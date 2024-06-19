@@ -93,7 +93,7 @@
                                     <div class="col-md-3">
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Status
+                                              Filter By
                                             </button>
                                             <ul class="dropdown-menu">
                                               <li><a class="dropdown-item" href="#">Instock</a></li>
@@ -116,6 +116,7 @@
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Brand</th>
+                                        <th scope="col">Size</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -126,6 +127,7 @@
                                         <td>3</td>
                                         <td class="text-success">In Stock</td>
                                         <td>Dunlop</td>
+                                        <td>20.3</td>
                                       </tr>
                                       <tr>
                                         <th scope="row">2</th>
@@ -134,6 +136,7 @@
                                         <td>3</td>
                                         <td class="text-success">In Stock</td>
                                         <td>BF Goodrich</td>
+                                        <td>20.3</td>
                                       </tr>
                                       <tr>
                                         <th scope="row">3</th>
@@ -142,7 +145,9 @@
                                         <td>3</td>
                                         <td class="text-success">In Stock</td>
                                         <td>Goodyear</td>
+                                        <td>20.3</td>
                                       </tr>
+                             
                                     </tbody>
                                   </table>
                                 <!--  end table -->

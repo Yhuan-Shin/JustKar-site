@@ -92,7 +92,7 @@
                     
                         We are here to fix your <span style="color: rgb(220,53,69);">tires</span></h1>
                     <div class="col-md-12">
-                        <button type="button" class="btn btn-outline-danger fw-bold" data-bs-toggle="modal" data-bs-target="#contact"><i class="bi bi-envelope-arrow-down-fill"></i> Schedule an Appointment</button>
+                        <button type="button" class="btn btn-outline-danger fw-bold" data-bs-toggle="modal" data-bs-target="#contact"><i class="bi bi-gear-fill"></i> See Services</button>
                         <button type="button" class="btn btn-dark m-2 fw-bold" data-bs-toggle="modal" data-bs-target="#location"><i class="bi bi-geo-alt-fill"></i> Location</button>
                         <p class="text-dark mt-3"> 
                             Experience the difference with JustKar Tire Supply. Whether you're looking for performance upgrades, replacements, or seasonal switches, we've got everything you need to keep your wheels turning smoothly.

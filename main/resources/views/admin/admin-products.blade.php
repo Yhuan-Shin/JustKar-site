@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders</title>
+    <title>Products</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
-    @include('components/customer-modal')
+    {{-- @include('components/customer-modal') --}}
 
     <!-- sidebar -->
     <div class="container-fluid">
@@ -51,7 +51,7 @@
                                             <i class="bi bi-person-circle"></i>
                                             <span class="d-none d-sm-inline text-dark mx-1"> Admin</span>
                                         </div>
-                                        <h1>Orders</h1>
+                                        <h1>Products</h1>
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="container ">
@@ -63,7 +63,7 @@
                                                       <h5 class="card-title">Wheel 1</h5>
                                                       <p class="card-text">Details of the wheel</p>
                                                       <div class="container d-flex justify-content-center">
-                                                        <a href="#" class="btn btn-success">Add</a>
+                                                        <a href="#" class="btn btn-success">Edit</a>
 
                                                       </div>
                                                     </div>
@@ -73,10 +73,10 @@
                                                 <div class="card p-3 mb-2" style="width: 14rem;">
                                                     <img src="/images/wheel1.png" class="card-img-top img-fluid" alt="..." width="100px" height="100px">
                                                     <div class="card-body">
-                                                      <h5 class="card-title">Wheel 1</h5>
+                                                      <h5 class="card-title">Wheel 2</h5>
                                                       <p class="card-text">Details of the wheel</p>
                                                       <div class="container d-flex justify-content-center">
-                                                        <a href="#" class="btn btn-success">Add</a>
+                                                        <a href="#" class="btn btn-success">Edit</a>
 
                                                       </div>
                                                     </div>
@@ -86,10 +86,10 @@
                                                 <div class="card p-3 mb-2" style="width: 14rem;">
                                                     <img src="/images/wheel1.png" class="card-img-top img-fluid" alt="..." width="100px" height="100px">
                                                     <div class="card-body">
-                                                      <h5 class="card-title">Wheel 1</h5>
+                                                      <h5 class="card-title">Wheel 3</h5>
                                                       <p class="card-text">Details of the wheel</p>
                                                       <div class="container d-flex justify-content-center">
-                                                        <a href="#" class="btn btn-success">Add</a>
+                                                        <a href="#" class="btn btn-success">Edit</a>
 
                                                       </div>
                                                     </div>
@@ -99,10 +99,10 @@
                                                 <div class="card p-3" style="width: 14rem;">
                                                     <img src="/images/wheel1.png" class="card-img-top img-fluid" alt="..." width="100px" height="100px">
                                                     <div class="card-body">
-                                                      <h5 class="card-title">Wheel 1</h5>
+                                                      <h5 class="card-title">Wheel 4</h5>
                                                       <p class="card-text">Details of the wheel</p>
                                                       <div class="container d-flex justify-content-center">
-                                                        <a href="#" class="btn btn-success">Add</a>
+                                                        <a href="#" class="btn btn-success">Edit</a>
                                                       </div>
                                                     </div>
                                                   </div>

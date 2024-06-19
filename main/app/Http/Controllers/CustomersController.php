@@ -34,23 +34,23 @@ class CustomersController extends Controller
          
     /**
      * Display the specified resource.
-     */
-    public function showHomePage(){
-        $customers = Customers::select('id', 'first_name', 'last_name', 'email', 'date_time', 'phone_number')->get();
-        foreach ($customers as $customer) {
-            $dateTime = Carbon::parse($customer->date_time);
-            $customer->date_time = $dateTime->format('Y-m-d h:i:s A');
-        }
-        return view('admin/admin-home',['customers'=>$customers]);
+    //  */
+    // public function showHomePage(){
+    //     $customers = Customers::select('id', 'first_name', 'last_name', 'email', 'date_time', 'phone_number')->get();
+    //     foreach ($customers as $customer) {
+    //         $dateTime = Carbon::parse($customer->date_time);
+    //         $customer->date_time = $dateTime->format('Y-m-d h:i:s A');
+    //     }
+    //     return view('admin/admin-home',['customers'=>$customers]);
         
-    } 
+    // } 
     
-    public function showOrderPage(){
-        $customers = Customers::select('id', 'first_name', 'last_name', 'email', 'date_time', 'phone_number')->get();
-        foreach ($customers as $customer) {
-            $dateTime = Carbon::parse($customer->date_time);
-            $customer->date_time = $dateTime->format('Y-m-d h:i:s A');
-        }
-        return view('admin/order',['customers'=>$customers]);
-    } 
+    // public function showOrderPage(){
+    //     $customers = Customers::select('id', 'first_name', 'last_name', 'email', 'date_time', 'phone_number')->get();
+    //     foreach ($customers as $customer) {
+    //         $dateTime = Carbon::parse($customer->date_time);
+    //         $customer->date_time = $dateTime->format('Y-m-d h:i:s A');
+    //     }
+    //     return view('admin/admin-products',['customers'=>$customers]);
+    // } 
 }
