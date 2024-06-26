@@ -16,9 +16,7 @@
 <body>
    
             <!-- Navbar -->
-        <div class="container">
-            
-        </div>
+      
         <nav class="navbar fixed-top navbar-expand-lg bg-dark" id="navbar">
             <div class="container-fluid">
                 <a href="/home" class="navbar-brand px-3"><img src="/images/logo.png" alt="" width="50px" height="50px"></a>
@@ -54,13 +52,11 @@
                 </div>       
              </div>
              <div class="row">
-                <div class="container d-flex justify-content-center bg-light">
+                <div class="container d-flex justify-content-center p-3 bg-light">
                     <div id="image-list">
 
                         @include('components/wheels')
                       </div>
-                      <button onclick="scrollImages(-1)" id="prev-btn" class="btn btn-outline-primary">Prev</button>
-                      <button onclick="scrollImages(1)" id="next-btn" class="btn btn-outline-primary">Next</button>
                     
                 </div>
              </div>

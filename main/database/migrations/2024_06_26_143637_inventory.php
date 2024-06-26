@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('inventory', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-            $table->string('date_time');
-            $table->string('phone_number'); 
+            $table->string('product_code');
+            $table->string('product_name');
+            $table->string('category');
+            $table->string('quantity');
+            $table->string('status'); 
+            $table->string('brand'); 
+            $table->string('size'); 
             $table->timestamps();
         });
     }

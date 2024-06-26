@@ -10,15 +10,20 @@
             <i class="fs-4 bi bi-bag-check-fill"></i> <span class="ms-1 d-none d-sm-inline text-white">Products</span>
         </a>
     </li>
-    
-    {{-- <li>
-        <a href="#customers" class="nav-link px-0 align-middle"  data-bs-toggle="modal" data-bs-target="#customer">
-            <i class="fs-4 bi-people-fill"></i> <span class="ms-1 d-none d-sm-inline text-white">Customers</span>
+    <li>                           
+        <a href="/admin/sales" class="nav-link px-0 align-middle">
+            <i class="fs-4 bi bi-receipt-cutoff"></i> <span class="ms-1 d-none d-sm-inline text-white">Sales Logs</span>
         </a>
-    </li> --}}
+    </li>
+    <li>                           
+        <a href="/admin/user_management" class="nav-link px-0 align-middle">
+            <i class="fs-4 bi bi-person-fill-add"></i> <span class="ms-1 d-none d-sm-inline text-white">User Management</span>
+        </a>
+    </li>
     <li>                           
         <a href="/admin/inventory" class="nav-link px-0 align-middle">
             <i class="fs-4 bi bi-box-seam-fill"></i> <span class="ms-1 d-none d-sm-inline text-white">Inventory</span>
         </a>
     </li>
+    
 </ul>

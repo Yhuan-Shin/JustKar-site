@@ -26,8 +26,8 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse " id="navmenu">
-                    <ul class="navbar-nav text-center">
-                        <li class="nav-item px-3 ">
+                    <ul class="navbar-nav text-center text-uppercase ">
+                        <li class="nav-item px-3">
                             <a href="#main" class="nav-link text-white " style="font-size: 16px;
                             font-weight: 500;">Home</a>
                         </li>
@@ -35,12 +35,15 @@
                             <a href="#services" class="nav-link text-white " style="font-size: 16px; font-weight: 500;">Services</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a href="/customize" class="nav-link text-white" style="font-size: 16px; font-weight: 500;">Customize</a>
+                            <a href="#announcement" class="nav-link text-white" style="font-size: 16px; font-weight: 500;">Announcements</a>
                         </li>
+                      
                         <li class="nav-item px-3">
                             <a href="#about" class="nav-link text-white" style="font-size: 16px; font-weight: 500;">About</a>
                         </li>
-                      
+                        <li class="nav-item px-3">
+                            <a href="/customize" class="nav-link text-white" style="font-size: 16px; font-weight: 500;">Customize</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -81,13 +84,7 @@
        
             <div class="row">
                 <div class="col-md-6 mt-5 py-2">
-                   <div class="container p-3">
-                    @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                   </div>
+           
                     <h1 class="text-uppercase text-dark py-2" id="title">
                     
                         We are here to fix your <span style="color: rgb(220,53,69);">tires</span></h1>
@@ -102,7 +99,7 @@
                
             </div>
             <div class="container mt-5">
-                    <h4 class="text-uppercase text-dark fw-bold fs-2">Why Choose <span class="text-danger">us?</span></h4>
+                    <h4 class="text-uppercase text-dark fw-bold">Why Choose <span class="text-danger">us?</span></h4>
                   
                 <div class="row justify-content-center">        
                     <div class="col-lg-3 col-sm-6 col-s-3 p-2 m-3 col-custom ">
@@ -144,7 +141,7 @@
     <section id="services">
         <!-- main content -->
                    <div class="container mt-3 p-3">
-                       <h2 class="text-uppercase text-dark text-center text-dark fw-bold">OUR <span style="color: rgb(220,53,69);">SERVICES</span></h2>
+                       <h4 class="text-uppercase text-dark text-center text-dark fw-bold">OUR <span style="color: rgb(220,53,69);">SERVICES</span></h2>
                        <div class="row text-dark justify-content-center">
                            <div class="col-md-8 text-dark" >
                                <p>At <span style="color: rgb(220,53,69);">JustKar Tire Supply</span>, we are dedicated to providing top-quality tires and comprehensive services to meet all your tire needs. Whether you're a vehicle owner, a fleet manager, or a tire retailer, we have the expertise and resources to serve you.</p>
@@ -179,15 +176,29 @@
                </section>
            <!-- END SERVICES -->
     <!-- customize -->
-    
-        
+    {{-- announcement --}}
+    <section id="announcement">
+        <div class="container">
+            <div class="row text-dark">
+                <div class="col-md-12">
+                    <h4 class="text-center fw-bold text-uppercase">Announcement</h4>
+                    <div class="alert alert-danger" role="alert">  
+                        <h4 class="alert-heading">Announcement Section</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    {{-- end announcement--}}
+
     <!-- ABOUT -->
         <!-- modal about -->
         <div class="modal fade" id="modal-about" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">About Us</h1>
+                        <h5 class="modal-title " id="exampleModalLabel">About Us</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -205,7 +216,7 @@
             <div class="container p-3">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md text-center ">
-                        <h2 class="text-dark fw-bold  text-uppercase">ABOUT <span class="text-danger">us</span></h2>
+                        <h4 class="text-dark fw-bold text-uppercase">ABOUT <span class="text-danger">us</span></h5>
                         <p class="text-dark">
                             At JustKar, we're passionate about providing high-quality tires and exceptional service to our customers. With years of experience in the tire industry, we've built a reputation for reliability, and expertise.
                             <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modal-about">Read More</button>

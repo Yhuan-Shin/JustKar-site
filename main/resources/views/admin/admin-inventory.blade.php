@@ -102,8 +102,56 @@
                                             </ul>
                                           </div>
                                     </div>
+                                    {{-- modal add product --}}
+                                    <div class="modal fade" id="add-product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <form action="" method="post">
+                                                <div class="mb-3">
+                                                    <label for="product-code" class="form-label">Product Code</label>
+                                                    <input type="text" class="form-control" id="product-code" placeholder="Product Code">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="product-name" class="form-label">Product Name</label>
+                                                    <input type="text" class="form-control" id="product-name" placeholder="Product Name">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="category" class="form-label">Category</label>
+                                                    <input type="text" class="form-control" id="category" placeholder="Category">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="quantity" class="form-label">Quantity</label>
+                                                    <input type="text" class="form-control" id="quantity" placeholder="Quantity">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="status" class="form-label">Status</label>
+                                                    <input type="text" class="form-control" id="status" placeholder="Status">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="brand" class="form-label">Brand</label>
+                                                    <input type="text" class="form-control" id="brand" placeholder="Brand">
+                                                  </div>
+                                                  <div class="mb-3">
+                                                    <label for="size" class="form-label">Size</label>
+                                                    <input type="text" class="form-control" id="size" placeholder="Size">
+                                                  </div>
+                                              </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                              <button type="button" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {{-- end modal --}}
                                     <div class="col p-2">
-                                        <button class="btn btn-outline-dark" type="submit">Add Product</button>
+                                        <button class="btn btn-outline-dark" type="submit" data-bs-target="#add-product" data-bs-toggle="modal">Add Product</button>
                                     </div>
                             <div class="table-responsive">
                                 <!-- table -->
@@ -120,33 +168,8 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr>
-                                        <th scope="row">1</th>
-                                        <td>205/55 R 16 91V</td>
-                                        <td>All terain</td>
-                                        <td>3</td>
-                                        <td class="text-success">In Stock</td>
-                                        <td>Dunlop</td>
-                                        <td>20.3</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">2</th>
-                                        <td>205/55 R 16 91V</td>
-                                        <td>Performance</td>
-                                        <td>3</td>
-                                        <td class="text-success">In Stock</td>
-                                        <td>BF Goodrich</td>
-                                        <td>20.3</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">3</th>
-                                        <td>205/55 R 16 91V</td>
-                                        <td>Offroad</td>
-                                        <td>3</td>
-                                        <td class="text-success">In Stock</td>
-                                        <td>Goodyear</td>
-                                        <td>20.3</td>
-                                      </tr>
+                                      {{-- row --}}
+                                    
                              
                                     </tbody>
                                   </table>

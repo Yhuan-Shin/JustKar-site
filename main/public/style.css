@@ -104,62 +104,7 @@
     border: 1px solid black;
    }
 
-   /* wheels */
-   #image-list {
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    &::-webkit-scrollbar {
-      display: none;
-    }
    
-  }
-  .img-container {
-    flex: 0 0 auto;
-    display: inline-block;
-    padding: 10px;
-  }
-  .img-container img {
-    max-width: 120px;
-    max-height: 120px;
-  }
-  #prev-btn {
-    position: absolute;
-    top: 110%;
-    left: 100px; /* Adjust as needed */
-    transform: translateY(-50%);
-    transition: all 0.5s ease;
-      @media screen and (max-width: 768px) {
-      left: 10px;
-      top: 110%;
-    }
-  }
-  #next-btn {
-    position: absolute;
-    top: 110%;
-    right: 100px; /* Adjust as needed */
-    transform: translateY(-50%);
-    transition: all 0.5s ease;
-    @media screen and (max-width: 768px) {
-      right: 10px;
-      top: 110%;
-
-    }
-  }
-  #prev-btn, #next-btn{
-    height: 30px;
-    width: 60px;
-    display: flex;
-    align-items: center;
-
-  }
-  #wheel-image{
-    cursor: pointer;
-    @media screen and (max-width: 768px) {
-      width: 60%;
-    }
-  }
   #vehicle-image{
     cursor: pointer;
     @media screen and (max-width: 768px) {
