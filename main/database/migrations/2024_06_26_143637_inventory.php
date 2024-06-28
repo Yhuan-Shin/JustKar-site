@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('product_name');
             $table->string('category');
             $table->string('quantity');
-            $table->string('status'); 
+            $table->string('status')->nullable(); 
             $table->string('brand'); 
             $table->string('size'); 
             $table->timestamps();

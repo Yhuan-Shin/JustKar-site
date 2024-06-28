@@ -103,53 +103,15 @@
                                           </div>
                                     </div>
                                     {{-- modal add product --}}
-                                    <div class="modal fade" id="add-product" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                          <div class="modal-content">
-                                            <div class="modal-header">
-                                              <h1 class="modal-title fs-5" id="exampleModalLabel">Add Product</h1>
-                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                              <form action="" method="post">
-                                                <div class="mb-3">
-                                                    <label for="product-code" class="form-label">Product Code</label>
-                                                    <input type="text" class="form-control" id="product-code" placeholder="Product Code">
-                                                  </div>
-                                                  <div class="mb-3">
-                                                    <label for="product-name" class="form-label">Product Name</label>
-                                                    <input type="text" class="form-control" id="product-name" placeholder="Product Name">
-                                                  </div>
-                                                  <div class="mb-3">
-                                                    <label for="category" class="form-label">Category</label>
-                                                    <input type="text" class="form-control" id="category" placeholder="Category">
-                                                  </div>
-                                                  <div class="mb-3">
-                                                    <label for="quantity" class="form-label">Quantity</label>
-                                                    <input type="text" class="form-control" id="quantity" placeholder="Quantity">
-                                                  </div>
-                                                  <div class="mb-3">
-                                                    <label for="status" class="form-label">Status</label>
-                                                    <input type="text" class="form-control" id="status" placeholder="Status">
-                                                  </div>
-                                                  <div class="mb-3">
-                                                    <label for="brand" class="form-label">Brand</label>
-                                                    <input type="text" class="form-control" id="brand" placeholder="Brand">
-                                                  </div>
-                                                  <div class="mb-3">
-                                                    <label for="size" class="form-label">Size</label>
-                                                    <input type="text" class="form-control" id="size" placeholder="Size">
-                                                  </div>
-                                              </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                              <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      {{-- end modal --}}
+                                   @include('components.inventory_add')
+                                   {{-- end modal --}}
+                                   {{-- success message --}}
+                                   @if(session()->has('success'))
+                                   <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                  </div>
+                                  @endif
                                     <div class="col p-2">
                                         <button class="btn btn-outline-dark" type="submit" data-bs-target="#add-product" data-bs-toggle="modal">Add Product</button>
                                     </div>
@@ -169,6 +131,17 @@
                                     </thead>
                                     <tbody>
                                       {{-- row --}}
+                                      @foreach($inventory as $item)
+                                      <tr>
+                                          <td>{{ $item->product_code }}</td>
+                                          <td>{{ $item->product_name }}</td>
+                                          <td>{{ $item->category }}</td>
+                                          <td>{{ $item->quantity }}</td>
+                                          <td></td>
+                                          <td>{{ $item->brand }}</td>
+                                          <td>{{ $item->size }}</td>
+                                      </tr>
+                                      @endforeach
                                     
                              
                                     </tbody>

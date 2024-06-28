@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CustomersController;
-use App\Models\Customers;
+
+use App\Http\Controllers\InventoryController;
+
 use Illuminate\Support\Facades\Route;
 Route::get('/superadmin', function () {
     return view('superadmin/superadmin-login');
@@ -24,10 +24,12 @@ Route::get('/admin/sales', function () {
 Route::get('/admin/user_management', function () {
     return view('admin/admin-cashier');
 }); 
+Route::get('/admin/cashier', function () {
+    return view('admin/admin-cashier');
+}); 
 Route::get('/admin/inventory', function () {
     return view('admin/admin-inventory');
 }); 
-
 
 Route::get('/cashier/login', function () {
     return view('cashier/cashier-login');
@@ -43,3 +45,8 @@ Route::get('/home', function () {
 Route::get('/customize', function () {
     return view('customize');
 });
+//functions
+Route::get('/admin/inventory', [InventoryController::class, 'display'])->name('inventory.display');
+
+Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('inventory.store');
+
