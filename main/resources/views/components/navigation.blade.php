@@ -21,6 +21,11 @@
         </a>
     </li>
     <li>                           
+        <a href="/" class="nav-link px-0 align-middle">
+            <i class="fs-4 bi bi-megaphone-fill"></i> <span class="ms-1 d-none d-sm-inline text-white">Create Announcements</span>
+        </a>
+    </li>
+    <li>                           
         <a href="/admin/inventory" class="nav-link px-0 align-middle">
             <i class="fs-4 bi bi-box-seam-fill"></i> <span class="ms-1 d-none d-sm-inline text-white">Inventory</span>
         </a>

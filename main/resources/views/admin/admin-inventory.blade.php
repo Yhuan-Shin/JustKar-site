@@ -102,16 +102,26 @@
                                             </ul>
                                           </div>
                                     </div>
-                                    {{-- modal add product --}}
+                                    {{-- modal create product --}}
                                    @include('components.inventory_add')
+                                   @include('components.inventory_update')
+
                                    {{-- end modal --}}
-                                   {{-- success message --}}
+
+                                    {{-- modal update product --}}
+                                    {{-- end modal --}}
+                                    
+                                   {{-- success add message --}}
                                    @if(session()->has('success'))
                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ session('success') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                   </div>
                                   @endif
+                                  {{-- end --}}
+
+
+
                                     <div class="col p-2">
                                         <button class="btn btn-outline-dark" type="submit" data-bs-target="#add-product" data-bs-toggle="modal">Add Product</button>
                                     </div>
@@ -127,6 +137,8 @@
                                         <th scope="col">Status</th>
                                         <th scope="col">Brand</th>
                                         <th scope="col">Size</th>
+                                        <th scope="col">Actions</th>
+
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -140,6 +152,15 @@
                                           <td></td>
                                           <td>{{ $item->brand }}</td>
                                           <td>{{ $item->size }}</td>
+                                          <td>
+                                            <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}">Edit</button>
+
+                                            <form action="{{ route('inventory.destroy', $item->id) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                          </td>
                                       </tr>
                                       @endforeach
                                     

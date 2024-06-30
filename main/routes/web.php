@@ -47,6 +47,11 @@ Route::get('/customize', function () {
 });
 //functions
 Route::get('/admin/inventory', [InventoryController::class, 'display'])->name('inventory.display');
-
 Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('inventory.store');
+Route::get('/admin/inventory/{id}', [InventoryController::class, 'edit'])->name('inventory.edit');
+Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
+Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
+
+
+
 
