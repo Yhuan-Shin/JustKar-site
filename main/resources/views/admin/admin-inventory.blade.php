@@ -103,12 +103,11 @@
                                           </div>
                                     </div>
                                     {{-- modal create product --}}
-                                   @include('components.inventory_add')
-                                   @include('components.inventory_update')
-
-                                   {{-- end modal --}}
+                                   @include('components/inventory/inventory_add')
+                                    {{-- end modal --}}
 
                                     {{-- modal update product --}}
+                                    @include('components/inventory/inventory_update')
                                     {{-- end modal --}}
                                     
                                    {{-- success add message --}}
@@ -123,7 +122,7 @@
 
 
                                     <div class="col p-2">
-                                        <button class="btn btn-outline-dark" type="submit" data-bs-target="#add-product" data-bs-toggle="modal">Add Product</button>
+                                        <button class="btn btn-outline-success" type="submit" data-bs-target="#add-product" data-bs-toggle="modal"><i class="bi bi-plus-circle"></i> Add Product</button>
                                     </div>
                             <div class="table-responsive">
                                 <!-- table -->
@@ -153,12 +152,12 @@
                                           <td>{{ $item->brand }}</td>
                                           <td>{{ $item->size }}</td>
                                           <td>
-                                            <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}">Edit</button>
+                                            <button type="button" class="btn btn-outline-success" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
 
                                             <form action="{{ route('inventory.destroy', $item->id) }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-outline-danger "> <i class="bi bi-trash"></i>Delete</button>
                                             </form>
                                           </td>
                                       </tr>

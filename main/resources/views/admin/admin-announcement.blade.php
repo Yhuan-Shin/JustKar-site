@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Create Announcements</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -51,44 +50,49 @@
                                             <i class="bi bi-person-circle"></i>
                                             <span class="d-none d-sm-inline text-dark mx-1"> Admin</span>
                                         </div>
-                                        <h1>Products</h1>
-                                       
+                                        <h1>Create Announcements</h1>
                                 </div>
-                                @include('components/products/editInfo')
-                               <div class="row justify-content-center">
-                                @forelse ($inventory as $item)
-                                    <div class="col-md-4 d-flex justify-content-center">
-                                        {{-- card --}}
-                                        <div class="card p-3 mb-2" style="width: 14rem;">
-                                            <div class="card-body"> 
-
-                                                {{-- @foreach($products as $product)
-                                                <img src="{{asset('uploads/images/'.$product->product_image)}}" class="card-img-top" alt="...">
-                                                @endforeach --}}
-
-                                                <h5 class="card-title">{{$item->product_name}}</h5>
-                                                <p class="card-text">Category: {{ $item->category }}</p>
-                                                <p class="card-text">Brand: {{$item->brand }}</p>
-                                                <p class="card-text">Size: {{ $item->size }}</p>
-
-                                                {{-- @foreach($products as $product)
-                                                <p class="card-text">Price: {{ $product->price }}</p>
-                                                @endforeach --}}
-                                                
-                                                <div class="container d-flex justify-content-center">
-                                                    <button class="btn btn-primary" data-bs-target="#editInfo{{ $item->id }}" data-bs-toggle="modal">Edit</button>
-                                                </div>
+                                <div class="row">
+                                    <div class="container">
+                                        <div class="row d-flex justify-content-center ">
+                                            <div class="col-md-12 mb-2 ">
+                                                @include('components/announcement/add-announcement')  
+                                                @include('components/announcement/update')        
+      
+                                                <button type="button" class="btn btn-outline-success float-end" data-bs-target="#announcement" data-bs-toggle="modal">Create Announcement</button>                                  
                                             </div>
+                                          
                                         </div>
                                     </div>
-                                    {{-- end card --}}
-                                @empty
-                                    <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                        <i class="fs-4 bi bi-exclamation-circle-fill p-3"></i> No items in inventory
-                                    </div>
-                                @endforelse
                                 </div>
-
+                                <div class="row">
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Content</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($announcements as $announcement)
+                                          <tr>
+                                            <td>{{$announcement->title}}</td>
+                                            <td>{{$announcement->content}}</td>
+                                            <td><img src="{{asset('uploads/images/'.$announcement->image)}}" alt="" width="150px" height="100px"></td>
+                                            <td>
+                                                <button type="button" class="btn btn-outline-success" data-bs-target="#edit-announcement{{$announcement->id}}" data-bs-toggle="modal" value="{{ $announcement->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
+                                                <form action="{{route('announcement.destroy', $announcement->id)}}" method="POST" style="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-outline-danger "> <i class="bi bi-trash"></i>Delete</button>
+                                                </form>
+                                            </td>
+                                          </tr>
+                                          @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

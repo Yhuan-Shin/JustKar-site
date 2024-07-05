@@ -19,14 +19,14 @@
       
         <nav class="navbar fixed-top navbar-expand-lg bg-dark" id="navbar">
             <div class="container-fluid">
-                <a href="/home" class="navbar-brand px-3"><img src="/images/logo.png" alt="" width="50px" height="50px"></a>
+                <a href="/" class="navbar-brand px-3"><img src="/images/logo.png" alt="" width="50px" height="50px"></a>
                 <button class="navbar-toggler btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse " id="navmenu">
                     <ul class="navbar-nav text-center">
                         <li class="nav-item px-3 ">
-                            <a href="/home" class="nav-link text-white " style="font-size: 16px;
+                            <a href="/" class="nav-link text-white " style="font-size: 16px;
                             font-weight: 500;">Back to Home</a>
                         </li>
                        

@@ -21,7 +21,7 @@
         </div>
         <nav class="navbar fixed-top navbar-expand-lg bg-dark" id="navbar">
             <div class="container-fluid">
-                <a href="/home" class="navbar-brand px-3"><img src="/images/logo.png" alt="" width="50px" height="50px"></a>
+                <a href="/" class="navbar-brand px-3"><img src="/images/logo.png" alt="" width="50px" height="50px"></a>
                 <button class="navbar-toggler btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -182,8 +182,20 @@
             <div class="row text-dark">
                 <div class="col-md-12">
                     <h4 class="text-center fw-bold text-uppercase">Announcement</h4>
-                    <div class="alert alert-danger" role="alert">  
-                        <h4 class="alert-heading">Announcement Section</h4>
+                    <div class="p-3">
+                        @foreach ($announcements as $announcement)
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5 class="text-uppercase fw-bold">{{$announcement->title}}</h5>
+                                    <p>{{$announcement->content}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="/uploads/images/{{$announcement->image}}" alt="" class="img-fluid">
+                                </div>
+                            </div>        
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
+use App\Models\Products;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 class InventoryController extends Controller
@@ -13,6 +14,7 @@ class InventoryController extends Controller
         $inventory = Inventory::all();
         return view('admin/admin-inventory', ['inventory' => $inventory]);
     }
+    
    function create(){
        return view('admin/admin-inventory');
    }
@@ -26,9 +28,9 @@ class InventoryController extends Controller
         'brand' => 'required',
         'size' => 'required',
     ]);
-
+    
     Inventory::create($data);
-    return redirect('/admin/inventory')->with('success', 'Data Inserted');
+    return redirect('/admin/inventory')->with('success', 'Item Inserted');
    }
    public function edit(string $id): View
     {
@@ -39,7 +41,7 @@ class InventoryController extends Controller
     {
         $inventory = Inventory::find($id);
         $inventory->update($request->all());
-        return redirect('/admin/inventory')->with('success', 'Data Updated');
+        return redirect('/admin/inventory')->with('success', 'Item Updated');
     }
     public function destroy(string $id): RedirectResponse
     {
