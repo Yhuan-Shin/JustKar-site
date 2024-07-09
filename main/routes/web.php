@@ -56,6 +56,8 @@ Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('in
 // Route::get('/admin/inventory/{id}', [InventoryController::class, 'edit'])->name('inventory.edit');
 Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
 Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
+//Route critical level
+Route::put('/admin/inventory', [InventoryController::class, 'setCriticalLevel'])->name('inventory.critical');
 
 //functions user managements
 Route::get('/admin/user_management', [AddCashierController::class, 'display'])->name('cashier.display');

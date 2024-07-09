@@ -16,7 +16,7 @@
                     <div class="container">
                        <div class="row">
                             <div class="col d-flex align-items-center">
-                                <a href="admin_side.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                                <a href="/admin/home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                                 <div class="container">
                                     <img src="/images/logo.png" alt="" style="width: 60px; height: 60px">
                                 </div>
@@ -32,15 +32,31 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Overview</h5>
                                         <p class="card-text">
-                                            In Stock<br>256
+                                            In Stock<br>
+                                            @if ($quantity > 0)
+                                                {{$quantity}}
+                                            @endif
+
                                         </p>
-                                        <p class="card-text fw-bold text-danger">
+                                        <p class="card-text fw-bold">
                                             By Category
                                         </p>
                                         <p class="card-text">
                                             Offroad 20<br>
                                             Performance 20<br>
                                             All terain 20<br>
+                                        </p>
+                                        <hr>
+                                        <p class="card-text">
+                                           Set Critical Level<br>
+
+                                           <form action="{{ route('inventory.critical')}}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                               <input type="number"class="form-control mb-2 " name="critical_level" id="critical_level" min="0" max="100" value="0">
+
+                                               <input type="submit" class="btn btn-outline-light" value="Set">
+                                           </form>
                                         </p>
                                     </div>
                             </div>
@@ -129,7 +145,6 @@
                                 <table class="table table-hover table-striped ">
                                     <thead>
                                       <tr>
-                                        <th scope="col">ID #</th>
                                         <th scope="col">Product_Code</th>
                                         <th scope="col">Product_Name</th>
                                         <th scope="col">Category</th>
@@ -145,12 +160,19 @@
                                       {{-- row --}}
                                       @foreach($inventory as $item)
                                       <tr>
-                                          <td>{{ $item->id }}</td>
                                           <td>{{ $item->product_code }}</td>
                                           <td>{{ $item->product_name }}</td>
                                           <td>{{ $item->category }}</td>
                                           <td>{{ $item->quantity }}</td>
-                                          <td></td>
+                                          <td>
+                                            @if($item->quantity == 0)
+                                            <span class="badge bg-danger">Out of Stock</span>
+                                            @elseif($item->quantity <= $item->critical_level)
+                                            <span class="badge bg-warning">Low Stock</span>
+                                            @else
+                                            <span class="badge bg-success">In Stock</span>
+                                            @endif
+                                          </td>
                                           <td>{{ $item->brand }}</td>
                                           <td>{{ $item->size }}</td>
                                           <td>

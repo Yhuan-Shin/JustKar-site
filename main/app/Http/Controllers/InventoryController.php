@@ -12,7 +12,8 @@ class InventoryController extends Controller
     //
     function display(){
         $inventory = Inventory::all();
-        return view('admin/admin-inventory', ['inventory' => $inventory]);
+        $quantity = Inventory::sum('quantity'); 
+        return view('admin/admin-inventory', ['inventory' => $inventory], ['quantity' => $quantity]);
     }
     
    function create(){
@@ -34,7 +35,8 @@ class InventoryController extends Controller
         'category' => $data['category'],
         'quantity' => $data['quantity'],
         'brand' => $data['brand'],
-        'size' => $data['size']
+        'size' => $data['size'],
+       
     ]);
     Products::create([
         'inventory_id' => $inventory->id,
@@ -63,6 +65,19 @@ class InventoryController extends Controller
     {
         Inventory::destroy('delete from inventory where id = ?',[$id]);
         return redirect('/admin/inventory')->with('success', 'Item deleted!'); 
+    }
+
+    public function setCriticalLevel(Request $request): RedirectResponse
+    {
+       $validatedData = $request->validate([
+        'critical_level' => 'required|integer|min:0',
+    ]);
+
+    $criticalLevel = $validatedData['critical_level'];
+
+    Inventory::query()->update(['critical_level' => $criticalLevel]);
+
+    return redirect('/admin/inventory')->with('success', 'Critical level set!', ['critical_level' => $criticalLevel]);
     }
 
 

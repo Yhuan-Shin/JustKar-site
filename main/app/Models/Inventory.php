@@ -10,7 +10,7 @@ class Inventory extends Model
 {
     protected $table = 'inventory';
     protected $primaryKey = 'id';
-    protected $fillable = ['product_code','product_name','category','quantity','brand','size'];
+    protected $fillable = ['product_code','product_name','category','quantity','brand','size', 'critical_level', 'status'];
     use HasFactory; 
 
     public function products(): HasOne
@@ -28,5 +28,6 @@ class Inventory extends Model
             ]);
         });
     }
+    
 }
 
