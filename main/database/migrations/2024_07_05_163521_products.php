@@ -14,9 +14,16 @@ return new class extends Migration
         //
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_image');
-            $table->string('price');
+            $table->unsignedBigInteger('inventory_id');
+            $table->string('product_code')->nullable();
+            $table->string('product_name')->nullable();
+            $table->string('category')->nullable();
+            $table->string('brand')->nullable();
+            $table->string('size')->nullable();
+            $table->string('product_image') ->nullable();
+            $table->string('price') ->nullable();
             $table->timestamps();
+            $table->foreign('inventory_id')->references('id')->on('inventory') ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

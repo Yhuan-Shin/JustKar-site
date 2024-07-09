@@ -129,6 +129,7 @@
                                 <table class="table table-hover table-striped ">
                                     <thead>
                                       <tr>
+                                        <th scope="col">ID #</th>
                                         <th scope="col">Product_Code</th>
                                         <th scope="col">Product_Name</th>
                                         <th scope="col">Category</th>
@@ -144,6 +145,7 @@
                                       {{-- row --}}
                                       @foreach($inventory as $item)
                                       <tr>
+                                          <td>{{ $item->id }}</td>
                                           <td>{{ $item->product_code }}</td>
                                           <td>{{ $item->product_name }}</td>
                                           <td>{{ $item->category }}</td>

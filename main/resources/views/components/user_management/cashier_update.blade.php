@@ -7,7 +7,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
                 <!-- Form or content for editing cashier goes here -->
                 <form action="{{ route('cashier.update', $cashier->id)}}" method="post">
                     @csrf

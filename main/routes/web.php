@@ -57,7 +57,7 @@ Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('in
 Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
 Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
 
-//functions user management
+//functions user managements
 Route::get('/admin/user_management', [AddCashierController::class, 'display'])->name('cashier.display');
 Route::post('/admin/user_management', [AddCashierController::class, 'store'])->name('cashier.store');
 Route::post('/admin/user_management/{id}', [AddCashierController::class, 'update'])->name('cashier.update');
@@ -72,11 +72,9 @@ Route::delete('/admin/announcements/{id}', [AnnouncementController::class, 'dest
 //display announcement
 Route::get('/', [AnnouncementController::class, 'displayOnCustomers'])->name('announcement.display');
 
-//function products
-//get from inventory
-// Route::get('/admin/products', [InventoryController::class, 'displayOnProductsPage'])->name('products.display');
-Route::post('/admin/products', [ProductsController::class, 'store'])->name('products.store');
-Route::get('/admin/products', [ProductsController::class, 'displayOnProductsPage'])->name('products.displayProducts');
+//functions products
+Route::post('/admin/products{id}', [ProductsController::class, 'update'])->name('products.update');
+Route::get('/admin/products', [ProductsController::class, 'display'])->name('products.display');
 
 
 

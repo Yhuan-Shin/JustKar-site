@@ -13,11 +13,18 @@ class Products extends Model
     protected $table = 'products';
 
     protected $fillable = [
+        'product_code',
+        'product_name',
+        'category',
+        'brand',
+        'size',
+        'inventory_id',
         'product_image',
         'price',
     ];
-    public function inventory():BelongsTo
+    public function inventory(): BelongsTo
     {
-        return $this->belongsTo(Inventory::class);
+        return $this->belongsTo(Inventory::class,'inventory_id','id');
     }
+
 }

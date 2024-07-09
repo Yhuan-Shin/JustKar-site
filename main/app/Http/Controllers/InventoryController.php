@@ -28,8 +28,24 @@ class InventoryController extends Controller
         'brand' => 'required',
         'size' => 'required',
     ]);
+    $inventory = Inventory::create([
+        'product_code' => $data['product_code'],
+        'product_name' => $data['product_name'],
+        'category' => $data['category'],
+        'quantity' => $data['quantity'],
+        'brand' => $data['brand'],
+        'size' => $data['size']
+    ]);
+    Products::create([
+        'inventory_id' => $inventory->id,
+        'product_code' => $inventory->product_code,
+        'product_name' => $inventory->product_name,
+        'category' => $inventory->category,
+        'brand' => $inventory->brand,
+        'size' => $inventory->size
+
+    ]);
     
-    Inventory::create($data);
     return redirect('/admin/inventory')->with('success', 'Item Inserted');
    }
    public function edit(string $id): View

@@ -62,19 +62,13 @@
                                         <div class="card p-3 mb-2" style="width: 14rem;">
                                             <div class="card-body"> 
 
-                                                {{-- @foreach($products as $product)
-                                                <img src="{{asset('uploads/images/'.$product->product_image)}}" class="card-img-top" alt="...">
-                                                @endforeach --}}
+                                                <img src="{{asset('uploads/product_images/'.$item->product_image)}}" class="card-img-top" alt="...">
 
                                                 <h5 class="card-title">{{$item->product_name}}</h5>
                                                 <p class="card-text">Category: {{ $item->category }}</p>
                                                 <p class="card-text">Brand: {{$item->brand }}</p>
                                                 <p class="card-text">Size: {{ $item->size }}</p>
-
-                                                {{-- @foreach($products as $product)
-                                                <p class="card-text">Price: {{ $product->price }}</p>
-                                                @endforeach --}}
-                                                
+                                                <p class="card-text">Price: {{ $item->price }}</p>
                                                 <div class="container d-flex justify-content-center">
                                                     <button class="btn btn-primary" data-bs-target="#editInfo{{ $item->id }}" data-bs-toggle="modal">Edit</button>
                                                 </div>
