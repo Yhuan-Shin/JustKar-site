@@ -4,6 +4,7 @@ use App\Http\Controllers\AddCashierController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\InventorySearch;
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Route;
 //superadmin
@@ -34,6 +35,7 @@ Route::get('/admin/inventory', function () {
     return view('admin/admin-inventory');
 }); 
 
+
 //cashier
 Route::get('/cashier/login', function () {
     return view('cashier/cashier-login');
@@ -50,14 +52,19 @@ Route::get('/customize', function () {
     return view('customize');
 });
 
-//functions inventory
+//crud functions inventory
 Route::get('/admin/inventory', [InventoryController::class, 'display'])->name('inventory.display');
+
 Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('inventory.store');
 // Route::get('/admin/inventory/{id}', [InventoryController::class, 'edit'])->name('inventory.edit');
 Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
 Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
-//Route critical level
+//search
+// Route::get('/admin/inventory/search', [InventoryController::class, 'search'])->name('inventory.search');
+//critical level
 Route::put('/admin/inventory', [InventoryController::class, 'setCriticalLevel'])->name('inventory.critical');
+
+
 
 //functions user managements
 Route::get('/admin/user_management', [AddCashierController::class, 'display'])->name('cashier.display');

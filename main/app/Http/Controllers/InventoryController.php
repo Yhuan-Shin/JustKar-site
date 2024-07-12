@@ -9,18 +9,62 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 class InventoryController extends Controller
 {
-    //
-    function display(){
-        $inventory = Inventory::all();
-        $quantity = Inventory::sum('quantity'); 
-        return view('admin/admin-inventory', ['inventory' => $inventory], ['quantity' => $quantity]);
+    public function display(Request $request)
+    {   
+        $filter = $request->filter;
+        $search = $request->search;
+        $query = Inventory::query();
+
+        if ($request->search) {
+            $searchProduct = Inventory::where('product_name', 'like', '%' . $request->search . '%')
+            ->orWhere('product_code', 'like', '%' . $request->search . '%')
+            ->orWhere('size', 'like', '%' . $request->search . '%')
+            ->orWhere('brand', 'like', '%' . $request->search . '%')
+            ->orWhere('category', 'like', '%' . $request->search . '%')
+            ->orWhere('quantity', 'like', '%' . $request->search . '%')
+            ->get();
+            $quantity = $searchProduct->sum('quantity');
+            return view('admin.admin-inventory', ['inventory' => $searchProduct, 'quantity' => $quantity]); 
+        } else if ($filter) {
+            switch ($filter) {
+                case 'all':
+                    break;
+                case 'instock':
+                    $query->where('quantity', '>', Inventory::raw('critical_level'));
+                    break;
+                case 'lowstock':
+                    $query->whereColumn('quantity', '<=', 'critical_level');
+                    break;
+                case 'outofstock':
+                    $query->where('quantity', 0);
+                    break;
+                default:
+                    // Handle other cases or do nothing
+            }
+        }else {
+            $inventory = Inventory::all();
+            $quantity = Inventory::sum('quantity');
+            return view('admin.admin-inventory', ['inventory' => $inventory, 'quantity' => $quantity]);
+        }
+        
+        $inventory = $query->get();
+        $quantity = $inventory->sum('quantity');
+
+        return view('admin.admin-inventory', [
+            'inventory' => $inventory,
+            'quantity' => $quantity,
+            'search' => $search,
+            'filter' => $filter,
+        ]);
     }
     
    function create(){
        return view('admin/admin-inventory');
    }
+   protected $criticalLevel;
    function store(Request $request)
    {
+    
     $data = $request->validate([
         'product_code' => 'required',
         'product_name' => 'required',
@@ -29,6 +73,7 @@ class InventoryController extends Controller
         'brand' => 'required',
         'size' => 'required',
     ]);
+    $criticalLevel = Inventory::latest()->value('critical_level') ?? 0;  
     $inventory = Inventory::create([
         'product_code' => $data['product_code'],
         'product_name' => $data['product_name'],
@@ -36,6 +81,7 @@ class InventoryController extends Controller
         'quantity' => $data['quantity'],
         'brand' => $data['brand'],
         'size' => $data['size'],
+        'critical_level' => $criticalLevel,
        
     ]);
     Products::create([
@@ -69,16 +115,19 @@ class InventoryController extends Controller
 
     public function setCriticalLevel(Request $request): RedirectResponse
     {
-       $validatedData = $request->validate([
+        $validatedData = $request->validate([
         'critical_level' => 'required|integer|min:0',
     ]);
 
     $criticalLevel = $validatedData['critical_level'];
 
     Inventory::query()->update(['critical_level' => $criticalLevel]);
+    $this->criticalLevel = $criticalLevel;
 
     return redirect('/admin/inventory')->with('success', 'Critical level set!', ['critical_level' => $criticalLevel]);
     }
+
+
 
 
 }

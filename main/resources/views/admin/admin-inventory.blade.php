@@ -96,14 +96,13 @@
                                         <h5>Instock</h5>
                                     </div>
                                     <div class="col-md-3 col-sm-4">
-                                        <form class="form">
-                                            <input class="form-control"  type="search" placeholder="Search" aria-label="Search">
+                                        <form class="form" type="get" method="GET" action="{{ route('inventory.display')}}">
+                                            <input class="form-control" name="search" id="search"  type="search" placeholder="Search" aria-label="Search">
                                             
-                                          </form>
                                     </div>
                                     <div class="col-md-2 col-sm-2 p-2">
-                                        <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
-
+                                         <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                                        </form>
                                     </div>
                               
                                     <div class="col-md-3">
@@ -111,11 +110,13 @@
                                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                               Filter By
                                             </button>
-                                            <ul class="dropdown-menu">
-                                              <li><a class="dropdown-item" href="#">Instock</a></li>
-                                              <li><a class="dropdown-item" href="#">Low Stock</a></li>
-                                              <li><a class="dropdown-item" href="#">Out of Stock</a></li>
-                                            </ul>
+                                           {{-- drop down filter menu --}}
+                                           <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'all'])}}">All</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'instock'])}}">In stock</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'lowstock'])}}">Low stock</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'outofstock'])}}">Out of stock</a></li>
+                                           </ul>
                                           </div>
                                     </div>
                                     {{-- modal create product --}}
@@ -169,7 +170,7 @@
                                             <span class="badge bg-danger">Out of Stock</span>
                                             @elseif($item->quantity <= $item->critical_level)
                                             <span class="badge bg-warning">Low Stock</span>
-                                            @else
+                                            @elseif($item->quantity > $item->critical_level)
                                             <span class="badge bg-success">In Stock</span>
                                             @endif
                                           </td>
