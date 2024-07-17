@@ -62,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="/admin/home"><button type="button" class="btn btn-outline-secondary col-md-12 mb-3 text-white"><i class="bi bi-arrow-return-left"></i>     Back to Home</button>
+                    <a href="/admin/dashboard"><button type="button" class="btn btn-outline-secondary col-md-12 mb-3 text-white"><i class="bi bi-arrow-return-left"></i>  Back to Home</button>
                     </a>
                     <hr>
                     

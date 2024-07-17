@@ -21,12 +21,9 @@
                   </div>
                   <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" value="{{ $cashier->password}}" required>
+                    <input type="password" class="form-control" id="password" name="password"  required>
                   </div>
-                  <div class="mb-3">
-                    <label for="position" class="form-label">Position</label>
-                    <input type="text" class="form-control" id="position" name="position" value="{{ $cashier->position}}" required>
-                  </div>
+            
     
             </div>
             <div class="modal-footer">

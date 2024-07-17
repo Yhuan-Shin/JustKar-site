@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="add-cashier" tabindex="-1" aria-labelledby="addcashier" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -21,10 +22,6 @@
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-              </div>
-              <div class="mb-3">
-                <label for="position" class="form-label">Position</label>
-                <input type="text" class="form-control" id="position" name="position" placeholder="Position" required>
               </div>
               
 

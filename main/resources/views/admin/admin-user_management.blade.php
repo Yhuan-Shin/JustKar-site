@@ -90,7 +90,6 @@
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Username</th>
                                                             <th scope="col">Password</th>
-                                                            <th scope="col">Position</th>
                                                             <th scope="col">Date Created</th>
                                                             <th scope="col">Date Updated</th>
                                                             <th scope="col">Action</th>
@@ -106,7 +105,6 @@
                                                            <td>{{ $cashier->name }}</td>
                                                            <td>{{ $cashier->username }}</td>
                                                            <td>{{ $cashier->password }}</td>
-                                                           <td>{{ $cashier->position }}</td>
                                                            <td>{{ $cashier->created_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>{{ $cashier->updated_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>
