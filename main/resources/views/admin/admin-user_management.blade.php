@@ -83,14 +83,14 @@
                                                </div>
                                                @endif
                                                
-                                                <table class="table table-hover">
+                                                <table class="table table-hover table-striped table-responsive">
 
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Username</th>
                                                             <th scope="col">Password</th>
-                                                            <th scope="col">Date Created</th>
+                                                             <th scope="col">Date Created</th>
                                                             <th scope="col">Date Updated</th>
                                                             <th scope="col">Action</th>
 

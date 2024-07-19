@@ -24,7 +24,14 @@
                                         </div>
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1"> Cashier</span>
+                                            <span class="d-none d-sm-inline text-dark mx-1">
+                                                @if (Auth::check())
+                                                    <span class="d-none d-sm-inline text-dark mx-1">{{ Auth::user()->name }}</span>
+                                                @else
+                                                    <span class="d-none d-sm-inline text-dark mx-1">Guest</span>
+                                                @endif
+
+                                            </span>
                                         </div>
                                         <h1>Point of Sales</h1>
                                         <div class="container d-flex justify-content-end">

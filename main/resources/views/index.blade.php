@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JustKar</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css
     ">
@@ -183,19 +186,46 @@
                 <div class="col-md-12">
                     <h4 class="text-center fw-bold text-uppercase">Announcement</h4>
                     <div class="p-3">
-                        @foreach ($announcements as $announcement)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5 class="text-uppercase fw-bold">{{$announcement->title}}</h5>
-                                    <p>{{$announcement->content}}</p>
-                                </div>
+                        <div id="announcementsCarousel" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @if ($announcements->isEmpty())
+                                    <div class="carousel-item active">
+                                        <div class="card" style="width: 18rem; margin: auto;">
+                                            <div class="card-body">
+                                                {{-- alert --}}
+                                                <div class="alert alert-danger" role="alert">
+                                                    <h4 class="alert-heading">There's no announcement available</h4>
+                                                    <p>Stay updated with the latest announcements</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    @foreach ($announcements as $index => $announcement)
+                                        <div class="carousel-item @if ($index == 0) active @endif">
+                                            <div class="card" style="width: 18rem; margin: auto;">
+                                                <img src="{{ asset('uploads/images/' . $announcement->image) }}" class="card-img-top img-fluid p-3" alt="image">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ $announcement->title }}</h5>
+                                                    <p class="card-text">{{ $announcement->content }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <img src="/uploads/images/{{$announcement->image}}" alt="" class="img-fluid">
-                                </div>
-                            </div>        
-                        @endforeach
+                            @if (!$announcements->isEmpty())
+                                <a class="carousel-control-prev" href="#announcementsCarousel" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#announcementsCarousel" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            @endif
+                        </div>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -224,7 +254,7 @@
         </div>
     
         <!-- end modal about-->
-    <section id="about" class="bg-light">
+        <section id="about" class="bg-light">
             <div class="container p-3">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md text-center ">
@@ -279,6 +309,9 @@
                 </div>        
         </footer>
         <!-- End of Content -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="/script.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js

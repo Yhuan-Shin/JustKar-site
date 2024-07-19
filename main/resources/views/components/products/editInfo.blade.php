@@ -16,7 +16,7 @@
 
                   <div class="mb-3">
                     <label for="price" class="form-label">Price</label><label for="price" class="form-label"></label>
-                    <input type="string" class="form-control" id="price" name="price" aria-label="Price" aria-describedby="price-addon">
+                    <input type="string" class="form-control" id="price" name="price" aria-label="Price" aria-describedby="price-addon" value="{{ $item->price }}" required>
 
                   </div>
                   <div class="mb-3">

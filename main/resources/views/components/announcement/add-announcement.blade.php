@@ -12,15 +12,15 @@
                 @method('POST')
                 <div class="mb-3 ">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                    <input type="text" class="form-control" id="title" name="title" required>
                 </div>
                 <div class="mb-3">
                     <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+                    <textarea class="form-control" id="content" rows="3" name="content" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Attach Image</label>
-                    <input type="file"  class="form-control" id="image" name="image">
+                    <input type="file"  class="form-control" id="image" name="image" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>     
