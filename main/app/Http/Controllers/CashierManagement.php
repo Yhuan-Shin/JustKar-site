@@ -56,11 +56,15 @@ class CashierManagement extends Controller
             if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
                 return redirect('/cashier/pos') ->with('success', 'Login Successful');
             }else{
-                return view('cashier/cashier-login')->with('error', 'Invalid Credentials');   
+                return redirect('/cashier')->with('error', 'Invalid Credentials');   
             }
         }
         else{
-            return view('cashier/cashier-login')->with('error', 'Invalid Credentials');   
+            return redirect('/cashier')->with('error', 'Invalid Credentials');   
         }
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('/cashier');
     }
 }

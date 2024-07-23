@@ -13,9 +13,13 @@
 </head>
 <body>
     <!-- form -->
-    <div class="container ">
+    <div class="container mt-2">
         @if(Session::has('error'))
-        <div class="alert alert-danger">{{Session::get('error')}}</div>
+        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+            <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
+            {{Session::get('error')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         @endif
 
         <div class="row justify-content-center">

@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="container">
-                                <div class="row">
+                                <div class="row mt-3">
                                         <div class="col m-2">
 
                                         </div>
@@ -33,6 +33,13 @@
 
                                             </span>
                                         </div>
+                                        {{-- logout --}}
+                                        <div class="col">
+                                            <a href="{{ route('cashier.logout') }}">
+                                                <button class="btn btn-outline-dark col-md-4">Logout</button>
+                                            </a>
+                                        </div>
+                   
                                         <h1>Point of Sales</h1>
                                         <div class="container d-flex justify-content-end">
                                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">View Order</button>
