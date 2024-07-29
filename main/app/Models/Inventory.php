@@ -26,8 +26,10 @@ class Inventory extends Model
                 'brand' => $inventory->brand,
                 'size' => $inventory->size,
             ]);
+         
         });
     }
     
+
 }
 

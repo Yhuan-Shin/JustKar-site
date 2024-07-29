@@ -26,5 +26,26 @@ class Products extends Model
     {
         return $this->belongsTo(Inventory::class,'inventory_id','id');
     }
-
+    public function orderItems(): HasOne
+    {
+        return $this->hasOne(OrderItem::class, 'order_id', 'id');
+    }
+    protected static function booted()
+    {
+        static::updated(function ($product) {
+            OrderItem::where('product_id', $product->id)->update([
+                'price' => $product->price,
+                'product_name' => $product->product_name,
+                'size' => $product->size
+            ]);
+        });
+        //update inventory
+        static::updated(function ($product) {
+            Inventory::where('id', $product->inventory_id)->update([
+                'product_name' => $product->product_name,
+                'size' => $product->size
+            ]);
+        });
+    }
+    
 }

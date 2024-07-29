@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_items', function (Blueprint $table) {
+        //
+        Schema::create('admin', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->string('product_name');
-            $table->string('product_code');
-            $table->string('quantity');
-            $table->string('price');
-            
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->string('name');
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->enum('role', ['admin', 'cashier']) -> default('admin');
+            $table->string('remember_token')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_items');
+        //
+        Schema::dropIfExists('admin');
     }
 };

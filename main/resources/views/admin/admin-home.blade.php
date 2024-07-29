@@ -30,8 +30,10 @@
             
                     @include('components/navigation')
                     <hr>
-                    
-                    <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+
+                    <a href="{{ route('admin.logout') }}">
+                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </a>
                   
                 </div>
             </div>
@@ -48,9 +50,23 @@
                                         </div>
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1"> Admin</span>
+                                            <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                         </div>
                                         <h1>Dashboard</h1>
+                                        @if (session('success'))
+                                        <div class="alert alert-success alert-dismissible fade show mt-3">
+                                            {{ session('success') }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        @endif
+                                
+                                        @if (session('error'))
+                                            <div class="alert alert-danger  alert-dismissible fade show mt-3" role="alert">
+                                                {{ session('error') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        @endif
+                                
                                 </div>
                                 <div class="row">
                                     <div class="container">

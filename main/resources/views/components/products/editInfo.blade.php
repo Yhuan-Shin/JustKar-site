@@ -1,5 +1,4 @@
-@foreach ($inventory as $item)
-<link rel="stylesheet" href="style.css">
+@foreach ($products as $item)
 <div class="modal fade" id="editInfo{{ $item->id }}" tabindex="-1" aria-labelledby="editInfoLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -12,12 +11,18 @@
             <form action="{{ route('products.update', $item->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
               @method('POST')
-              <input type="hidden" name="inventory_id" value="{{ $item->id }}">
+              <div class="mb-3">
+                <label for="name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="name" name="product_name" aria-label="Name" aria-describedby="name-addon" value="{{ $item->product_name }}" required>
+              </div>
 
+              <div class="mb-3">
+                <label for="size" class="form-label">Size</label>
+                <input type="text" class="form-control" id="size" name="size" aria-label="Size" aria-describedby="size-addon" value="{{ $item->size }}" required>
+              </div>
                   <div class="mb-3">
                     <label for="price" class="form-label">Price</label><label for="price" class="form-label"></label>
                     <input type="string" class="form-control" id="price" name="price" aria-label="Price" aria-describedby="price-addon" value="{{ $item->price }}" required>
-
                   </div>
                   <div class="mb-3">
                     <label for="image" class="form-label">Image</label>

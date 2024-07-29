@@ -67,8 +67,23 @@
                                         <div class="row">
                                             <div class="col">
                                                 {{-- content --}}
-                                                <button type="button" class="btn btn-outline-success float-end mb-3" data-bs-target="#add-cashier" data-bs-toggle="modal"><i class=" py-2 bi bi-plus-circle"></i> Add User</button>
+                                                <button type="button" class="btn btn-outline-success float-end mb-3" data-bs-target="#add-admin" data-bs-toggle="modal"><i class=" py-2 bi bi-plus-circle"></i> Add Admin</button>
 
+                                                
+                                                @if(session()->has('success'))
+                                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                 {{ session('success') }}
+                                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                               </div>
+                                               @endif
+
+                                               @if($errors->any())
+                                               <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                   {{ $errors->first('username') }}
+                                                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                               </div>
+                                               @endif
+                                               
                                                
                                                
                                                 <table class="table table-hover table-striped table-responsive">
@@ -88,7 +103,27 @@
                                                     <tbody>                                                                                                        
 
                                                        {{-- display data--}}
+                                                       @foreach ($admins as $admin)
+                                                       @include('components/superadmin/update-admin')
 
+                                                       <tr>
+                                                           <td>{{ $admin->name }}</td>
+                                                           <td>{{ $admin->username }}</td>
+                                                           <td>{{ $admin->password }}</td>
+                                                           <td>{{ $admin->created_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
+                                                           <td>{{ $admin->updated_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
+                                                           <td>
+                                                            <button type="button" class="btn btn-outline-success" data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
+
+                                                            <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-outline-danger "> <i class="bi bi-trash"></i>Delete</button>
+                                                            </form>
+
+                                                           </td>
+                                                       </tr>
+                                                       @endforeach
                                                     </tbody>
                                                 </table>
                                              
@@ -97,6 +132,7 @@
                                             </div>
                                             
                                         </div>
+                                        @include('components/superadmin/add-admin')
 
                                     </div>
                                 </div>

@@ -15,7 +15,7 @@ class AnnouncementController extends Controller
     }
     public function displayOnCustomers(){
         $announcements = Announcement::all();
-        return view('index', compact('announcements'));
+        return view('index',['announcements' => $announcements]);
     }
     public function store(Request $request)
     {

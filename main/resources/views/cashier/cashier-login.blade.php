@@ -17,7 +17,7 @@
         @if(Session::has('error'))
         <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
             <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
-            {{Session::get('error')}}
+            <strong class="p-2">{{ Session::get('error') }}</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif

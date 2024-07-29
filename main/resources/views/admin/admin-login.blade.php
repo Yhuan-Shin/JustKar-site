@@ -14,6 +14,13 @@
 <body>
     <!-- form -->
     <div class="container ">
+        @if(Session::has('error'))
+        <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
+            <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
+            <strong class="p-2">{{ Session::get('error') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card mt-5">
@@ -22,8 +29,9 @@
                         <h3 class="text-center text-uppercase">Admin LOGIN</h3>
                     </div>
                     <div class="card-body text-white bg-dark">
-                        <form action="/admin" method="post">
+                        <form action="{{route('admin.login')}}" method="post">
                         @csrf
+                        @method('POST')
                             <div class="mb-3">
                                 <label for="username" class="form-label"><i class="bi bi-person fs-2 align-middle"></i>Username</label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>

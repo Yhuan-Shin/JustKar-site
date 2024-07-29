@@ -11,16 +11,18 @@ class ProductsController extends Controller
 
    
     function display(){
-        $inventory = Products::all();
-        return view('admin/admin-products', ['inventory' => $inventory]);
+        $products = Products::all();
+        return view('admin/admin-products', ['products' => $products]);
     }
-    function displayCashierPage(){
-        $inventory = Products::all();
-        return view('cashier/pos', ['inventory' => $inventory]);
-    }
+        // function displayCashierPage(){
+        //     $inventory = Products::all();
+        //     return view('cashier/pos', ['inventory' => $inventory]);
+        // }
 
     public function update(string $id ,Request $request){
         $inventory = Products::find($id);
+        $inventory->product_name = $request->input('product_name');
+        $inventory->size = $request->input('size');
         $inventory->price = $request->input('price');
         if($request->hasFile('product_image')){
             $destination = 'uploads/product_images'.$inventory -> product_image;
@@ -55,6 +57,7 @@ class ProductsController extends Controller
             $orderItem->product_code = $product->product_code;
             $orderItem->product_name = $product->product_name;
             $orderItem->price = $product->price;
+            $orderItem->size = $product->size;
             $orderItem->quantity = 1; // Default quantity
             $orderItem->save();
         }

@@ -29,11 +29,7 @@ class CashierManagement extends Controller
 
 
     }
-    public function edit(string $id): View
-    {
-        $cashiers = User::find($id);
-        return view('inventory.edit')->with('cashiers', $cashiers);
-    }
+
     public function update(Request $request, string $id)
     {
         $cashiers = User::find($id);

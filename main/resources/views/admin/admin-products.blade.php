@@ -32,7 +32,9 @@
                     @include('components/navigation')
                     <hr>
                     
-                    <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    <a href="{{ route('admin.logout') }}">
+                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </a>
                   
                 </div>
             </div>
@@ -56,7 +58,7 @@
                                 </div>
                                 @include('components/products/editInfo')
                                <div class="row justify-content-center">
-                                @forelse ($inventory as $item)
+                                @forelse ($products as $item)
                                     <div class="col-md-4 d-flex justify-content-center">
                                         {{-- card --}}
                                         <div class="card p-3 mb-2" style="width: 14rem;">

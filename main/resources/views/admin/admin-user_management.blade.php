@@ -34,7 +34,9 @@
                     
                     <hr>
                     
-                    <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    <a href="{{ route('admin.logout') }}">
+                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </a>
                     
                   
                 </div>
