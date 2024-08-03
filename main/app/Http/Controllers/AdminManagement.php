@@ -5,6 +5,7 @@ use App\Models\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
@@ -31,9 +32,18 @@ class AdminManagement extends Controller
     }
     public function update(Request $request, string $id)
     {
+       try{
         $admins = Admin::find($id);
         $admins->update($request->all());
         return redirect('/superadmin/user_management')->with('success', 'Admin Updated');
+       }catch (QueryException $e) {
+        if ($e->errorInfo[1] == 1062) { // MySQL error code for duplicate entry
+            return redirect('/superadmin/user_management')->with('error', 'Duplicate entry for username. Please use a different username.');
+        } else {
+            // Handle other query exceptions or rethrow the exception
+            throw $e;
+        }
+       }
     }
     public function destroy(string $id): RedirectResponse
     {
