@@ -20,7 +20,7 @@
                     <div class="container">
                        <div class="row">
                             <div class="col d-flex align-items-center">
-                                <a href="/superadmin/user-management" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                                <a href="/superadmin/user_management" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                                 <div class="container">
                                     <img src="/images/logo.png" alt="" style="width: 60px; height: 60px">
                                 </div>
@@ -113,7 +113,7 @@
                                                            <td>{{ $admin->created_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>{{ $admin->updated_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>
-                                                            <button type="button" class="btn btn-outline-success" data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
+                                                            <button type="button" class="btn btn-outline-success mb-2" data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
 
                                                             <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
                                                                 @csrf

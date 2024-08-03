@@ -5,6 +5,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
 use App\Models\Products;
+use Illuminate\Database\QueryException;
+
+use App\Models\OrderItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 class InventoryController extends Controller
@@ -39,7 +42,6 @@ class InventoryController extends Controller
                     $query->where('quantity', 0);
                     break;
                 default:
-                    // Handle other cases or do nothing
             }
         }else {
             $inventory = Inventory::all();
@@ -66,7 +68,7 @@ class InventoryController extends Controller
    {
     
     $data = $request->validate([
-        'product_code' => 'required',
+        'product_code' => 'required|unique:inventory,product_code',
         'product_name' => 'required',
         'category' => 'required',
         'quantity' => 'required',
@@ -97,21 +99,47 @@ class InventoryController extends Controller
     return redirect('/admin/inventory')->with('success', 'Item Inserted');
    }
    public function edit(string $id): View
-    {
+    {   
         $inventory = Inventory::find($id);
         return view('inventory.edit')->with('item', $inventory);
     }
     public function update(Request $request, string $id)
-    {
-        $inventory = Inventory::find($id);
+{
+    try {
+        $inventory = Inventory::findOrFail($id);
         $inventory->update($request->all());
         return redirect('/admin/inventory')->with('success', 'Item Updated');
+    } catch (QueryException $e) {
+        // Handle the exception for duplicate entry
+        if ($e->errorInfo[1] == 1062) { // MySQL error code for duplicate entry
+            return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
+        } else {
+            // Handle other query exceptions or rethrow the exception
+            throw $e;
+        }
     }
+}
+    // public function destroy(string $id): RedirectResponse
+    // {
+    //     Inventory::destroy('delete from inventory where id = ?',[$id]);
+    //     return redirect('/admin/inventory')->with('success', 'Item deleted!'); 
+    // }
     public function destroy(string $id): RedirectResponse
-    {
-        Inventory::destroy('delete from inventory where id = ?',[$id]);
-        return redirect('/admin/inventory')->with('success', 'Item deleted!'); 
+{
+    $inventory = Inventory::findOrFail($id);
+
+    $product = Products::where('inventory_id', $inventory->id)->first();
+
+    if ($product) {
+        OrderItem::where('product_id', $product->id)->delete();
+        $product->delete();
     }
+
+    $inventory->delete();
+
+    return redirect('/admin/inventory')->with('success', 'Item deleted!');
+}
+
 
     public function setCriticalLevel(Request $request): RedirectResponse
     {

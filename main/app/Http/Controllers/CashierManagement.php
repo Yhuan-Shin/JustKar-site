@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\View\View;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -32,9 +33,19 @@ class CashierManagement extends Controller
 
     public function update(Request $request, string $id)
     {
-        $cashiers = User::find($id);
-        $cashiers->update($request->all());
-        return redirect('/admin/user_management')->with('success', 'Cashier Updated');
+        try{
+            $cashiers = User::find($id);
+            $cashiers->update($request->all());
+            return redirect('/admin/user_management')->with('success', 'Cashier Updated');
+        }
+        catch (QueryException $e) {
+            if ($e->errorInfo[1] == 1062) { // MySQL error code for duplicate entry
+                return redirect('/admin/user_management')->with('error', 'Duplicate entry for username. Please use a different username.');
+            } else {
+                // Handle other query exceptions or rethrow the exception
+                throw $e;
+            }
+        }
     }
     public function destroy(string $id): RedirectResponse
     {

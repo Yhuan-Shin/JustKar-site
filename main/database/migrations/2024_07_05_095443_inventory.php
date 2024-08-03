@@ -14,7 +14,7 @@ return new class extends Migration
         //
         Schema::create('inventory', function (Blueprint $table) {
             $table->id();
-            $table->string('product_code');
+            $table->string('product_code') ->unique();
             $table->string('product_name');
             $table->string('category');
             $table->string('quantity');
