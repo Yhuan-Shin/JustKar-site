@@ -24,4 +24,9 @@ class OrderController extends Controller
         return redirect('/cashier/pos')->with('success', 'Quantity Updated');
         
     }
+    public function deleteFromCart(string $id){
+        $orderItem = OrderItem::find($id);
+        $orderItem->delete();
+        return redirect('/cashier/pos')->with('success', 'Product removed from cart!');
+    }
 }

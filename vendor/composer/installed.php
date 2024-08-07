@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => '__root__',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '3719027d7fa85dfd382d7d3626ffb7e4ce4a93e7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,11 +11,20 @@
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '3719027d7fa85dfd382d7d3626ffb7e4ce4a93e7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'barryvdh/laravel-dompdf' => array(
+            'pretty_version' => 'v2.2.0',
+            'version' => '2.2.0.0',
+            'reference' => 'c96f90c97666cebec154ca1ffb67afed372114d8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -35,7 +44,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../carbonphp/carbon-doctrine-types',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'doctrine/inflector' => array(
             'pretty_version' => '2.0.10',
@@ -44,7 +53,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/inflector',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'doctrine/lexer' => array(
             'pretty_version' => '3.0.1',
@@ -54,6 +63,15 @@
             'install_path' => __DIR__ . '/../doctrine/lexer',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'dompdf/dompdf' => array(
+            'pretty_version' => 'v2.0.8',
+            'version' => '2.0.8.0',
+            'reference' => 'c20247574601700e1f7c8dab39310fca1964dc52',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../dompdf/dompdf',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'egulias/email-validator' => array(
             'pretty_version' => '4.0.2',
@@ -80,7 +98,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/collections',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'illuminate/conditionable' => array(
             'pretty_version' => 'v11.7.0',
@@ -89,7 +107,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/conditionable',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'illuminate/console' => array(
             'pretty_version' => 'v11.7.0',
@@ -116,7 +134,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/contracts',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'illuminate/events' => array(
             'pretty_version' => 'v11.7.0',
@@ -143,7 +161,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/macroable',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'illuminate/pipeline' => array(
             'pretty_version' => 'v11.7.0',
@@ -161,7 +179,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../illuminate/support',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'illuminate/translation' => array(
             'pretty_version' => 'v11.7.0',
@@ -208,6 +226,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'masterminds/html5' => array(
+            'pretty_version' => '2.9.0',
+            'version' => '2.9.0.0',
+            'reference' => 'f5ac2c0b0a2eefca70b2ce32a5809992227e75a6',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../masterminds/html5',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'nesbot/carbon' => array(
             'pretty_version' => '3.3.1',
             'version' => '3.3.1.0',
@@ -215,7 +242,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../nesbot/carbon',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'nunomaduro/termwind' => array(
             'pretty_version' => 'v2.0.1',
@@ -226,6 +253,24 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'phenx/php-font-lib' => array(
+            'pretty_version' => '0.5.6',
+            'version' => '0.5.6.0',
+            'reference' => 'a1681e9793040740a405ac5b189275059e2a9863',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phenx/php-font-lib',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phenx/php-svg-lib' => array(
+            'pretty_version' => '0.5.4',
+            'version' => '0.5.4.0',
+            'reference' => '46b25da81613a9cf43c83b2a8c2c1bdab27df691',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phenx/php-svg-lib',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'psr/clock' => array(
             'pretty_version' => '1.0.0',
             'version' => '1.0.0.0',
@@ -233,10 +278,10 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/clock',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'psr/clock-implementation' => array(
-            'dev_requirement' => true,
+            'dev_requirement' => false,
             'provided' => array(
                 0 => '1.0',
             ),
@@ -248,7 +293,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/container',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'psr/container-implementation' => array(
             'dev_requirement' => true,
@@ -269,10 +314,19 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../psr/simple-cache',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
+        ),
+        'sabberworm/php-css-parser' => array(
+            'pretty_version' => 'v8.6.0',
+            'version' => '8.6.0.0',
+            'reference' => 'd2fb94a9641be84d79c7548c6d39bbebba6e9a70',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../sabberworm/php-css-parser',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'spatie/once' => array(
-            'dev_requirement' => true,
+            'dev_requirement' => false,
             'replaced' => array(
                 0 => '*',
             ),
@@ -284,7 +338,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/clock',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/console' => array(
             'pretty_version' => 'v7.0.7',
@@ -374,7 +428,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/polyfill-php72' => array(
             'pretty_version' => 'v1.29.0',
@@ -392,7 +446,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php80',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/polyfill-php83' => array(
             'pretty_version' => 'v1.29.0',
@@ -401,7 +455,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php83',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/process' => array(
             'pretty_version' => 'v7.0.7',
@@ -437,7 +491,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/translation',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/translation-contracts' => array(
             'pretty_version' => 'v3.5.0',
@@ -446,10 +500,10 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/translation-contracts',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/translation-implementation' => array(
-            'dev_requirement' => true,
+            'dev_requirement' => false,
             'provided' => array(
                 0 => '2.3|3.0',
             ),
@@ -461,7 +515,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../voku/portable-ascii',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
     ),
 );

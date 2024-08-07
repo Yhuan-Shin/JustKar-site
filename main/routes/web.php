@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CashierManagement;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InventoryPdfController;
 use App\Http\Controllers\AdminManagement;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductsController;
@@ -73,6 +74,8 @@ Route::middleware([AdminAuth::class])->group(function() {
     Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
     Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
     Route::put('/admin/inventory', [InventoryController::class, 'setCriticalLevel'])->name('inventory.critical');
+    Route::get('/inventory/export-pdf', [InventoryPdfController::class, 'exportToPdf'])->name('inventory.export');
+
 
 });
 //cashier auth routes
@@ -81,6 +84,7 @@ Route::middleware([CashierAuth::class])->group(function() {
     Route::post('/cashier/pos/{id}', [ProductsController::class, 'addToOrder'])->name('order.store');
     Route::get('/cashier/pos', [OrderController::class, 'display'])->name('order.display');
     Route::put('/cashier/pos/{id}', [OrderController::class, 'update'])->name('order.update');
+    Route::delete('/cashier/pos/{id}', [OrderController::class, 'deleteFromCart'])->name('order.destroy');
 });
 //cashier login and logout
 Route::post('/cashier/login', [CashierManagement::class, 'login'])->name('cashier.login');

@@ -66,5 +66,5 @@ class ProductsController extends Controller
         return redirect('/cashier/pos')->with('success', 'Product added to cart!');
     }
 
-    
+
 }

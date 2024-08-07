@@ -88,7 +88,14 @@
                                         <span class="d-none d-sm-inline text-dark mx-1"> Admin</span>
                                     </div>
                                 <h1>Inventory Management System</h1>
-
+                                </div>
+                                <div class="row">
+                                    <div class="col m-2 text-end px-3">
+                                        <form action="{{ route('inventory.export')}}" method="GET">
+                                            <button class="btn btn-outline-success col-md-2">
+                                                <i class="bi bi-filetype-pdf"></i> Export to PDF</button>
+                                        </form>
+                                    </div>
                                 </div>
                             <div class="container m-3">
                                 <div class="row align-items-center">

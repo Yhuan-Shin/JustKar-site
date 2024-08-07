@@ -24,7 +24,14 @@
                                         @method('PUT')
                                         <label for="quantity">Quantity:</label>
                                         <input type="number" class="form-control mb-2" min="1" name="quantity" value="{{ $item->quantity }}">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        {{-- delete from the cart    --}}
+                                        <form action="{{route('order.destroy', $item->id)}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger">Delete</button>
+
+                                        </form>
+                                        
                                     </form>
                                 </div>
                             </div>
@@ -34,6 +41,7 @@
                     @endif
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Checkout</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
