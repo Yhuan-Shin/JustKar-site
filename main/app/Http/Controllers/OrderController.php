@@ -19,7 +19,11 @@ class OrderController extends Controller
     }
     public function update(string $id ,Request $request){
         $orderItem = OrderItem::findorfail($id);
+        $price = (float) $orderItem->price;
+        $quantity = (int) $request->input('quantity');
+
         $orderItem->quantity = $request->input('quantity');
+        $orderItem->total_price = $price * $quantity;
         $orderItem->save();
         return redirect('/cashier/pos')->with('success', 'Quantity Updated');
         

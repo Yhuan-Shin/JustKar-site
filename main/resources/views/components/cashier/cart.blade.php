@@ -14,26 +14,34 @@
                                 {{-- <div class="col-md-3">
                                     <img src="{{ asset('uploads/product_images/'.$item->product->product_image) }}" class="img-fluid">
                                 </div> --}}
-                                <div class="col-md-6">
+                                <div class="col-md-6 p-3">
                                     <h5>{{ $item->product_name }}</h5>
-                                    <p>Price: {{ $item->price }}</p>
+                                    <p>Price: {{ $item->price}}</p>
+                                    <p>Total Price: {{ $item->total_price}}</p>
                                     <p>Size: {{ $item->size }}</p>
-                                    {{-- edit quantity --}}
-                                    <form action="{{ route('order.update', $item->id) }}" method="POST">
-                                        @csrf
-                                        @method('PUT')
-                                        <label for="quantity">Quantity:</label>
-                                        <input type="number" class="form-control mb-2" min="1" name="quantity" value="{{ $item->quantity }}">
-                                        {{-- delete from the cart    --}}
-                                        <form action="{{route('order.destroy', $item->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger">Delete</button>
+                                        <div class="row">
+                                            <div class="col">
+                                                  {{-- edit quantity --}}
+                                                    <form action="{{ route('order.update', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <label for="quantity">Quantity:</label>
+                                                        <input type="number" class="form-control mb-2" min="1" name="quantity" value="{{ $item->quantity }}">
 
-                                        </form>
-                                        
-                                    </form>
-                                </div>
+                                                        <button type="submit" class="btn btn-primary">Update</button>
+                                                    </form>
+                                            </div>
+                                            <div class="col align-self-end">
+                                                {{-- delete from the cart    --}}
+                                               <form action="{{route('order.destroy', $item->id)}}" method="POST">
+                                                   @csrf
+                                                   @method('DELETE')
+                                                   <button class="btn btn-danger">Delete</button>
+
+                                               </form>
+                                            </div>
+                                    
+                                    </div>
                             </div>
                         @endforeach
                     @else

@@ -50,8 +50,8 @@
                                         </div>
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1"> Admin</span>
-                                        </div>
+                                            <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
+    c                                        </div>
                                         <h1>Create Announcements</h1>
                                 </div>
                                 <div class="row">

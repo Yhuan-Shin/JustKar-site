@@ -58,7 +58,7 @@
                                         
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1"> Admin</span>
+                                            <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                         </div>
                                         <h1>User Management</h1>
                                         

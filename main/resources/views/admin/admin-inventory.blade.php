@@ -16,7 +16,7 @@
                     <div class="container">
                        <div class="row">
                             <div class="col d-flex align-items-center">
-                                <a href="/admin/home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                                <a href="/admin/inventory" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                                 <div class="container">
                                     <img src="/images/logo.png" alt="" style="width: 60px; height: 60px">
                                 </div>
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col text-end m-2">
                                         <i class="bi bi-person-circle"></i>
-                                        <span class="d-none d-sm-inline text-dark mx-1"> Admin</span>
+                                        <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                     </div>
                                 <h1>Inventory Management System</h1>
                                 </div>
