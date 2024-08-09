@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Inventory;
 use App\Models\Products;
 use Illuminate\Database\QueryException;
-
 use App\Models\OrderItem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;

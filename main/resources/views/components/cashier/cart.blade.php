@@ -49,7 +49,13 @@
                     @endif
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Checkout</button>
+                    @if($orderItems->count() > 0)
+                        <form action="{{route('order.checkout')}}" method="post">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-primary">Checkout</button>
+                        </form>
+                    @endif
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

@@ -11,6 +11,8 @@ use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\CashierAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReceiptPDF;
+
 //superadmin
 Route::get('/superadmin', function () {
     return view('superadmin/superadmin-login');
@@ -85,6 +87,8 @@ Route::middleware([CashierAuth::class])->group(function() {
     Route::get('/cashier/pos', [OrderController::class, 'display'])->name('order.display');
     Route::put('/cashier/pos/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/cashier/pos/{id}', [OrderController::class, 'deleteFromCart'])->name('order.destroy');
+    Route::post('/cashier/pos', [OrderController::class, 'checkout'])->name('order.checkout');
+    Route::get('/cashier/pos/receipt', [ReceiptPDF::class, 'exportToPdf'])->name('order.receipt');
 });
 //cashier login and logout
 Route::post('/cashier/login', [CashierManagement::class, 'login'])->name('cashier.login');
