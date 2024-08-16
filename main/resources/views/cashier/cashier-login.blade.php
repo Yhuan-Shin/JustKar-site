@@ -24,7 +24,7 @@
 
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <div class="card mt-5">
+                <div class="card mt-3">
                     <div class="card-header text-center text-white bg-dark">
                         <i class="bi bi-person-circle" style="font-size: 50px;"></i>
                         <h3 class="text-center text-uppercase">Cashier LOGIN</h3>

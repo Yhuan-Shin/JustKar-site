@@ -4,7 +4,8 @@
     <title>Inventory Report</title>
 </head>
 <body>
-    <h1>Inventory Report</h1>
+
+    <h1>JustKar Inventory Report</h1>
     <table>
         <thead>
             <tr>

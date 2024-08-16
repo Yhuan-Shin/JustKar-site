@@ -67,9 +67,24 @@
                                                             <th scope="col">Quantity</th>
                                                             <th scope="col">Date</th>
                                                             <th scope="col">Total</th>
+                                                            <th scope="col">Cashier Name</th>
 
                                                         </tr>
                                                     </thead>
+                                                    <tbody>
+                                                        @foreach ($sales as $log)
+
+                                                        <tr>
+                                                                <td>{{ $log->ref_no }}</td>
+                                                                <td>{{ $log->product_name }}</td>
+                                                                <td>{{ $log->quantity }}</td>
+                                                                <td>{{ $log->created_at }}</td>
+                                                                <td>{{ $log->total_price }}</td>
+                                                                <td>{{ $log->cashier_name }}</td>
+                                                        </tr>
+                                                        @endforeach
+
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>

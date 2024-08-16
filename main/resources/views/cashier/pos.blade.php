@@ -16,12 +16,10 @@
             <div class="col">
                 <div class="container">
                     <div class="row">
-                        <div class="col">
+                        <div class="col-md-8">
                             <div class="container">
                                 <div class="row mt-3">
-                                        <div class="col m-2">
-
-                                        </div>
+                        
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
                                             <span class="d-none d-sm-inline text-dark mx-1">
@@ -40,11 +38,9 @@
                                             </a>
                                         </div>
                    
-                                        <h1>Point of Sales</h1>
-                                        <div class="container d-flex justify-content-end">
-                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">View Order</button>
-                                        </div>
+                                     
                                 </div>
+                                {{-- @if (session('success')) --}}
                                 @if (session('success'))
                                 <div class="alert alert-success alert-dismissible fade show mt-3">
                                     {{ session('success') }}
@@ -62,7 +58,7 @@
                                 <div class="row justify-content-center mt-3">
                                   <div class="row justify-content-center">
                                     @forelse ($inventory as $item)
-                                        <div class="col-md-4 d-flex justify-content-center">
+                                        <div class="col-md d-flex justify-content-center">
                                             {{-- card --}}
                                             <div class="card p-3 mb-2" style="width: 14rem;">
                                                 <div class="card-body"> 
@@ -82,6 +78,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                  
                                     
                                         {{-- end card --}}
                                         
@@ -89,20 +86,71 @@
                                         <div class="alert alert-danger d-flex align-items-center" role="alert">
                                             <i class="fs-4 bi bi-exclamation-circle-fill p-3"></i> No items in inventory
                                         </div>
+                                        
                                     @endforelse
                                     </div>
-                                    
+                                  
                                 </div>
                              
                             </div>
+                        </div>
+                        <div class="col-md-4 bg-light mt-2 p-3">
+                            <h4 class="text-center mt-5"> <i class="bi bi-bag-fill"></i> Orders</h4>
+                            @if($orderItems->count() > 0)
+                            @foreach($orderItems as $item)
+                                <div class="row mb-4">
+                                    {{-- <div class="col-md-3">
+                                        <img src="{{ asset('uploads/product_images/'.$item->product->product_image) }}" class="img-fluid">
+                                    </div> --}}
+                                    <div class="col-md p-3">
+                                        <h5>{{ $item->product_name }}</h5>
+                                        <p>Price: {{ $item->price}}</p>
+                                        <p>Total Price: {{$item->total_price}}</p>
+                                        <p>Size: {{ $item->size }}</p>
+                                            <div class="row">
+                                                <div class="col">
+                                                      {{-- edit quantity --}}
+                                                        <form action="{{ route('order.update', $item->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <label for="quantity">Quantity:</label>
+                                                            <input type="number" class="form-control mb-2" min="1" name="quantity" value="{{ $item->quantity }}">
+    
+                                                            <button type="submit" class="btn btn-primary">SET </button>
+                                                        </form>
+                                                </div>
+                                                <div class="col align-self-end">
+                                                    {{-- delete from the cart    --}}
+                                                   <form action="{{route('order.destroy', $item->id)}}" method="POST">
+                                                       @csrf
+                                                       @method('DELETE')
+                                                       <button class="btn btn-danger float-end">Delete</button>
+    
+                                                   </form>
+                                                </div>
+                                        
+                                        </div>
+                                    </div>
+                                    <hr>
+                            @endforeach
+                        @else
+                            <h6 class="text-center text-danger"> <i class="bi bi-exclamation-circle-fill"></i> Your cart is empty</h6>
+                        @endif
+
+                        @if($orderItems->count() > 0)
+                        <form action="{{route('order.checkout')}}" method="post">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="btn btn-primary float-end"> <i class="bi bi-bag-check-fill"></i> Checkout</button>
+                        </form>
+                    @endif
                         </div>
                     </div>
                 </div>
             </div>
     </div>
-    </div>
+
     <!-- End of sidebar -->
-    @include('components/cashier/cart')
     <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

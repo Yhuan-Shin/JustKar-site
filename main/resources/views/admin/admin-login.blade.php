@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- form -->
-    <div class="container ">
+    <div class="container mt-2">
         @if(Session::has('error'))
         <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
             <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
@@ -23,7 +23,7 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <div class="card mt-5">
+                <div class="card mt-3">
                     <div class="card-header text-center text-white bg-dark">
                         <i class="bi bi-person-circle" style="font-size: 50px;"></i>
                         <h3 class="text-center text-uppercase">Admin LOGIN</h3>

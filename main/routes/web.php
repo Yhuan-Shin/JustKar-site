@@ -54,9 +54,7 @@ Route::middleware([AdminAuth::class])->group(function() {
     Route::post('/admin/products/{id}', [ProductsController::class, 'update'])->name('products.update');
 
     // Sales Logs
-    Route::get('/admin/sales', function () {
-        return view('admin/admin-logs');
-    });
+    Route::get('/admin/sales', [AdminController::class, 'displayLogs'])->name('admin.logs');
 
     // User Management
     Route::get('/admin/user_management', [CashierManagement::class, 'display'])->name('cashier.display');
@@ -88,7 +86,7 @@ Route::middleware([CashierAuth::class])->group(function() {
     Route::put('/cashier/pos/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/cashier/pos/{id}', [OrderController::class, 'deleteFromCart'])->name('order.destroy');
     Route::post('/cashier/pos', [OrderController::class, 'checkout'])->name('order.checkout');
-    Route::get('/cashier/pos/receipt', [ReceiptPDF::class, 'exportToPdf'])->name('order.receipt');
+    Route::get('/cashier/pos/receipt{id}', [ReceiptPDF::class, 'exportToPdf'])->name('order.receipt');
 });
 //cashier login and logout
 Route::post('/cashier/login', [CashierManagement::class, 'login'])->name('cashier.login');
