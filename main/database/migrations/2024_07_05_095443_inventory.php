@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('category');
             $table->string('quantity');
             $table->string('status')->nullable(); 
-            $table->string('brand'); 
+            $table->string('fitment');
+            $table->string('brand');
+            $table->string('pattern'); 
+            $table->string('load');
             $table->string('size'); 
             $table->timestamps();
         });

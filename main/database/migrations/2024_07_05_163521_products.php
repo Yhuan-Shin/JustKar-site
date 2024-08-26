@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('product_code')->nullable();
             $table->string('product_name')->nullable();
             $table->string('category')->nullable();
-            $table->string('brand')->nullable();
+            $table->string('fitment')->nullable();
+            $table->string('pattern')->nullable();
             $table->string('size')->nullable();
             $table->string('product_image') ->nullable();
             $table->string('price') ->nullable();

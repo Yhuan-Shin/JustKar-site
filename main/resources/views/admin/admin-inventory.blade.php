@@ -53,9 +53,13 @@
                                            <form action="{{ route('inventory.critical')}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
-                                               <input type="number"class="form-control mb-2 " name="critical_level" id="critical_level" min="0" max="100" value="0">
-
-                                               <input type="submit" class="btn btn-outline-light" value="Set">
+                                           
+                                            
+                                             <div class="input-group mb-3 col-3">
+                                                <input type="number" name="critical_level" class="form-control col-3" " min="1" >
+                                                <button class="btn btn-primary" type="submit" ">Set</button>
+                                              </div>
+                    
                                            </form>
                                         </p>
                                     </div>
@@ -141,6 +145,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                   </div>
                                   @endif
+                                  
                                   @if(session()->has('error'))
                                   <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                       {{session('error') }}
@@ -159,9 +164,12 @@
                                 <table class="table table-hover table-striped ">
                                     <thead>
                                       <tr>
-                                        <th scope="col">Product_Code</th>
-                                        <th scope="col">Product_Name</th>
+                                        <th scope="col">P Code</th>
+                                        <th scope="col">P Name</th>
                                         <th scope="col">Category</th>
+                                        <th scope="col">Pattern</th>
+                                        <th scope="col">Load/Speed</th>
+                                        <th scope="col">Fitment</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Brand</th>
@@ -177,6 +185,9 @@
                                           <td>{{ $item->product_code }}</td>
                                           <td>{{ $item->product_name }}</td>
                                           <td>{{ $item->category }}</td>
+                                          <td>{{ $item->pattern }}</td>
+                                          <td>{{ $item->load }}</td>
+                                          <td>{{ $item->fitment }}</td>
                                           <td>{{ $item->quantity }}</td>
                                           <td>
                                             @if($item->quantity == 0)

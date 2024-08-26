@@ -20,7 +20,24 @@
               </div>
               <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="category" name="category" value="{{ $item->category}}" required>
+                <select class="form-select" aria-label="Default select example" name="category"  required >
+                  <option selected >{{ $item->category}}</option>
+                  <option value="A/T">All Terrain</option>
+                  <option value="H/T">Highway Terrain</option>
+                  <option value="H/L ">Highway Light Truck</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="pattern" class="form-label">Pattern</label>
+                <input type="text" name="pattern" id="pattern"  class="form-control" placeholder="Pattern" required value="{{ $item->pattern}}">
+              </div>
+              <div class="mb-3">
+                <label for="load/speed" class="form-label">Load/Speed</label>
+                <input type="text" name="load" id="load/speed"  class="form-control" placeholder="Load/Speed" required value="{{ $item->load}}">
+              </div>
+              <div class="mb-3">
+                <label for="fitment" class="form-label">Fitment</label>
+                <input type="text" name="fitment" id="fitment"  class="form-control" placeholder="Fitment"  required value="{{ $item->fitment}}">
               </div>
               <div class="mb-3">
                 <label for="quantity" class="form-label">Quantity</label>

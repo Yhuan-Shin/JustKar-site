@@ -10,7 +10,7 @@ class Inventory extends Model
 {
     protected $table = 'inventory';
     protected $primaryKey = 'id';
-    protected $fillable = ['product_code','product_name','category','quantity','brand','size', 'critical_level', 'status'];
+    protected $fillable = ['product_code','product_name','category','quantity','brand','fitment','pattern','load','size', 'critical_level', 'status'];
     use HasFactory; 
 
     public function products(): HasOne
@@ -23,7 +23,7 @@ class Inventory extends Model
             Products::where('inventory_id', $inventory->id)->update([
                 'product_name' => $inventory->product_name,
                 'category' => $inventory->category,
-                'brand' => $inventory->brand,
+                // 'brand' => $inventory->brand,
                 'size' => $inventory->size,
             ]);
          

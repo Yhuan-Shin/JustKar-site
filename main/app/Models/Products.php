@@ -17,10 +17,13 @@ class Products extends Model
         'product_name',
         'category',
         'brand',
+        'fitment',
+        'pattern',
         'size',
         'inventory_id',
         'product_image',
         'price',
+        'description'
     ];
     public function inventory(): BelongsTo
     {

@@ -7,6 +7,7 @@ use App\Models\Inventory;
 use App\Models\Products;
 use Illuminate\Database\QueryException;
 use App\Models\OrderItem;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 class InventoryController extends Controller
@@ -73,24 +74,43 @@ class InventoryController extends Controller
         'quantity' => 'required',
         'brand' => 'required',
         'size' => 'required',
+        'pattern' => 'required',
+        'load' => 'required',
+        'fitment' => 'required',
     ]);
-    $criticalLevel = Inventory::latest()->value('critical_level') ?? 0;  
-    $inventory = Inventory::create([
-        'product_code' => $data['product_code'],
-        'product_name' => $data['product_name'],
-        'category' => $data['category'],
-        'quantity' => $data['quantity'],
-        'brand' => $data['brand'],
-        'size' => $data['size'],
-        'critical_level' => $criticalLevel,
-       
-    ]);
+    $criticalLevel = Inventory::latest()->value('critical_level') ?? 0; 
+    try{
+        $inventory = Inventory::create([
+            'product_code' => $data['product_code'],
+            'product_name' => $data['product_name'],
+            'category' => $data['category'],
+            'quantity' => $data['quantity'],
+            'brand' => $data['brand'],
+            'size' => $data['size'],
+            'pattern' => $data['pattern'],
+            'load' => $data['load'],
+            'fitment' => $data['fitment'],
+            'critical_level' => $criticalLevel,
+           
+        ]);
+    }
+    catch(QueryException $e){
+        if ($e->errorInfo[1] == 1062) { 
+            return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
+        } else {
+           
+            throw $e;
+        }
+    }
     Products::create([
         'inventory_id' => $inventory->id,
         'product_code' => $inventory->product_code,
         'product_name' => $inventory->product_name,
         'category' => $inventory->category,
-        'brand' => $inventory->brand,
+        'quantity' => $inventory->quantity,
+        'pattern' => $inventory->pattern,
+        'load' => $inventory->load,
+        'fitment' => $inventory->fitment,
         'size' => $inventory->size
 
     ]);
@@ -109,11 +129,10 @@ class InventoryController extends Controller
         $inventory->update($request->all());
         return redirect('/admin/inventory')->with('success', 'Item Updated');
     } catch (QueryException $e) {
-        // Handle the exception for duplicate entry
-        if ($e->errorInfo[1] == 1062) { // MySQL error code for duplicate entry
+        if ($e->errorInfo[1] == 1062) { 
             return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
         } else {
-            // Handle other query exceptions or rethrow the exception
+           
             throw $e;
         }
     }

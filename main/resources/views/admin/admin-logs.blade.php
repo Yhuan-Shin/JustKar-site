@@ -78,8 +78,8 @@
                                                                 <td>{{ $log->ref_no }}</td>
                                                                 <td>{{ $log->product_name }}</td>
                                                                 <td>{{ $log->quantity }}</td>
-                                                                <td>{{ $log->created_at }}</td>
-                                                                <td>{{ $log->total_price }}</td>
+                                                                <td>{{ $log->created_at ->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
+                                                                <td>{{ $log->total_price}}</td>
                                                                 <td>{{ $log->cashier_name }}</td>
                                                         </tr>
                                                         @endforeach

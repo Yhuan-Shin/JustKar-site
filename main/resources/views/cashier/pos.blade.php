@@ -67,7 +67,7 @@
     
                                                     <h5 class="card-title">{{$item->product_name}}</h5>
                                                     <p class="card-text">Category: {{ $item->category }}</p>
-                                                    <p class="card-text">Brand: {{$item->brand }}</p>
+                                                    {{-- <p class="card-text">Brand: {{$item->brand }}</p> --}}
                                                     <p class="card-text">Size: {{ $item->size }}</p>
                                                     <p class="card-text">Price: {{ $item->price }}</p>
 
@@ -110,24 +110,32 @@
                                             <div class="row">
                                                 <div class="col">
                                                       {{-- edit quantity --}}
-                                                        <form action="{{ route('order.update', $item->id) }}" method="POST">
+                                                        <form action="{{ route('order.update', $item->id) }}" method="POST" class="col-6">
                                                             @csrf
                                                             @method('PUT')
-                                                            <label for="quantity">Quantity:</label>
-                                                            <input type="number" class="form-control mb-2" min="1" name="quantity" value="{{ $item->quantity }}">
-    
-                                                            <button type="submit" class="btn btn-primary">SET </button>
-                                                        </form>
+                                                            <label for="quantity">Quantity:</label>                        
+                                                            
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    {{-- <input type="number" class="form-control col-3 mb-2" min="1" name="quantity" value="{{ $item->quantity }}"> --}}
+
+                                                                    <div class="input-group mb-3 col-3">
+                                                                        <input type="number" name="quantity" class="form-control col-3" value="{{ $item->quantity }}" min="1" >
+                                                                        <button class="btn btn-primary" type="submit" ">Set</button>
+                                                                      </div>
+                                                                </div>
+
+                                                            </div>
+                                                </form>
                                                 </div>
-                                                <div class="col align-self-end">
                                                     {{-- delete from the cart    --}}
-                                                   <form action="{{route('order.destroy', $item->id)}}" method="POST">
-                                                       @csrf
-                                                       @method('DELETE')
-                                                       <button class="btn btn-danger float-end">Delete</button>
-    
-                                                   </form>
-                                                </div>
+                                                <form action="{{route('order.destroy', $item->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger float-end">Delete</button>
+
+                                                </form>
+                                           
                                         
                                         </div>
                                     </div>

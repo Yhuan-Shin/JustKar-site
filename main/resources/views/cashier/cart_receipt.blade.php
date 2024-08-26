@@ -11,7 +11,8 @@
         <p class="text-center">Tandoc Street Pecson Ville Subdivision,
             San Jose del Monte, Philippines</p>
         <p>Phone: 09123456789</p>
-        <p class="text-center">TIN: 123456789</p>
+        <p class="text-center">TIN: 274-162-585-00000</p>
+        <p class="text-center">BIR ATP: OCN 25BAAU20230000007</p>
         <hr>
         @foreach ($sales as $item)
             <p>{{ $item->product_name }} - price per pc - {{ $item->price }} - {{$item->size}} x {{$item->quantity}}</p>

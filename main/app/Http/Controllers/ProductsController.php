@@ -24,6 +24,7 @@ class ProductsController extends Controller
         $inventory->product_name = $request->input('product_name');
         $inventory->size = $request->input('size');
         $inventory->price = $request->input('price');
+        $inventory->description = $request->input('description');
         if($request->hasFile('product_image')){
             $destination = 'uploads/product_images'.$inventory -> product_image;
             if(file_exists($destination)){

@@ -70,7 +70,7 @@ class OrderController extends Controller
                     'ref_no' => uniqid('REF-'),
                     'product_code' => $item['product_code'],
                     'product_name' => $item['product_name'],
-                    'brand' => $item['brand'],
+                    // 'brand' => $item['brand'],
                     'size' => $item['size'],
                     'quantity' => $item['quantity'],
                     'price' => (float)$item['price'],   

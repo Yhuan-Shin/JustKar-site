@@ -28,6 +28,10 @@
                     <label for="image" class="form-label">Image</label>
                     <input type="file" class="form-control" id="product_image" name="product_image">
                   </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="description" name="description">
+                  </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

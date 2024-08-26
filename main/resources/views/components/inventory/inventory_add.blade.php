@@ -17,9 +17,30 @@
                 <label for="product_name" class="form-label">Product Name</label>
                 <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name" required>
               </div>
-              <div class="mb-3">
+              {{-- <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <input type="text" class="form-control" id="category" name="category" placeholder="Category" required>
+              </div> --}}
+              <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" aria-label="Default select example" name="category" required>
+                  <option selected>Select Category</option>
+                  <option value="A/T">All Terrain</option>
+                  <option value="H/T">Highway Terrain</option>
+                  <option value="H/L ">Highway Light Truck</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="pattern" class="form-label">Pattern</label>
+                <input type="text" name="pattern" id="pattern"  class="form-control" placeholder="Pattern" required>
+              </div>
+              <div class="mb-3">
+                <label for="load/speed" class="form-label">Load/Speed</label>
+                <input type="text" name="load" id="load/speed"  class="form-control" placeholder="Load/Speed" required>
+              </div>
+              <div class="mb-3">
+                <label for="fitment" class="form-label">Fitment</label>
+                <input type="text" name="fitment" id="fitment"  class="form-control" placeholder="Fitment" required>
               </div>
               <div class="mb-3">
                 <label for="quantity" class="form-label">Quantity</label>
@@ -37,7 +58,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Add</button>
         </div>
       </form>
 
