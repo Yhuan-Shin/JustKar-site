@@ -28,49 +28,42 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 p-3">
-                                <div class="card bg-dark">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Overview</h5>
-                                        <p class="card-text">
-                                            In Stock<br>
-                                            @if ($quantity > 0)
-                                                {{$quantity}}
-                                            @endif
-
-                                        </p>
-                                        <p class="card-text fw-bold">
-                                            By Category
-                                        </p>
-                                        <p class="card-text">
-                                            Offroad 20<br>
-                                            Performance 20<br>
-                                            All terain 20<br>
-                                        </p>
+                                        <h5>Overview</h5>
+                                            Instock
+                                        @if ($quantity > 0)
+                                            <p class="badge bg-success">{{ $quantity }}</p>
+                                        @else
+                                           <div class="badge bg-danger">No Items Available</div>
+                                        @endif
+                                     
+                                        <p >By Category</p>
+                                        <p ><div class="badge bg-secondary">TO BE ADDED</div></p>
                                         <hr>
-                                        <p class="card-text">
-                                           Set Critical Level<br>
-
+                                        <p> Set Critical Level<br></p>
                                            <form action="{{ route('inventory.critical')}}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                            
+                                            @if($inventory->isNotEmpty())
+                                                <div class="input-group mb-3 col-3">
+                                                    <input type="number" name="critical_level" class="form-control" min="1" value="{{ $inventory->first()->critical_level }}">
+                                                    <button class="btn btn-primary" type="submit">Set</button>
+                                                </div>
+                                            @else
+                                                <p>No items available.</p>
+                                            @endif
                                             
-                                             <div class="input-group mb-3 col-3">
-                                                <input type="number" name="critical_level" class="form-control col-3" " min="1" >
-                                                <button class="btn btn-primary" type="submit" ">Set</button>
-                                              </div>
-                    
+
                                            </form>
-                                        </p>
-                                    </div>
                             </div>
-                        </div>
                     </div>
                     <a href="/admin/dashboard"><button type="button" class="btn btn-outline-secondary col-md-12 mb-3 text-white"><i class="bi bi-arrow-return-left"></i>  Back to Home</button>
                     </a>
                     <hr>
                     
-                    <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    <a href="{{ route('admin.logout') }}">
+                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                    </a>
                   
                 </div>
             </div>
@@ -91,16 +84,24 @@
                                         <i class="bi bi-person-circle"></i>
                                         <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                     </div>
-                                <h1>Inventory Management System</h1>
+                                {{-- <h1>Inventory Management System</h1> --}}
                                 </div>
-                                <div class="row">
-                                    <div class="col m-2 text-end px-3">
-                                        <form action="{{ route('inventory.export')}}" method="GET">
-                                            <button class="btn btn-outline-success col-md-2">
-                                                <i class="bi bi-filetype-pdf"></i> Export to PDF</button>
-                                        </form>
-                                    </div>
+                                 {{-- success add message --}}
+                                 @if(session()->has('success'))
+                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                  {{ session('success') }}
+                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
+                                @endif
+                                
+                                @if(session()->has('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{session('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+                                {{-- end --}}
+
                             <div class="container m-3">
                                 <div class="row align-items-center">
                                     <div class="col-md-1 col-sm-2">
@@ -123,10 +124,10 @@
                                             </button>
                                            {{-- drop down filter menu --}}
                                            <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'all'])}}">All</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'instock'])}}">In stock</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'lowstock'])}}">Low stock</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'outofstock'])}}">Out of stock</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'all'])}}">All</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'instock'])}}">In stock</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'lowstock'])}}">Low stock</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'outofstock'])}}">Out of stock</a></li>
                                            </ul>
                                           </div>
                                     </div>
@@ -137,39 +138,20 @@
                                     {{-- modal update product --}}
                                     @include('components/inventory/inventory_update')
                                     {{-- end modal --}}
-                                    
-                                   {{-- success add message --}}
-                                   @if(session()->has('success'))
-                                   <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    {{ session('success') }}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                  </div>
-                                  @endif
-                                  
-                                  @if(session()->has('error'))
-                                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                      {{session('error') }}
-                                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                  </div>
-                                  @endif
-                                  {{-- end --}}
-
-
-
                                     <div class="col p-2">
-                                        <button class="btn btn-outline-success" type="submit" data-bs-target="#add-product" data-bs-toggle="modal"><i class="bi bi-plus-circle"></i> Add Product</button>
+                                        <button class="btn btn-success" type="submit" data-bs-target="#add-product" data-bs-toggle="modal"><i class="bi bi-plus-circle"></i> Add Product</button>
                                     </div>
                             <div class="table-responsive">
                                 <!-- table -->
-                                <table class="table table-hover table-striped ">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">P Code</th>
-                                        <th scope="col">P Name</th>
+                                <table class="table table-hover">
+                                    <thead class="table-dark">
+                                      <tr class="text-center">
+                                        <th scope="col">Product Code</th>
+                                        <th scope="col">Product Name</th>
                                         <th scope="col">Category</th>
                                         <th scope="col">Pattern</th>
-                                        <th scope="col">Load/Speed</th>
-                                        <th scope="col">Fitment</th>
+                                        {{-- <th scope="col">Load/Speed</th>
+                                        <th scope="col">Fitment</th> --}}
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Brand</th>
@@ -181,13 +163,13 @@
                                     <tbody>
                                       {{-- row --}}
                                       @foreach($inventory as $item)
-                                      <tr>
-                                          <td>{{ $item->product_code }}</td>
-                                          <td>{{ $item->product_name }}</td>
+                                      <tr class="text-center">
+                                          <th scope="row">{{ $item->product_code }}</th>
+                                          <td class="text-uppercase">{{ $item->product_name }}</td>
                                           <td>{{ $item->category }}</td>
-                                          <td>{{ $item->pattern }}</td>
-                                          <td>{{ $item->load }}</td>
-                                          <td>{{ $item->fitment }}</td>
+                                          <td class="text-uppercase">{{ $item->pattern }}</td>
+                                          {{-- <td>{{ $item->load }}</td>
+                                          <td>{{ $item->fitment }}</td> --}}
                                           <td>{{ $item->quantity }}</td>
                                           <td>
                                             @if($item->quantity == 0)
@@ -198,16 +180,23 @@
                                             <span class="badge bg-success">In Stock</span>
                                             @endif
                                           </td>
-                                          <td>{{ $item->brand }}</td>
+                                          <td class="text-uppercase">{{ $item->brand }}</td>
                                           <td>{{ $item->size }}</td>
                                           <td>
-                                            <button type="button" class="btn btn-outline-success" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
-
-                                            <form action="{{ route('inventory.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger "> <i class="bi bi-trash"></i>Delete</button>
-                                            </form>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col mb-2">
+                                                        <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}">Edit</button>
+                                                    </div>
+                                                    <div class="col">
+                                                        <form action="{{ route('inventory.destroy', $item->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
+                                         
+                                            </div>
                                           </td>
                                       </tr>
                                       @endforeach
@@ -215,6 +204,12 @@
                              
                                     </tbody>
                                   </table>
+                                  <div class="container d-flex justify-content-end">
+                                    <form action="{{ route('inventory.export')}}" method="GET">
+                                        <button class="btn btn-outline-success col-md-12 r mt-3">
+                                            <i class="bi bi-filetype-pdf"></i> Export to PDF</button>
+                                      </form>
+                                  </div>
                                 <!--  end table -->
                             </div>
                         </div>

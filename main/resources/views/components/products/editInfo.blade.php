@@ -20,19 +20,23 @@
                 <label for="size" class="form-label">Size</label>
                 <input type="text" class="form-control" id="size" name="size" aria-label="Size" aria-describedby="size-addon" value="{{ $item->size }}" required>
               </div>
-                  <div class="mb-3">
-                    <label for="price" class="form-label">Price</label><label for="price" class="form-label"></label>
-                    <input type="string" class="form-control" id="price" name="price" aria-label="Price" aria-describedby="price-addon" value="{{ $item->price }}" required>
-                  </div>
+              <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="inputGroupPrepend3">₱</span>
+                    <input type="text" class="form-control" id="price" name="price" aria-label="Price" aria-describedby="inputGroupPrepend3" value="{{ $item->price }}" required>
+                </div>
+            </div>
+            
                   <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="product_image" name="product_image">
+                    <input type="file" class="form-control" accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.svg"id="product_image" name="product_image" value="{{ $item->product_image }}">
                   </div>
                   <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <input type="text" class="form-control" id="description" name="description">
+                    <input type="text" class="form-control" id="description" value="{{ $item->description }}" name="description">
                   </div>
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
             </form>
         </div>
       </div>

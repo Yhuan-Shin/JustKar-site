@@ -20,6 +20,9 @@ class ProductsController extends Controller
         // }
 
     public function update(string $id ,Request $request){
+        $request->validate([
+            'product_image'=> 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         $inventory = Products::find($id);
         $inventory->product_name = $request->input('product_name');
         $inventory->size = $request->input('size');

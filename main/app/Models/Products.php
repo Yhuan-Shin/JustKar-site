@@ -21,6 +21,8 @@ class Products extends Model
         'pattern',
         'size',
         'inventory_id',
+        'quantity',
+        'critical_level',
         'product_image',
         'price',
         'description'

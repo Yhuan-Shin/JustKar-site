@@ -39,7 +39,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label"><i class="bi bi-shield-lock fs-3 align-middle"></i> Password</label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                <input type="password" maxlength="8" name="password" class="form-control" id="password" placeholder="Enter your password" required>
                             </div>
                             {{-- <div class="mb-3">
                              

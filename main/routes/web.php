@@ -53,6 +53,7 @@ Route::middleware([AdminAuth::class])->group(function() {
     Route::get('/admin/products', [ProductsController::class, 'display'])->name('products.display');
     Route::post('/admin/products/{id}', [ProductsController::class, 'update'])->name('products.update');
 
+
     // Sales Logs
     Route::get('/admin/sales', [AdminController::class, 'displayLogs'])->name('admin.logs');
 
@@ -70,6 +71,8 @@ Route::middleware([AdminAuth::class])->group(function() {
 
     // Inventory Management
     Route::get('/admin/inventory', [InventoryController::class, 'display'])->name('inventory.display');
+    Route::get('/admin/inventory{id}', [InventoryController::class, 'display'])->name('inventory.filter');
+
     Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('inventory.store');
     Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
     Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');

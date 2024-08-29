@@ -61,20 +61,54 @@
                                 @forelse ($products as $item)
                                     <div class="col-md-4 d-flex justify-content-center">
                                         {{-- card --}}
-                                        <div class="card p-3 mb-3" style="width: 14rem;">
+                                        <div class="card p-3 mb-3 text-center text-uppercase" style="width: 14rem;">
                                             <div class="card-body"> 
-
+                                              
+                                                @if($item->product_image == null)
+                                                 <p class="alert alert-danger">No Image</p>
+                                                @elseif($item->product_image != null)
                                                 <img src="{{asset('uploads/product_images/'.$item->product_image)}}" class="card-img-top" alt="...">
+                                                @endif
 
                                                 <h5 class="card-title">{{$item->product_name}}</h5>
-                                                <p class="card-text">Category: {{ $item->category }}</p>
-                                                {{-- <p class="card-text">Brand: {{$item->brand }}</p> --}}
-                                                <p class="card-text">Size: {{ $item->size }}</p>
-                                                <p class="card-text">Price: {{ $item->price }}</p>
-                                                <p class="card-text">Description: {{ $item->description }}</p>
-                                                <div class="container d-flex justify-content-center">
-                                                    <button class="btn btn-primary" data-bs-target="#editInfo{{ $item->id }}" data-bs-toggle="modal">Edit</button>
+                                                    @if($item->quantity == 0)
+                                                    <span class="badge bg-danger">Out of Stock</span>
+                                                    @elseif($item->quantity <= $item->critical_level)
+                                                    <span class="badge bg-warning">Low Stock</span>
+                                                    @elseif($item->quantity > $item->critical_level)
+                                                    <span class="badge bg-success">In Stock</span>
+                                                    @endif
+                                            
+                                                <div class="container">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-4">
+                                                            <p class="card-text">{{ $item->category }}</p>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <p class="card-text">{{ $item->size }}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-2 border rounded">
+                                                        <div class="col">
+                                                            <p class="card-text">{{ $item->description }}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                <div class="container d-flex justify-content-center">
+                                                   <div class="row">
+                                                    <div class="col">
+                                                         @if($item->price == null)
+                                                        <p class="alert alert-danger">No Price Set</p>
+                                                        @elseif($item->price != null)
+                                                        <p class="card-text text-start">₱{{ $item->price }}</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="col">
+                                                        <button class="btn btn-primary" data-bs-target="#editInfo{{ $item->id }}" data-bs-toggle="modal">Edit</button>
+                                                    </div>
+                                                   </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

@@ -64,3 +64,21 @@ function updateCar(newWheelSrc) {
     const carImage = document.getElementById("vehicle-image");
     carImage.src = newWheelSrc;
   }
+
+  //products submit
+  document.getElementById('product_image').addEventListener('change', function() {
+    var submitBtn = document.getElementById('submitBtn');
+    var fileInput = this;
+    var filePath = fileInput.value;
+
+    // Allowed file types
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.webp|\.svg)$/i;
+
+    if (allowedExtensions.exec(filePath)) {
+        submitBtn.disabled = false; // Enable the submit button
+    } else {
+        submitBtn.disabled = true;  // Disable the submit button
+        alert('Please upload a valid image file.');
+        fileInput.value = ''; // Clear the input
+    }
+});

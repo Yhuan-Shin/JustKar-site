@@ -24,7 +24,9 @@ class Inventory extends Model
                 'product_name' => $inventory->product_name,
                 'category' => $inventory->category,
                 // 'brand' => $inventory->brand,
+                'quantity' => $inventory->quantity,
                 'size' => $inventory->size,
+                'critical_level' => $inventory->critical_level,
             ]);
          
         });

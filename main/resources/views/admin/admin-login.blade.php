@@ -17,7 +17,7 @@
         @if(Session::has('error'))
         <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center" role="alert">
             <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
-            <strong class="p-2">{{ Session::get('error') }}</strong>
+            <p class="p-2">{{ Session::get('error') }}</p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
@@ -38,7 +38,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label"><i class="bi bi-shield-lock fs-3 align-middle"></i> Password</label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                <input type="password" maxlength="8" name="password" class="form-control" id="password" placeholder="Enter your password" required>
                             </div>
                             <div class="mb-3">
                              
