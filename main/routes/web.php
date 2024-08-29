@@ -71,8 +71,6 @@ Route::middleware([AdminAuth::class])->group(function() {
 
     // Inventory Management
     Route::get('/admin/inventory', [InventoryController::class, 'display'])->name('inventory.display');
-    Route::get('/admin/inventory{id}', [InventoryController::class, 'display'])->name('inventory.filter');
-
     Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('inventory.store');
     Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
     Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');

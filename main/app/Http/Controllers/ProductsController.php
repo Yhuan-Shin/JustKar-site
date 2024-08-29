@@ -52,6 +52,7 @@ class ProductsController extends Controller
     
         $orderItem = OrderItem::where('product_id', $product->id)->first();
     
+       try {
         if ($orderItem) {
             return redirect('/cashier/pos')->with('error', 'Product is already in the cart!');
         } else {
@@ -65,6 +66,9 @@ class ProductsController extends Controller
             $orderItem->quantity = 1; // Default quantity
             $orderItem->save();
         }
+    } catch (\Exception $e) {
+        return redirect('/cashier/pos')->with('error', 'An error occurred while adding the product to the cart: ');
+    }
     
 
         return redirect('/cashier/pos')->with('success', 'Product added to cart!');

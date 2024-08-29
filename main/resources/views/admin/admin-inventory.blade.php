@@ -123,11 +123,11 @@
                                               Filter By
                                             </button>
                                            {{-- drop down filter menu --}}
-                                           <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'all'])}}">All</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'instock'])}}">In stock</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'lowstock'])}}">Low stock</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.filter', ['filter' => 'outofstock'])}}">Out of stock</a></li>
+                                           <ul class="dropdown-menu">   
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'all'])}}">All</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'instock'])}}">In stock</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'lowstock'])}}">Low stock</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'outofstock'])}}">Out of stock</a></li>
                                            </ul>
                                           </div>
                                     </div>

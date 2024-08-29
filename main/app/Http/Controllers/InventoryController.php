@@ -14,35 +14,52 @@ class InventoryController extends Controller
 {
  
     public function display(Request $request)
-    {   
-        $search = $request->search;
-        $query = Inventory::query();
-        $quantity = Inventory::all()->sum('quantity');
+    {
+    $filter = $request->filter;
+    $search = $request->search;
+    $query = Inventory::query();
 
-        if ($request->search) {
-            $searchProduct = Inventory::where('product_name', 'like', '%' . $request->search . '%')
-            ->orWhere('product_code', 'like', '%' . $request->search . '%')
-            ->orWhere('size', 'like', '%' . $request->search . '%')
-            ->orWhere('brand', 'like', '%' . $request->search . '%')
-            ->orWhere('category', 'like', '%' . $request->search . '%')
-            ->orWhere('quantity', 'like', '%' . $request->search . '%')
-            ->get();
-            return view('admin.admin-inventory', ['inventory' => $searchProduct, 'quantity' => $quantity]); 
-        } else {
-            $inventory = Inventory::all();
-            return view('admin.admin-inventory', ['inventory' => $inventory, 'quantity' => $quantity]);
-        }
-        
-        $inventory = $query->get();
-        // $quantity = $inventory->sum('quantity');
+    $quantity = Inventory::query()->sum('quantity');
 
-        return view('admin.admin-inventory', [
-            'inventory' => $inventory,
-            'quantity' => $quantity,
-            'search' => $search,
-            'filter' => $filter,
-        ]);
+    if ($search) {
+        $query->where(function($q) use ($search) {
+            $q->where('product_name', 'like', '%' . $search . '%')
+              ->orWhere('product_code', 'like', '%' . $search . '%')
+              ->orWhere('size', 'like', '%' . $search . '%')
+              ->orWhere('brand', 'like', '%' . $search . '%')
+              ->orWhere('category', 'like', '%' . $search . '%')
+              ->orWhere('quantity', 'like', '%' . $search . '%');
+        });
     }
+
+    $query->when($filter, function ($query, $filter) {
+        switch ($filter) {
+            case 'instock':
+                $query->whereColumn('quantity', '>', 'critical_level');
+                break;
+            case 'lowstock':
+                $query->where('quantity', '>', 0)
+                      ->whereColumn('quantity', '<=', 'critical_level');
+                break;
+            case 'outofstock':
+                $query->where('quantity', 0);
+                break;
+            case 'all':
+            default:
+                // No additional filtering
+                break;
+        }
+    });
+    $inventory = $query->get();  
+
+    return view('admin.admin-inventory', [
+        'inventory' => $inventory,
+        'quantity' => $quantity,
+        'search' => $search,
+        'filter' => $filter,
+    ]);
+    }
+
     
    function create(){
        return view('admin/admin-inventory');
