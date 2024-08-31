@@ -19,11 +19,19 @@ class AdminManagement extends Controller
     }
     public function store(Request $request)
     {
+        
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-        'username' => 'required|string|max:255|unique:users,username',
-        'password' => 'required|string|max:255',
-        ]);
+            'name' => 'required|string',
+            'username' => 'required|string|unique:admin,username',
+            'password' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/'
+            ],[
+                'password.regex' => 'The password must contain at least one letter, one number, and one special character.',
+            
+            ]
+        );
+        if (Admin::where('username', $data['username'])->exists()) {
+            return redirect('superadmin/user_management')->with('error', 'Username already exists. Please use a different username.');
+        }
         Admin::create($data);
         return redirect('/superadmin/user_management')->with('success', 'Admin Added');
         
@@ -34,7 +42,15 @@ class AdminManagement extends Controller
     {
        try{
         $admins = Admin::find($id);
-        $admins->update($request->all());
+        $admins->update($request->validate([
+            'name' => 'required|string',
+            'username' => 'required|string|unique:admin,username,'.$id,
+            'password' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/'
+            ],[
+                'password.regex' => 'The password must contain at least one letter, one number, and one special character.',
+            
+            ])
+        );
         return redirect('/superadmin/user_management')->with('success', 'Admin Updated');
        }catch (QueryException $e) {
         if ($e->errorInfo[1] == 1062) { // MySQL error code for duplicate entry

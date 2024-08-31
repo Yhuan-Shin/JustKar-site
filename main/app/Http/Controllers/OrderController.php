@@ -85,6 +85,7 @@ class OrderController extends Controller
             
             $pdf = PDF::loadView('cashier/cart_receipt', compact('sales'));
             DB::table('order_items')->truncate();
+            
             return $pdf->stream('receipt.pdf');
     
             return redirect('/cashier/pos')->with('success', 'Order checkout successfully!');

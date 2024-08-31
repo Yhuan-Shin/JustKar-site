@@ -12,6 +12,8 @@ use App\Http\Middleware\CashierAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReceiptPDF;
+use App\Livewire\InventoryUpdate;
+use App\Models\Inventory;
 
 //superadmin
 Route::get('/superadmin', function () {
@@ -70,6 +72,8 @@ Route::middleware([AdminAuth::class])->group(function() {
     Route::delete('/admin/announcements/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
 
     // Inventory Management
+    // Route::get('admin/inventory', [InventoryController::class, 'fetchData'])->name('inventory.fetch');
+
     Route::get('/admin/inventory', [InventoryController::class, 'display'])->name('inventory.display');
     Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('inventory.store');
     Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
@@ -106,6 +110,8 @@ Route::get('/admin/logout', [AdminManagement::class, 'logout'])->name('admin.log
 
 //customers
 Route::get('/', [AnnouncementController::class, 'displayOnCustomers']);
+
+
 
 
 

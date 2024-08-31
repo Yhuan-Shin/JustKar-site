@@ -154,8 +154,8 @@
                                                                 <div class="col">
                                                                     {{-- <input type="number" class="form-control col-3 mb-2" min="1" name="quantity" value="{{ $item->quantity }}"> --}}
 
-                                                                    <div class="input-group mb-3 col-3">
-                                                                        <input type="number" name="quantity" class="form-control col-3" value="{{ $item->quantity }}" min="1" >
+                                                                    <div class="input-group mb-3 col-md-4">
+                                                                        <input type="number" name="quantity" class="form-control col-md-4" value="{{ $item->quantity }}" min="1" >
                                                                         <button class="btn btn-primary" type="submit" ">Set</button>
                                                                       </div>
                                                                 </div>

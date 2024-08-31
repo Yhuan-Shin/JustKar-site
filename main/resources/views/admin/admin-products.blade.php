@@ -57,7 +57,7 @@
                                        
                                 </div>
                                 @include('components/products/editInfo')
-                               <div class="row">
+                               <div class="row" >
                                 @forelse ($products as $item)
                                     <div class="col-md-4 d-flex justify-content-center">
                                         {{-- card --}}
@@ -79,7 +79,7 @@
                                                     <span class="badge bg-success">In Stock</span>
                                                     @endif
                                             
-                                                <div class="container">
+                                                <div class="container ">
                                                     <div class="row mb-2">
                                                         <div class="col-md-4">
                                                             <p class="card-text">{{ $item->category }}</p>

@@ -80,10 +80,20 @@
 
                                                @if($errors->any())
                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                   {{ $errors->first('username') }}
+                                                   @if ($errors->has('username'))
+                                                       <div>{{ $errors->first('username') }}</div>
+                                                   @endif
+                                                   @if ($errors->has('password'))
+                                                       <div>{{ $errors->first('password') }}</div>
+                                                   @endif
                                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                                </div>
+                                               
+                                                </div>
                                                @endif
+
+                                
+
                                                @if(session()->has('error'))
                                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                                    {{session('error') }}

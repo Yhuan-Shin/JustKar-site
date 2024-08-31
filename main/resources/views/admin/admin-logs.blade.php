@@ -59,8 +59,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 {{-- content --}}
-                                                <table class="table table-hover">
-                                                    <thead>
+                                                <table class="table table-hover table-striped">
+                                                    <thead class="table-dark">
                                                         <tr>
                                                             <th scope="col">Ref. Number</th>
                                                             <th scope="col">Product</th>

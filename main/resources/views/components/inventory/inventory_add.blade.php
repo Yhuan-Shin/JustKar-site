@@ -17,10 +17,7 @@
                 <label for="product_name" class="form-label">Product Name</label>
                 <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Product Name" required>
               </div>
-              {{-- <div class="mb-3">
-                <label for="category" class="form-label">Category</label>
-                <input type="text" class="form-control" id="category" name="category" placeholder="Category" required>
-              </div> --}}
+             
               <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <select class="form-select" aria-label="Default select example" name="category" required>
@@ -65,4 +62,3 @@
       </div>
     </div>
   </div>
-  {{-- end modal --}}

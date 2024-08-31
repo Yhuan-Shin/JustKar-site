@@ -20,3 +20,4 @@ class Sales extends Model
         'cashier_name',
     ];
 }
+
