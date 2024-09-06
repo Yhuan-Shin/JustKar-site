@@ -8,16 +8,10 @@ use App\Models\Products;
 class ProductsController extends Controller
 {
     //
-
-   
     function display(){
         $products = Products::all();
         return view('admin/admin-products', ['products' => $products]);
     }
-        // function displayCashierPage(){
-        //     $inventory = Products::all();
-        //     return view('cashier/pos', ['inventory' => $inventory]);
-        // }
 
     public function update(string $id ,Request $request){
         $request->validate([

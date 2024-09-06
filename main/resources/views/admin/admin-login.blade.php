@@ -37,7 +37,7 @@
                                     <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
                                     </div>
-                                    <input type="email" class="form-control" placeholder="Username@example" aria-label="Username" name="username" maxlength="20" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"  name="username" maxlength="20" aria-describedby="basic-addon1">
                                   </div>
                             </div>
                             <div class="mb-3">

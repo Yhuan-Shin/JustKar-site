@@ -10,36 +10,79 @@
 </head>
 <body>
 
-    <!-- sidebar -->
-    <div class="container-fluid">
-            <!-- content -->
+    <nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="{{ asset('images/logo.png') }}" alt="" style="width: 60px; height: 60px"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav ">
+              <li class="nav-item">
+                <a class="nav-link text-white text-center" href="#"> 
+                    <i class="bi bi-person-circle"></i>
+                    <span class="text-white">
+                        @if (Auth::check())
+                            <span class="mx-1 ">{{ Auth::user()->name }}</span>
+                        @else
+                            <span class="mx-1">Guest</span>
+                        @endif
+    
+                    </span>
+                </a>
+              </li>
+              <li class="nav-item d-flex justify-content-center">
+                <a href="{{ route('cashier.logout') }}">
+                    <button class="btn btn-outline-light col-md ">Logout</button>
+                </a>              
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>     <div class="container-fluid">
+            <!-- content -->                  
+            {{-- <div class="col text-end m-2">
+               
+            </div>
+            <div class="col">
+                <a href="{{ route('cashier.logout') }}">
+                    <button class="btn btn-outline-dark col-md-4">Logout</button>
+                </a>
+            </div> --}}
+
             <div class="col">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
+                    <div class="row ">
+                        <div class="col-md-8 ">
                             <div class="container">
                                 <div class="row mt-3">
-                        
-                                        <div class="col text-end m-2">
-                                            <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1">
-                                                @if (Auth::check())
-                                                    <span class="d-none d-sm-inline text-dark mx-1">{{ Auth::user()->name }}</span>
-                                                @else
-                                                    <span class="d-none d-sm-inline text-dark mx-1">Guest</span>
-                                                @endif
 
-                                            </span>
-                                        </div>
-                                        {{-- logout --}}
-                                        <div class="col">
-                                            <a href="{{ route('cashier.logout') }}">
-                                                <button class="btn btn-outline-dark col-md-4">Logout</button>
-                                            </a>
-                                        </div>
                    
                                      
                                 </div>
+                                @foreach($orderItems as $item)
+                                    <div class="modal fade" id="modal-delete{{ $item->id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this item from the cart?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <form action="{{ route('order.destroy', $item->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                 {{-- @if (session('success')) --}}
                                 @if (session('success'))
                                 <div class="alert alert-success alert-dismissible fade show mt-3">
@@ -54,19 +97,20 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>
                                 @endif
-                        
-                                <div class="row justify-content-center mt-3">
-                                  <div class="row justify-content-center">
+                                    
+                                {{-- display product --}}
+                                <div class="row mt-3">
+                                  <div class="row ">
                                     @forelse ($inventory as $item)
                                         <div class="col-md">
                                             {{-- card --}}
-                                            <div class="card p-3 mb-2 text-center text-uppercase" style="width: 14rem;">
+                                            <div class="card mb-2 text-center text-uppercase" style="width: 14rem;">
                                                 <div class="card-body"> 
     
                                                     @if($item->product_image == null)
                                                     <p class="alert alert-danger">No Image</p>
                                                    @elseif($item->product_image != null)
-                                                   <img src="{{asset('uploads/product_images/'.$item->product_image)}}" class="card-img-top" alt="...">
+                                                   <img src="{{asset('uploads/product_images/'.$item->product_image)}}" class="card-img-top" alt="..."style="height: 70px; width: 70px">
                                                    @endif
    
                                                    <h5 class="card-title">{{$item->product_name}}</h5>
@@ -129,7 +173,9 @@
                              
                             </div>
                         </div>
-                        <div class="col-md-4 bg-light mt-2 p-3">
+
+                        {{-- display orders --}}
+                        <div class="col-md-4 bg-light mt-2 p-3 rounded float-end">
                             <h4 class="text-center mt-5"> <i class="bi bi-bag-fill"></i> Orders</h4>
                             @if($orderItems->count() > 0)
                             @foreach($orderItems as $item)
@@ -137,40 +183,58 @@
                                     {{-- <div class="col-md-3">
                                         <img src="{{ asset('uploads/product_images/'.$item->product->product_image) }}" class="img-fluid">
                                     </div> --}}
-                                    <div class="col-md p-3">
-                                        <h5>{{ $item->product_name }}</h5>
-                                        <p>Price: {{ $item->price}}</p>
-                                        <p>Total Price: {{$item->total_price}}</p>
-                                        <p>Size: {{ $item->size }}</p>
+                                    <div class="col-md p-3 text-uppercase" >
+                                        <div class="container">
                                             <div class="row">
                                                 <div class="col">
+                                                    <p class="card-text text-start fw-bold">{{ $item->product->product_name }}</p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="card-text text-end badge bg-primary">₱{{ $item->product->price }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p class="card-text text-start">{{ $item->size}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col">
+                                                    <p class="card-text text-start">TOTAL PRICE: </p>
+                                                </div>
+                                                <div class="col">
+                                                    <p class="card-text text-end badge bg-primary">{{ $item->quantity }} x ₱{{ $item->total_price }}</p>
+                                                </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                                <div class="col">
                                                       {{-- edit quantity --}}
-                                                        <form action="{{ route('order.update', $item->id) }}" method="POST" class="col-6">
+                                                        <form action="{{ route('order.update', $item->id) }}" method="POST" class="col-md-8">
                                                             @csrf
                                                             @method('PUT')
                                                             <label for="quantity">Quantity:</label>                        
                                                             
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    {{-- <input type="number" class="form-control col-3 mb-2" min="1" name="quantity" value="{{ $item->quantity }}"> --}}
+                                                                    <div class="input-group mb-3 col-md-8">
+                                                                        <button type="submit" name="decrement" value="1" class="btn btn-outline-secondary">-</button>
+                                                                        <input type="number" id="quantity" name="quantity" class="form-control text-center" value="{{ $item->quantity }}" min="1" readonly>
+                                                                        <button type="submit" name="increment" value="1" class="btn btn-outline-secondary">+</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
 
-                                                                    <div class="input-group mb-3 col-md-4">
-                                                                        <input type="number" name="quantity" class="form-control col-md-4" value="{{ $item->quantity }}" min="1" >
-                                                                        <button class="btn btn-primary" type="submit" ">Set</button>
-                                                                      </div>
+                                                                <div class="col-md-4">
+                                                                    <button class="btn btn-danger" data-bs-target="#modal-delete{{ $item->id }}" data-bs-toggle="modal">Delete</button>
+                                           
                                                                 </div>
 
                                                             </div>
-                                                </form>
                                                 </div>
                                                     {{-- delete from the cart    --}}
-                                                <form action="{{route('order.destroy', $item->id)}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger float-end">Delete</button>
-
-                                                </form>
-                                           
+                                             
                                         
                                         </div>
                                     </div>

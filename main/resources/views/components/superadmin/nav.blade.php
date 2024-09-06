@@ -6,7 +6,7 @@
 
     </li> --}}
     <li>          
-        <a href="/superadmin/user-management" class="nav-link px-0 align-middle">
+        <a href="/superadmin/user_management" class="nav-link px-0 align-middle">
             <i class="fs-4 bi bi-person-fill-add"></i> <span class="ms-1 d-none d-sm-inline text-white">User Management</span>
         </a>
     </li>

@@ -18,7 +18,7 @@
 
                     <div class="mb-3">
                         <label for="username{{ $cashier->id }}" class="form-label">Username</label>
-                        <input type="email" id="username{{ $cashier->id }}" class="form-control cashier-username" name="username" maxlength="20" value="{{ $cashier->username }}" required>
+                        <input type="text" id="username{{ $cashier->id }}" class="form-control cashier-username" name="username" maxlength="20" value="{{ $cashier->username }}" required>
                         <div class="invalid-feedback username-error"></div>
                     </div>
 
@@ -75,19 +75,16 @@
         }
 
         function validateUsername() {
-            if (usernameInput.value !== originalUsername) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (usernameInput.value !== originalName) {
                 if (usernameInput.value.trim().length === 0) {
-                    setError(usernameInput, usernameError, 'Username is required');
-                } else if (!emailRegex.test(usernameInput.value)) {
-                    setError(usernameInput, usernameError, 'Please enter a valid email address');
-                } else if (usernameInput.value.length > 20) {
-                    setError(usernameInput, usernameError, 'Username must be 20 characters or less');
+                    setError(usernameInput, nameError, 'Username is required');
+                } else if (usernameInput.value.length < 3) {
+                    setError(usernameInput, nameError, 'Username must be 3 characters or more');
                 } else {
-                    setSuccess(usernameInput, usernameError);
+                    setSuccess(usernameInput, nameError);
                 }
             } else {
-                clearValidation(usernameInput, usernameError);
+                clearValidation(usernameInput, nameError);
             }
         }
 

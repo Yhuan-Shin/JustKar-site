@@ -24,21 +24,23 @@
         </div>
         <nav class="navbar fixed-top navbar-expand-lg bg-dark" id="navbar">
             <div class="container-fluid">
-                <a href="/" class="navbar-brand px-3"><img src="/images/logo.png" alt="" width="50px" height="50px"></a>
+                <a href="/" class="navbar-brand px-3">
+                    <img src="/images/logo.png" alt="" width="50px" height="50px">
+                </a>
                 <button class="navbar-toggler btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse " id="navmenu">
+                <div class="collapse navbar-collapse d-flex justify-content-center  " id="navmenu">
                     <ul class="navbar-nav text-center text-uppercase ">
                         <li class="nav-item px-3">
-                            <a href="#main" class="nav-link text-white " style="font-size: 16px;
+                            <a href="#main" class="nav-link text-white " style="font-size: 14px;
                             font-weight: 500;">Home</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a href="#services" class="nav-link text-white " style="font-size: 16px; font-weight: 500;">Services</a>
+                            <a href="#services" class="nav-link text-white " style="font-size: 14px; font-weight: 500;">Services</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a href="#announcement" class="nav-link text-white" style="font-size: 16px; font-weight: 500;">Announcements</a>
+                            <a href="#announcement" class="nav-link text-white" style="font-size: 14px; font-weight: 500;">Announcements</a>
                         </li>
                       
                         <li class="nav-item px-3">
@@ -105,7 +107,7 @@
                     <h4 class="text-uppercase text-dark fw-bold">Why Choose <span class="text-danger">us?</span></h4>
                   
                 <div class="row justify-content-center">        
-                    <div class="col-lg-3 col-sm-6 col-s-3 p-2 m-3 col-custom ">
+                    <div class="col-lg-3 col-sm-6 col-s-3 p-2 m-3 bg-light rounded">
                         <div class="container">
                             <div class="row" style="text-align: center;">
                                 <div class="col">
@@ -116,7 +118,7 @@
                                       
                         <p class="text-dark">We're all about top-notch tires that deliver performance, durability, and safety mile after mile.</p>                    
                     </div>
-                    <div class="col-lg-3 col-sm-6 p-2 m-3 col-custom ">
+                    <div class="col-lg-3 col-sm-6 p-2 m-3 bg-light rounded ">
                         <div class="container">
                             <div class="row" style="text-align: center;">
                                 <div class="col">
@@ -126,7 +128,7 @@
                         </div>              
                             <p class="text-dark" >Off-road to eco-friendly, we've got the perfect tires for every vehicle and every need..</p>
                     </div>          
-                    <div class="col-lg-3 col-sm-6 p-2 m-3 col-custom ">
+                    <div class="col-lg-3 col-sm-6 p-2 m-3 bg-light rounded">
                         <div class="container">
                             <div class="row" style="text-align: center;">
                                 <div class="col">

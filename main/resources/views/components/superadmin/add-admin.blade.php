@@ -18,7 +18,7 @@
               </div>
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="email" class="form-control " id="admin-username" maxlength="20" value="{{old('username')}}" name="username" placeholder="Username" required>
+                <input type="text" class="form-control " id="admin-username" maxlength="20" value="{{old('username')}}" name="username" placeholder="Username" required>
                 <div class="invalid-feedback" id="admin-username-error">
               
                 </div>
@@ -66,16 +66,13 @@
     }
 
     function validateUsername() {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (usernameInput.value.trim().length === 0) {
-      setError(usernameInput, usernameError, 'Username is required');
-      } else if (!emailRegex.test(usernameInput.value)) {
-      setError(usernameInput, usernameError, 'Please enter a valid email address');
-      } else if (usernameInput.value.length > 20) {
-      setError(usernameInput, usernameError, 'Username must be 20 characters or less');
-      } else {
-      setSuccess(usernameInput, usernameError);
-      }
+          if (usernameInput.value.trim().length === 0) {
+    setError(usernameInput, usernameError, 'Username is required');
+    } else if (usernameInput.value.length >= 1 && usernameInput.value.length <=3) {
+    setError(usernameInput, usernameError, 'Password must be 3 characters or more');
+    } else {
+    setSuccess(usernameInput, usernameError);
+    }
   }
 
     function validatePassword() {

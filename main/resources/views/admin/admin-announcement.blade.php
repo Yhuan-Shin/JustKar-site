@@ -18,7 +18,7 @@
                     <div class="container">
                        <div class="row">
                             <div class="col d-flex align-items-center">
-                                <a href="/admin/home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                                <a href="/admin/dashboard" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                                 <div class="container">
                                     <img src="/images/logo.png" alt="" style="width: 60px; height: 60px">
                                 </div>
@@ -56,6 +56,30 @@
                                 </div>
                                 <div class="row">
                                     <div class="container">
+                                    @foreach($announcements as $announcement)
+                                    <div class="modal fade" id="modal-delete{{ $announcement->id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete this announcement?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <form action="{{ route('announcement.destroy', $announcement->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+
                                         <div class="row d-flex justify-content-center ">
                                             <div class="col-md-12 mb-2 ">
                                                 @include('components/announcement/add-announcement')  
@@ -84,12 +108,8 @@
                                             <td>{{$announcement->content}}</td>
                                             <td><img src="{{asset('uploads/images/'.$announcement->image)}}" alt="" width="150px" height="100px"></td>
                                             <td>
-                                                <button type="button" class="btn btn-outline-success" data-bs-target="#edit-announcement{{$announcement->id}}" data-bs-toggle="modal" value="{{ $announcement->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
-                                                <form action="{{route('announcement.destroy', $announcement->id)}}" method="POST" style="display: inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-outline-danger "> <i class="bi bi-trash"></i>Delete</button>
-                                                </form>
+                                                <button type="button" class="btn btn-outline-primary " data-bs-target="#edit-announcement{{$announcement->id}}" data-bs-toggle="modal" value="{{ $announcement->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
+                                               <button type="button" class="btn btn-outline-danger" data-bs-target="#modal-delete{{ $announcement->id }}" data-bs-toggle="modal"><i class="bi bi-trash"></i>Delete</button>
                                             </td>
                                           </tr>
                                           @endforeach

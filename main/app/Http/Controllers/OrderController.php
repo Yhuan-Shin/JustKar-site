@@ -11,6 +11,7 @@ use App\Models\Sales;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Events\InventoryUpdated;
 
 class OrderController extends Controller
 {
@@ -22,40 +23,50 @@ class OrderController extends Controller
         $name = User::findorfail(Auth::user()->id)->name;
         return view('cashier/pos', ['orderItems' => $orderItems, 'inventory' => $inventory], ['name' => $name], ['sales' => $sales]);
     }
-    public function update(string $id ,Request $request){
-        $orderItem = OrderItem::findorfail($id);
+    public function update(string $id, Request $request) {
+        $orderItem = OrderItem::findOrFail($id);
         $price = (float) $orderItem->price;
-        $quantity = (int) $request->input('quantity');
-
-        $orderItem->quantity = $request->input('quantity');
-        if($quantity == 1){
-            $orderItem->total_price = $price;
-        }else{
-            $orderItem->total_price = $price * $quantity;
+    
+        if ($request->has('increment')) {
+            $orderItem->quantity += (int) $request->input('increment');
+        } elseif ($request->has('decrement')) {
+            if ($orderItem->quantity > 1) { 
+                $orderItem->quantity -= (int) $request->input('decrement');
+            }
+        } else {
+            
+            $orderItem->quantity = (int) $request->input('quantity');
         }
+    
+        // Calculate total price
+        $orderItem->total_price = $price * $orderItem->quantity;
+    
         $orderItem->save();
+    
         return redirect('/cashier/pos')->with('success', 'Quantity Updated');
-        
     }
+    
     public function deleteFromCart(string $id){
         $orderItem = OrderItem::find($id);
         $orderItem->delete();
         return redirect('/cashier/pos')->with('success', 'Product removed from cart!');
     }
-    public function checkout() {
+    public function checkout(){ {
         $orderItems = OrderItem::all();
     
-        if ($orderItems->isEmpty()) {
+            if ($orderItems->isEmpty()) {
             return redirect('/cashier/pos')->with('error', 'No items in the order!');
-        }
+            }
     
-        DB::beginTransaction();
-    
+            DB::beginTransaction();
+            
         
             foreach ($orderItems as $item) {
                 $inventory = Inventory::where('product_code', $item['product_code'])->first();
-    
-                if (!$inventory) {
+
+                
+
+                if (!$inventory) {  
                     return redirect('/cashier/pos')->with('error', 'Item not found in inventory!');
                 }
     
@@ -64,7 +75,12 @@ class OrderController extends Controller
                 }
     
                 $inventory->quantity -= (int)$item['quantity'];
+                Inventory::where('product_code', $item['product_code'])->update(['quantity' => $inventory->quantity]);
+
                 $inventory->save();
+                event(new InventoryUpdated($inventory));
+
+
     
                 Sales::create([
                     'ref_no' => uniqid('REF-'),
@@ -75,7 +91,7 @@ class OrderController extends Controller
                     'quantity' => $item['quantity'],
                     'price' => (float)$item['price'],   
                     'total_price' => (float)$item['price'] * (int)$item['quantity'],
-                    'cashier_name' => auth()->user()->name,
+                    'cashier_name' => Auth::user()->name,
                 ]);
             }
     
@@ -92,5 +108,6 @@ class OrderController extends Controller
         
      
     
+    }
 }
 }

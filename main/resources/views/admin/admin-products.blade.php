@@ -19,7 +19,7 @@
                     <div class="container">
                        <div class="row">
                             <div class="col d-flex align-items-center">
-                                <a href="/admin/home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                                <a href="/admin/dashboard" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                                 <div class="container">
                                     <img src="/images/logo.png" alt="" style="width: 60px; height: 60px">
                                 </div>

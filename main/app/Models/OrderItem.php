@@ -20,6 +20,9 @@ class OrderItem extends Model
                 $order->total_price = $order->price;
             }
         });
+        //update inventory quantity
+       
     }
+    
    
 }

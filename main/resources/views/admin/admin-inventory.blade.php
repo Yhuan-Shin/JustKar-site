@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    @livewireStyles
 </head>
 <body>
     <!-- sidebar -->
@@ -30,17 +30,10 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 p-3">
-                                        <h5>Overview</h5>
-                                            Instock
-                                        @if ($quantity > 0)
-                                            <p class="badge bg-success">{{ $quantity }}</p>
-                                        @else
-                                           <div class="badge bg-danger">No Items Available</div>
-                                        @endif
+
+                                       <livewire:inventory-instock/>
                                      
-                                        <p >By Category</p>
-                                        <p ><div class="badge bg-secondary">TO BE ADDED</div></p>
-                                        <hr>
+                                        
                                         <p> Set Critical Level<br></p>
                                            <form action="{{ route('inventory.critical')}}" method="POST">
                                                 @csrf
@@ -88,14 +81,9 @@
                                     </div>
                                 {{-- <h1>Inventory Management System</h1> --}}
                                 </div>
-                                 {{-- success add message --}}
-                                 @if(session()->has('success'))
-                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  {{ session('success') }}
-                                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                </div>
-                                @endif
+            
                                 
+
                                 @if(session()->has('error'))
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     {{session('error') }}
@@ -103,36 +91,33 @@
                                 </div>
                                 @endif
                                 {{-- end --}}
-
+                                <!-- Delete Confirmation Modal -->
+                                @foreach($inventory as $item)
+                                <div class="modal fade" id="modal-delete{{ $item->id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete this item?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <form action="{{ route('inventory.destroy', $item->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
                             <div class="container m-3">
                                 <div class="row align-items-center">
-                                    <div class="col-md-1 col-sm-2">
-                                        <h5>Instock</h5>
-                                    </div>
-                                    <div class="col-md-3 col-sm-4">
-                                        <form class="form" type="get" method="GET" action="{{ route('inventory.display')}}">
-                                            <input class="form-control" name="search" id="search"  type="search" placeholder="Search" aria-label="Search">
-                                            
-                                    </div>
-                                    <div class="col-md-2 col-sm-2 p-2">
-                                         <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
-                                        </form>
-                                    </div>
-                              
-                                    <div class="col-md-3">
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Filter By
-                                            </button>
-                                           {{-- drop down filter menu --}}
-                                           <ul class="dropdown-menu">   
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'all'])}}">All</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'instock'])}}">In stock</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'lowstock'])}}">Low stock</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('inventory.display', ['filter' => 'outofstock'])}}">Out of stock</a></li>
-                                           </ul>
-                                          </div>
-                                    </div>
+                                    
                                     {{-- modal create product --}}
                                    @include('components/inventory/inventory_add')
                                     {{-- end modal --}}
@@ -140,82 +125,13 @@
                                     {{-- modal update product --}}
                                     @include('components/inventory/inventory_update')
                                     {{-- end modal --}}
-                                    <div class="col p-2">
-                                        <button class="btn btn-success" type="submit" data-bs-target="#add-product" data-bs-toggle="modal"><i class="bi bi-plus-circle"></i> Add Product</button>
-                                    </div>
+                                 
                                     
                                     
-                                    <div class="table-responsive">
-                                        <!-- table -->
-                                        <table class="table table-hover">
-                                            <thead class="table-dark">
-                                              <tr class="text-center">
-                                                <th scope="col">Product Code</th>
-                                                <th scope="col">Product Name</th>
-                                                <th scope="col">Category</th>
-                                                <th scope="col">Pattern</th>
-                                                {{-- <th scope="col">Load/Speed</th>
-                                                <th scope="col">Fitment</th> --}}
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Brand</th>
-                                                <th scope="col">Size</th>
-                                                <th scope="col">Actions</th>
-                                    
-                                              </tr>
-                                            </thead>
-                                            <tbody id="inventory-table-body">
-                                              {{-- row --}}
-                                              @foreach($inventory as $item)
-                                              <tr class="text-center">
-                                                  <th scope="row">{{ $item->product_code }}</th>
-                                                  <td class="text-uppercase">{{ $item->product_name }}</td>
-                                                  <td>{{ $item->category }}</td>
-                                                  <td class="text-uppercase">{{ $item->pattern }}</td>
-                                                  {{-- <td>{{ $item->load }}</td>
-                                                  <td>{{ $item->fitment }}</td> --}}
-                                                  <td>{{ $item->quantity }}</td>
-                                                  <td>
-                                                    @if($item->quantity == 0)
-                                                    <span class="badge bg-danger">Out of Stock</span>
-                                                    @elseif($item->quantity <= $item->critical_level)
-                                                    <span class="badge bg-warning">Low Stock</span>
-                                                    @elseif($item->quantity > $item->critical_level)
-                                                    <span class="badge bg-success">In Stock</span>
-                                                    @endif
-                                                  </td>
-                                                  <td class="text-uppercase">{{ $item->brand }}</td>
-                                                  <td>{{ $item->size }}</td>
-                                                  <td>
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col mb-2">
-                                                                <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}">Edit</button>
-                                                            </div>
-                                                            <div class="col">
-                                                                <form action="{{ route('inventory.destroy', $item->id) }}" method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                                </form>
-                                                            </div>
-                                                 
-                                                    </div>
-                                                  </td>
-                                              </tr>
-                                              @endforeach
-                                            
-                                     
-                                            </tbody>
-                                          </table>
-                                          <div class="container d-flex justify-content-end">
-                                            <form action="{{ route('inventory.export')}}" method="GET">
-                                                <button class="btn btn-outline-success col-md-12 r mt-3">
-                                                    <i class="bi bi-filetype-pdf"></i> Export to PDF</button>
-                                              </form>
-                                          </div>
-                                        <!--  end table -->
-                                    </div>
+                                    @livewire('inventory-update')
+                                    {{-- @livewire('inventory-archive') --}}
+                                </div>
+                                
                                     
 
                         </div>
@@ -227,7 +143,8 @@
         </div>
         </div>
     <!-- End of sidebar -->
-  
+    @livewireScripts
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

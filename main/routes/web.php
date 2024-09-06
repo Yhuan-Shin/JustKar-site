@@ -11,9 +11,11 @@ use App\Http\Middleware\AdminAuth;
 use App\Http\Middleware\CashierAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InventoryArchiveController;
 use App\Http\Controllers\ReceiptPDF;
-use App\Livewire\InventoryUpdate;
-use App\Models\Inventory;
+    
+use App\Livewire\InventoryArchive;
+
 
 //superadmin
 Route::get('/superadmin', function () {
@@ -72,9 +74,8 @@ Route::middleware([AdminAuth::class])->group(function() {
     Route::delete('/admin/announcements/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
 
     // Inventory Management
-    // Route::get('admin/inventory', [InventoryController::class, 'fetchData'])->name('inventory.fetch');
-
     Route::get('/admin/inventory', [InventoryController::class, 'display'])->name('inventory.display');
+    Route::get('/admin/inventory/archived', [InventoryArchiveController::class,'index'])->name('inventory.archived');
     Route::post('/admin/inventory', [InventoryController::class, 'store'])->name('inventory.store');
     Route::post('/admin/inventory/{id}', [InventoryController::class, 'update'])->name('inventory.update');
     Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inventory;
 use App\Models\Products;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use App\Models\OrderItem;
 use Illuminate\Database\Events\QueryExecuted;
@@ -14,59 +15,13 @@ class InventoryController extends Controller
 {
   
     public function display(Request $request)
-    {
-    $filter = $request->filter;
-    $search = $request->search;
-    $inventory = Inventory::all();
-
-    $quantity = Inventory::query()->sum('quantity');
-    $query = Inventory::query();
-    //search
-    if ($search) {
-        $query->where(function($q) use ($search) {
-            $q->where('product_name', 'like', '%' . $search . '%')
-              ->orWhere('product_code', 'like', '%' . $search . '%')
-              ->orWhere('size', 'like', '%' . $search . '%')
-              ->orWhere('brand', 'like', '%' . $search . '%')
-              ->orWhere('category', 'like', '%' . $search . '%')
-              ->orWhere('quantity', 'like', '%' . $search . '%');
-        });
+    {   
+        
+        $inventory = Inventory::all();
+        return view('admin.admin-inventory', [
+            'inventory' => $inventory,
+        ]);
     }
-    //filter
-    $query->when($filter, function ($query, $filter) {
-        switch ($filter) {
-            case 'instock':
-                $query->where('quantity', '>', function($q) {
-                    $q->selectRaw('min(critical_level)')->from('inventory');
-                });
-                break;
-            case 'lowstock':
-                $query->where('quantity', '<=', function($q) {
-                    $q->selectRaw('min(critical_level)')->from('inventory');
-                });
-                break;
-            case 'outofstock':
-                $query->where('quantity', 0);
-                break;
-            case 'all':
-            default:
-                break;
-        }
-    });
-    $inventory = $query->get();  
-
-  
-
-    return view('admin.admin-inventory', [
-        'inventory' => $inventory,
-        'quantity' => $quantity,
-        'search' => $search,
-        'filter' => $filter,
-    ]);
-
-    }
-
-    
 
    protected $criticalLevel;
    function store(Request $request)

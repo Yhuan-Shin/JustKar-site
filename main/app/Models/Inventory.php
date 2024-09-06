@@ -11,6 +11,9 @@ class Inventory extends Model
     protected $table = 'inventory';
     protected $primaryKey = 'id';
     protected $fillable = ['product_code','product_name','category','quantity','brand','fitment','pattern','load','size', 'critical_level', 'status'];
+    protected $casts = [
+        'archived' => 'boolean',
+    ];
     use HasFactory; 
 
     public function products(): HasOne
@@ -30,6 +33,16 @@ class Inventory extends Model
             ]);
          
         });
+    }
+    public function getStockStatusAttribute()
+    {
+        if ($this->quantity == 0) {
+            return 'outofstock';
+        } elseif ($this->quantity <= $this->critical_level) {
+            return 'lowstock';
+        } elseif($this->quantity > $this->critical_level) {
+            return 'instock';
+        }
     }
     
 
