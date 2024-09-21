@@ -11,17 +11,17 @@ use App\Models\Sales;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Events\InventoryUpdated;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
     //
     public function display(){
-        $orderItems = OrderItem::all();
+        $orderItem = OrderItem::all();
         $inventory = Products::all();
         $sales = Sales::all();
         $name = User::findorfail(Auth::user()->id)->name;
-        return view('cashier/pos', ['orderItems' => $orderItems, 'inventory' => $inventory], ['name' => $name], ['sales' => $sales]);
+        return view('cashier/pos', ['orderItems' => $orderItem, 'inventory' => $inventory], ['name' => $name], ['sales' => $sales]);
     }
     public function update(string $id, Request $request) {
         $orderItem = OrderItem::findOrFail($id);
@@ -29,28 +29,27 @@ class OrderController extends Controller
     
         if ($request->has('increment')) {
             $orderItem->quantity += (int) $request->input('increment');
+            $orderItem->total_price = $price * $orderItem->quantity;
+            $orderItem->save();
+            return redirect('/cashier/pos')->with('success', 'Quantity Updated');
+
         } elseif ($request->has('decrement')) {
             if ($orderItem->quantity > 1) { 
                 $orderItem->quantity -= (int) $request->input('decrement');
+                $orderItem->total_price = $price * $orderItem->quantity;
+                $orderItem->save();
+                return redirect('/cashier/pos')->with('success', 'Quantity Updated');
+
             }
-        } else {
-            
-            $orderItem->quantity = (int) $request->input('quantity');
-        }
-    
-        // Calculate total price
-        $orderItem->total_price = $price * $orderItem->quantity;
-    
-        $orderItem->save();
-    
-        return redirect('/cashier/pos')->with('success', 'Quantity Updated');
+        }   
+
     }
-    
-    public function deleteFromCart(string $id){
-        $orderItem = OrderItem::find($id);
+    public function destroy(string $id) {
+        $orderItem = OrderItem::findOrFail($id);
         $orderItem->delete();
-        return redirect('/cashier/pos')->with('success', 'Product removed from cart!');
+        return redirect('/cashier/pos')->with('success', 'Item Deleted');
     }
+
     public function checkout(){ {
         $orderItems = OrderItem::all();
     
@@ -75,10 +74,15 @@ class OrderController extends Controller
                 }
     
                 $inventory->quantity -= (int)$item['quantity'];
-                Inventory::where('product_code', $item['product_code'])->update(['quantity' => $inventory->quantity]);
+
+               
+                Inventory::where('product_code', $item['product_code'])->update([
+                    'quantity' => $inventory->quantity,
+                    'status' => $inventory->quantity == 0 ? 'outofstock' : 'instock'
+                ]);
+                
 
                 $inventory->save();
-                event(new InventoryUpdated($inventory));
 
 
     
@@ -86,9 +90,11 @@ class OrderController extends Controller
                     'ref_no' => uniqid('REF-'),
                     'product_code' => $item['product_code'],
                     'product_name' => $item['product_name'],
-                    // 'brand' => $item['brand'],
+                    'brand' => $item['brand'],
                     'size' => $item['size'],
                     'quantity' => $item['quantity'],
+                    'category' => $item['category'],
+                    'brand' => $item['brand'],
                     'price' => (float)$item['price'],   
                     'total_price' => (float)$item['price'] * (int)$item['quantity'],
                     'cashier_name' => Auth::user()->name,
@@ -102,6 +108,14 @@ class OrderController extends Controller
             $pdf = PDF::loadView('cashier/cart_receipt', compact('sales'));
             DB::table('order_items')->truncate();
             
+            Mail::send([], [], function ($message) use ($pdf) {
+                $message->to('tejima911@gmail.com')
+                        ->subject('Order Receipt')
+                        ->attachData($pdf->output(), 'receipt.pdf', [
+                            'mime' => 'application/pdf',
+                        ]);
+            });
+
             return $pdf->stream('receipt.pdf');
     
             return redirect('/cashier/pos')->with('success', 'Order checkout successfully!');

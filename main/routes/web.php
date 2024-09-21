@@ -50,7 +50,7 @@ Route::get('/customize', function () {
 
 Route::middleware([AdminAuth::class])->group(function() {
     // Admin Dashboard
-    Route::get('/admin/dashboard', function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'], function () {
         return view('admin/admin-home');
     });
     // Products Management
@@ -81,6 +81,7 @@ Route::middleware([AdminAuth::class])->group(function() {
     Route::delete('/admin/inventory/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
     Route::put('/admin/inventory', [InventoryController::class, 'setCriticalLevel'])->name('inventory.critical');
     Route::get('/inventory/export-pdf', [InventoryPdfController::class, 'exportToPdf'])->name('inventory.export');
+    Route::get('/inventory/export-excel', [InventoryController::class, 'exportToExcel'])->name('inventory.exportToExcel');
 
 
 });
@@ -90,7 +91,7 @@ Route::middleware([CashierAuth::class])->group(function() {
     Route::post('/cashier/pos/{id}', [ProductsController::class, 'addToOrder'])->name('order.store');
     Route::get('/cashier/pos', [OrderController::class, 'display'])->name('order.display');
     Route::put('/cashier/pos/{id}', [OrderController::class, 'update'])->name('order.update');
-    Route::delete('/cashier/pos/{id}', [OrderController::class, 'deleteFromCart'])->name('order.destroy');
+    Route::delete('/cashier/pos/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::post('/cashier/pos', [OrderController::class, 'checkout'])->name('order.checkout');
     Route::get('/cashier/pos/receipt{id}', [ReceiptPDF::class, 'exportToPdf'])->name('order.receipt');
 });

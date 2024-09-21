@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
+    @livewireStyles
 <body>
 
     <!-- sidebar -->
@@ -52,7 +53,6 @@
                                             <i class="bi bi-person-circle"></i>
                                             <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                         </div>
-                                        <h1>Dashboard</h1>
                                         @if (session('success'))
                                         <div class="alert alert-success alert-dismissible fade show mt-3">
                                             {{ session('success') }}
@@ -70,42 +70,20 @@
                                 </div>
                                 <div class="row">
                                     <div class="container">
+                                        <div class="row mb-2">
+                                            <div class="col">
+                                                @livewire('admin-dashboard-sales')
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                                <!-- card -->
+                                            <div class="col-md">
+                                                @livewire('sales-chart')
+                                            </div>
+                                        </div>
                                         <div class="row">
-                                                <!-- card -->
-                                            <div class="col-md-4 mb-2">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title"><i class="fs-3 bi bi-basket justify-content-center"></i>
-                                                                Daily Sales</h5>
-                                                                <div class="col-12 text-dark p-2 m-2 rounded-2">
-                                                                    <div class="container">
-                                                                        <div class="row">
-                                                                            <div class="col d-flex justify-content-start align-items-center">
-                                                                                <h6>0,000</h6>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>                                                                      
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                                <!-- card -->
-                                                <div class="col-md-4 mb-2">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Purchase Overview(Category, Brand)</h5>
-                                                            <p class="card-text">Analyze the purchasing trends across various categories and brands. This overview provides insights into the most popular items and their respective brands.</p>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                                <!-- card -->
-                                                <div class="col-md-4 mb-2">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">No. Sold Tires</h5>
-                                                            <p class="card-text">Track the number of tires sold within a specified period. This metric helps in understanding the demand and supply dynamics in the tire market.</p>
-                                                        </div>
-                                                    </div>
+                                            <div class="col">
+                                                @livewire('sales-chart-filter')
                                             </div>
                                         </div>
                                     </div>
@@ -116,8 +94,14 @@
                 </div>
             </div>
     </div>
+    @livewireScripts
     <!-- End of sidebar -->
+    @livewireChartsScripts    
     <script src="index.js"></script>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

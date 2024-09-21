@@ -68,12 +68,16 @@ class AdminManagement extends Controller
     }
     public function login(Request $request)
     {
+        if (Auth::guard('admin')->check()) {
+            return redirect('/admin')->with('error', 'You are already logged in.');
+        }
         $credentials = $request->validate([
             'username' => 'required|string|max:255',
             'password' => 'required|string|max:255',
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect('/admin/dashboard')->with('success', 'Login Successful');
         } else {
             return redirect('/admin')->with('error', 'Invalid Credentials');

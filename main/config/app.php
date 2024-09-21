@@ -122,5 +122,28 @@ return [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
+    // 'providers' => [
+    // /*
+    //  * Package Service Providers...
+    //  */
+    // Maatwebsite\Excel\ExcelServiceProvider::class,
+    // ],
+
+    // /*
+    // |--------------------------------------------------------------------------
+    // | Autoloaded Service Providers
+    // |--------------------------------------------------------------------------
+    // |
+    // | The service providers listed here will be automatically loaded on the
+    // | request to your application. Feel free to add your own services to
+    // | this array to grant expanded functionality to your applications.
+    // |
+    // */
+    // 'aliases' => [
+    //     // ... other aliases ...
+    //     'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+    // ],
+
 
 ];

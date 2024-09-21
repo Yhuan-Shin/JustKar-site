@@ -124,12 +124,12 @@
                                                            <td>{{ $admin->created_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>{{ $admin->updated_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>
-                                                            <button type="button" class="btn btn-outline-success mb-2" data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
+                                                            <button type="button" class="btn btn-primary mb-2" data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i></button>
 
                                                             <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-outline-danger "> <i class="bi bi-trash"></i>Delete</button>
+                                                                <button type="submit" class="btn btn-danger "> <i class="bi bi-trash"></i></button>
                                                             </form>
 
                                                            </td>

@@ -4,8 +4,166 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "925253140b29534c604d870d7fdafaeb",
+    "content-hash": "cc257b79d78ea704aca6655aa8e22db2",
     "packages": [
+        {
+            "name": "arielmejiadev/larapex-charts",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ArielMejiaDev/larapex-charts.git",
+                "reference": "821f9a99c47e51f7306d04c2eeb7c6c3ee9f1e1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ArielMejiaDev/larapex-charts/zipball/821f9a99c47e51f7306d04c2eeb7c6c3ee9f1e1b",
+                "reference": "821f9a99c47e51f7306d04c2eeb7c6c3ee9f1e1b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ArielMejiaDev\\LarapexCharts\\LarapexChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LarapexChart": "ArielMejiaDev\\LarapexCharts\\Facades\\LarapexChart"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ArielMejiaDev\\LarapexCharts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ArielMejiaDev",
+                    "email": "arielmejiadev@gmail.com"
+                }
+            ],
+            "description": "Package to provide easy api to build apex charts on Laravel",
+            "support": {
+                "issues": "https://github.com/ArielMejiaDev/larapex-charts/issues",
+                "source": "https://github.com/ArielMejiaDev/larapex-charts/tree/2.1.1"
+            },
+            "time": "2021-06-24T16:16:54+00:00"
+        },
+        {
+            "name": "asantibanez/livewire-charts",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asantibanez/livewire-charts.git",
+                "reference": "35324eace3c45112935eba7ccca3087fa52deb48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asantibanez/livewire-charts/zipball/35324eace3c45112935eba7ccca3087fa52deb48",
+                "reference": "35324eace3c45112935eba7ccca3087fa52deb48",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "livewire/livewire": "^3.0",
+                "php": "^7.2|^7.3|^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^8.0|^9.5.10|^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Asantibanez\\LivewireCharts\\LivewireChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireCharts": "Asantibanez\\LivewireCharts\\LivewireChartsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asantibanez\\LivewireCharts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrés Santibáñez",
+                    "email": "santibanez.andres@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Livewire Charts",
+            "homepage": "https://github.com/asantibanez/livewire-charts",
+            "keywords": [
+                "asantibanez",
+                "livewire-charts"
+            ],
+            "support": {
+                "issues": "https://github.com/asantibanez/livewire-charts/issues",
+                "source": "https://github.com/asantibanez/livewire-charts/tree/v4.1.0"
+            },
+            "time": "2024-08-22T19:42:07+00:00"
+        },
+        {
+            "name": "balping/json-raw-encoder",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:balping/json-raw-encoder.git",
+                "reference": "9338e193f84dbea33edcb1cb82baea328afadefb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/balping%2Fjson-raw-encoder/repository/archive.zip?sha=9338e193f84dbea33edcb1cb82baea328afadefb",
+                "reference": "9338e193f84dbea33edcb1cb82baea328afadefb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balping\\JsonRaw\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Balázs Dura-Kovács"
+                }
+            ],
+            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
+            "keywords": [
+                "callback",
+                "encode",
+                "json"
+            ],
+            "time": "2023-03-27T18:25:07+00:00"
+        },
         {
             "name": "barryvdh/laravel-dompdf",
             "version": "v2.2.0",
@@ -341,6 +499,62 @@
                 }
             ],
             "time": "2024-01-05T15:54:20+00:00"
+        },
+        {
+            "name": "consoletvs/charts",
+            "version": "6.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "408b62609d79be06d229181d3b4c3a4cf6e27a1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/408b62609d79be06d229181d3b4c3a4cf6e27a1b",
+                "reference": "408b62609d79be06d229181d3b4c3a4cf6e27a1b",
+                "shasum": ""
+            },
+            "require": {
+                "balping/json-raw-encoder": "^1.0",
+                "illuminate/console": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik Campobadal Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "The laravel charting package",
+            "support": {
+                "issues": "https://github.com/ConsoleTVs/Charts/issues",
+                "source": "https://github.com/ConsoleTVs/Charts/tree/6.7.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/ErikCampobadal",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-03-13T10:55:51+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -1367,17 +1581,82 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
-            "name": "laravel/framework",
-            "version": "v11.21.0",
+            "name": "icehouse-ventures/laravel-chartjs",
+            "version": "v4.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "9d9d36708d56665b12185493f684abce38ad2d30"
+                "url": "https://github.com/icehouse-ventures/laravel-chartjs.git",
+                "reference": "4557ac7a1d7d5ce8fd8413809a18647aaa367197"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/9d9d36708d56665b12185493f684abce38ad2d30",
-                "reference": "9d9d36708d56665b12185493f684abce38ad2d30",
+                "url": "https://api.github.com/repos/icehouse-ventures/laravel-chartjs/zipball/4557ac7a1d7d5ce8fd8413809a18647aaa367197",
+                "reference": "4557ac7a1d7d5ce8fd8413809a18647aaa367197",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.1|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.13",
+                "orchestra/testbench": "^8.19",
+                "pestphp/pest": "^2.30",
+                "pestphp/pest-plugin-laravel": "^2.2",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "IcehouseVentures\\LaravelChartjs\\Providers\\ChartjsServiceProvider"
+                    ],
+                    "aliases": {
+                        "Chartjs": "IcehouseVentures\\LaravelChartjs\\Facades\\Chartjs"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "IcehouseVentures\\LaravelChartjs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Icehouse Ventures",
+                    "email": "tech@icehouseventures.co.nz"
+                }
+            ],
+            "description": "Simple package to facilitate and automate the use of charts in Laravel using the Chart.js library",
+            "keywords": [
+                "chartjs",
+                "charts",
+                "graphs",
+                "icehouseventures",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/icehouse-ventures/laravel-chartjs/issues",
+                "source": "https://github.com/icehouse-ventures/laravel-chartjs/tree/v4.1"
+            },
+            "time": "2024-09-14T21:15:39+00:00"
+        },
+        {
+            "name": "laravel/framework",
+            "version": "v11.23.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453",
+                "reference": "16b31ab0e1dad5cb2ed6dcc1818c02f02fc48453",
                 "shasum": ""
             },
             "require": {
@@ -1439,6 +1718,7 @@
                 "illuminate/bus": "self.version",
                 "illuminate/cache": "self.version",
                 "illuminate/collections": "self.version",
+                "illuminate/concurrency": "self.version",
                 "illuminate/conditionable": "self.version",
                 "illuminate/config": "self.version",
                 "illuminate/console": "self.version",
@@ -1481,7 +1761,7 @@
                 "league/flysystem-sftp-v3": "^3.0",
                 "mockery/mockery": "^1.6",
                 "nyholm/psr7": "^1.2",
-                "orchestra/testbench-core": "^9.1.5",
+                "orchestra/testbench-core": "^9.4.0",
                 "pda/pheanstalk": "^5.0",
                 "phpstan/phpstan": "^1.11.5",
                 "phpunit/phpunit": "^10.5|^11.0",
@@ -1539,6 +1819,7 @@
                     "src/Illuminate/Events/functions.php",
                     "src/Illuminate/Filesystem/functions.php",
                     "src/Illuminate/Foundation/helpers.php",
+                    "src/Illuminate/Log/functions.php",
                     "src/Illuminate/Support/helpers.php"
                 ],
                 "psr-4": {
@@ -1570,7 +1851,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-08-20T15:00:52+00:00"
+            "time": "2024-09-13T13:36:30+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -1632,16 +1913,16 @@
         },
         {
             "name": "laravel/reverb",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/reverb.git",
-                "reference": "d4993bc6b8664d439c1c7d248bd25ef371e532cf"
+                "reference": "46bb5dd0b14ba0ae9d3dd740e60bca279b689a63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/reverb/zipball/d4993bc6b8664d439c1c7d248bd25ef371e532cf",
-                "reference": "d4993bc6b8664d439c1c7d248bd25ef371e532cf",
+                "url": "https://api.github.com/repos/laravel/reverb/zipball/46bb5dd0b14ba0ae9d3dd740e60bca279b689a63",
+                "reference": "46bb5dd0b14ba0ae9d3dd740e60bca279b689a63",
                 "shasum": ""
             },
             "require": {
@@ -1708,9 +1989,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/reverb/issues",
-                "source": "https://github.com/laravel/reverb/tree/v1.2.0"
+                "source": "https://github.com/laravel/reverb/tree/v1.3.0"
             },
-            "time": "2024-08-16T17:59:50+00:00"
+            "time": "2024-09-03T10:04:47+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -1838,6 +2119,50 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.9.0"
             },
             "time": "2024-01-04T16:10:04+00:00"
+        },
+        {
+            "name": "laraveldaily/laravel-charts",
+            "version": "0.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelDaily/laravel-charts.git",
+                "reference": "78d2a5a74e92d65e361652360aa73f5c20583561"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelDaily/laravel-charts/zipball/78d2a5a74e92d65e361652360aa73f5c20583561",
+                "reference": "78d2a5a74e92d65e361652360aa73f5c20583561",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelDaily\\LaravelCharts\\LaravelChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelDaily\\LaravelCharts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Povilas Korop",
+                    "email": "povilas@laraveldaily.com"
+                }
+            ],
+            "description": "Create charts and reports from Laravel",
+            "support": {
+                "issues": "https://github.com/LaravelDaily/laravel-charts/issues",
+                "source": "https://github.com/LaravelDaily/laravel-charts/tree/0.2.3"
+            },
+            "time": "2023-06-28T10:36:53+00:00"
         },
         {
             "name": "league/commonmark",
@@ -2292,6 +2617,130 @@
             "time": "2024-08-19T11:52:18+00:00"
         },
         {
+            "name": "maatwebsite/excel",
+            "version": "v1.1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
+                "reference": "0c67aba8387726458d42461eae91a3415593bbc4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/0c67aba8387726458d42461eae91a3415593bbc4",
+                "reference": "0c67aba8387726458d42461eae91a3415593bbc4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "phpoffice/phpexcel": "~1.8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "orchestra/testbench": "~2.2.0@dev",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Maatwebsite\\Excel\\": "src/"
+                },
+                "classmap": [
+                    "src/Maatwebsite/Excel",
+                    "tests/TestCase.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maatwebsite.nl",
+                    "email": "patrick@maatwebsite.nl"
+                }
+            ],
+            "description": "An eloquent way of importing and exporting Excel and CSV in Laravel 4 with the power of PHPExcel",
+            "keywords": [
+                "PHPExcel",
+                "batch",
+                "csv",
+                "excel",
+                "export",
+                "import",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/Maatwebsite/Laravel-Excel/issues",
+                "source": "https://github.com/Maatwebsite/Laravel-Excel/tree/master"
+            },
+            "time": "2014-07-10T09:06:07+00:00"
+        },
+        {
+            "name": "marineusde/larapex-charts",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marineusde/larapex-charts.git",
+                "reference": "f05da606a7bd5b4d6c986842c1f23852fedee880"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marineusde/larapex-charts/zipball/f05da606a7bd5b4d6c986842c1f23852fedee880",
+                "reference": "f05da606a7bd5b4d6c986842c1f23852fedee880",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/support": "^10.48|^11.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.9",
+                "laravel/pint": "^1.15",
+                "nunomaduro/collision": "^7.10",
+                "orchestra/testbench": "^8.10",
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "marineusde\\LarapexCharts\\Providers\\LarapexChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LarapexChart": "marineusde\\LarapexCharts\\Facades\\LarapexChart"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "marineusde\\LarapexCharts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Henning Zimmermann",
+                    "email": "github@marineus.de"
+                }
+            ],
+            "description": "Package to provide easy api to build apex charts on Laravel",
+            "homepage": "https://github.com/marineusde/larapex-charts",
+            "keywords": [
+                "apexcharts",
+                "charts",
+                "larapex"
+            ],
+            "support": {
+                "issues": "https://github.com/marineusde/larapex-charts/issues",
+                "source": "https://github.com/marineusde/larapex-charts/tree/1.4.2"
+            },
+            "time": "2024-07-30T09:48:00+00:00"
+        },
+        {
             "name": "masterminds/html5",
             "version": "2.9.0",
             "source": {
@@ -2715,16 +3164,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.1.0",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1"
+                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/683130c2ff8c2739f4822ff7ac5c873ec529abd1",
-                "reference": "683130c2ff8c2739f4822ff7ac5c873ec529abd1",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
+                "reference": "23c79fbbfb725fb92af9bcf41065c8e9a0d49ddb",
                 "shasum": ""
             },
             "require": {
@@ -2767,22 +3216,22 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.1.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.2.0"
             },
-            "time": "2024-07-01T20:03:41+00:00"
+            "time": "2024-09-15T16:40:33+00:00"
         },
         {
             "name": "nunomaduro/termwind",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/termwind.git",
-                "reference": "58c4c58cf23df7f498daeb97092e34f5259feb6a"
+                "reference": "e5f21eade88689536c0cdad4c3cd75f3ed26e01a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/58c4c58cf23df7f498daeb97092e34f5259feb6a",
-                "reference": "58c4c58cf23df7f498daeb97092e34f5259feb6a",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/e5f21eade88689536c0cdad4c3cd75f3ed26e01a",
+                "reference": "e5f21eade88689536c0cdad4c3cd75f3ed26e01a",
                 "shasum": ""
             },
             "require": {
@@ -2792,11 +3241,11 @@
             },
             "require-dev": {
                 "ergebnis/phpstan-rules": "^2.2.0",
-                "illuminate/console": "^11.0.0",
-                "laravel/pint": "^1.14.0",
-                "mockery/mockery": "^1.6.7",
-                "pestphp/pest": "^2.34.1",
-                "phpstan/phpstan": "^1.10.59",
+                "illuminate/console": "^11.1.1",
+                "laravel/pint": "^1.15.0",
+                "mockery/mockery": "^1.6.11",
+                "pestphp/pest": "^2.34.6",
+                "phpstan/phpstan": "^1.10.66",
                 "phpstan/phpstan-strict-rules": "^1.5.2",
                 "symfony/var-dumper": "^7.0.4",
                 "thecodingmachine/phpstan-strict-rules": "^1.0.0"
@@ -2841,7 +3290,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/termwind/issues",
-                "source": "https://github.com/nunomaduro/termwind/tree/v2.0.1"
+                "source": "https://github.com/nunomaduro/termwind/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -2857,7 +3306,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-06T16:17:14+00:00"
+            "time": "2024-09-05T15:25:50+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3084,6 +3533,68 @@
                 "source": "https://github.com/dompdf/php-svg-lib/tree/0.5.4"
             },
             "time": "2024-04-08T12:52:34+00:00"
+        },
+        {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "support": {
+                "issues": "https://github.com/PHPOffice/PHPExcel/issues",
+                "source": "https://github.com/PHPOffice/PHPExcel/tree/master"
+            },
+            "abandoned": "phpoffice/phpspreadsheet",
+            "time": "2015-05-01T07:00:55+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -3473,16 +3984,16 @@
         },
         {
             "name": "psr/log",
-            "version": "3.0.1",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "79dff0b268932c640297f5208d6298f71855c03e"
+                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/79dff0b268932c640297f5208d6298f71855c03e",
-                "reference": "79dff0b268932c640297f5208d6298f71855c03e",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
+                "reference": "f16e1d5863e37f8d8c2a01719f5b34baa2b714d3",
                 "shasum": ""
             },
             "require": {
@@ -3517,9 +4028,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/3.0.1"
+                "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
-            "time": "2024-08-21T13:31:24+00:00"
+            "time": "2024-09-11T13:17:53+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -4590,6 +5101,334 @@
             "time": "2024-07-01T07:33:21+00:00"
         },
         {
+            "name": "shuchkin/simplexlsx",
+            "version": "1.1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shuchkin/simplexlsx.git",
+                "reference": "61a9eb24784a9e8aa702efca3f5c7ec1f040aefb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shuchkin/simplexlsx/zipball/61a9eb24784a9e8aa702efca3f5c7ec1f040aefb",
+                "reference": "61a9eb24784a9e8aa702efca3f5c7ec1f040aefb",
+                "shasum": ""
+            },
+            "require": {
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "ext-simplexml": "*",
+                "ext-zlib": "*",
+                "php": ">=5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/SimpleXLSX.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Shuchkin (SMSPILOT)",
+                    "email": "sergey.shuchkin@gmail.com",
+                    "homepage": "https://github.com/shuchkin"
+                }
+            ],
+            "description": "Parse and retrieve data from Excel XLSx files. MS Excel 2007 workbooks PHP reader.",
+            "homepage": "https://github.com/shuchkin/simplexlsx",
+            "keywords": [
+                "backend",
+                "excel",
+                "parser",
+                "php",
+                "reader",
+                "xlsx"
+            ],
+            "support": {
+                "issues": "https://github.com/shuchkin/simplexlsx/issues",
+                "source": "https://github.com/shuchkin/simplexlsx/tree/1.1.11"
+            },
+            "time": "2024-07-06T17:18:59+00:00"
+        },
+        {
+            "name": "spatie/browsershot",
+            "version": "4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/browsershot.git",
+                "reference": "601f2758191d8c46b2ea587eea935a87da4f39e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/browsershot/zipball/601f2758191d8c46b2ea587eea935a87da4f39e8",
+                "reference": "601f2758191d8c46b2ea587eea935a87da4f39e8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "ext-json": "*",
+                "php": "^8.2",
+                "spatie/temporary-directory": "^2.0",
+                "symfony/process": "^6.0|^7.0"
+            },
+            "require-dev": {
+                "pestphp/pest": "^1.20",
+                "spatie/image": "^3.6",
+                "spatie/pdf-to-text": "^1.52",
+                "spatie/phpunit-snapshot-assertions": "^4.2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Browsershot\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://github.com/freekmurze",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Convert a webpage to an image or pdf using headless Chrome",
+            "homepage": "https://github.com/spatie/browsershot",
+            "keywords": [
+                "chrome",
+                "convert",
+                "headless",
+                "image",
+                "pdf",
+                "puppeteer",
+                "screenshot",
+                "webpage"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/browsershot/tree/4.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-08-22T09:14:07+00:00"
+        },
+        {
+            "name": "spatie/laravel-package-tools",
+            "version": "1.16.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-package-tools.git",
+                "reference": "c7413972cf22ffdff97b68499c22baa04eddb6a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/c7413972cf22ffdff97b68499c22baa04eddb6a2",
+                "reference": "c7413972cf22ffdff97b68499c22baa04eddb6a2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.28|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^7.7|^8.0",
+                "pestphp/pest": "^1.22",
+                "phpunit/phpunit": "^9.5.24",
+                "spatie/pest-plugin-test-time": "^1.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\LaravelPackageTools\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Tools for creating Laravel packages",
+            "homepage": "https://github.com/spatie/laravel-package-tools",
+            "keywords": [
+                "laravel-package-tools",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-package-tools/issues",
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.5"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-08-27T18:56:10+00:00"
+        },
+        {
+            "name": "spatie/laravel-pdf",
+            "version": "1.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-pdf.git",
+                "reference": "fadf23c6249c491fd4924f8ec37166a283269966"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-pdf/zipball/fadf23c6249c491fd4924f8ec37166a283269966",
+                "reference": "fadf23c6249c491fd4924f8ec37166a283269966",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0|^11.0",
+                "php": "^8.2",
+                "spatie/browsershot": "^4.0",
+                "spatie/laravel-package-tools": "^1.16.1",
+                "spatie/temporary-directory": "^2.2.1"
+            },
+            "require-dev": {
+                "ext-imagick": "*",
+                "larastan/larastan": "^2.7.0",
+                "laravel/pint": "^1.13.7",
+                "nunomaduro/collision": "^7.10",
+                "orchestra/testbench": "^8.18",
+                "pestphp/pest": "^2.30",
+                "pestphp/pest-plugin-arch": "^2.5",
+                "pestphp/pest-plugin-laravel": "^2.2",
+                "phpstan/extension-installer": "^1.3.1",
+                "phpstan/phpstan-deprecation-rules": "^1.1.4",
+                "phpstan/phpstan-phpunit": "^1.3.15",
+                "spatie/image": "^3.3.2",
+                "spatie/laravel-ray": "^1.33",
+                "spatie/pdf-to-image": "^2.2",
+                "spatie/pdf-to-text": "^1.52.1",
+                "spatie/pest-expectations": "^1.5",
+                "spatie/pest-plugin-snapshots": "^2.1",
+                "spatie/pixelmatch-php": "^1.0",
+                "wnx/sidecar-browsershot": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\LaravelPdf\\PdfServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelPdf": "Pdf"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Support/functions.php"
+                ],
+                "psr-4": {
+                    "Spatie\\LaravelPdf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create PDFs in Laravel apps",
+            "homepage": "https://github.com/spatie/laravel-pdf",
+            "keywords": [
+                "laravel",
+                "laravel-pdf",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-pdf/issues",
+                "source": "https://github.com/spatie/laravel-pdf/tree/1.5.2"
+            },
+            "time": "2024-07-16T07:42:10+00:00"
+        },
+        {
+            "name": "spatie/temporary-directory",
+            "version": "2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/temporary-directory.git",
+                "reference": "76949fa18f8e1a7f663fd2eaa1d00e0bcea0752a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/temporary-directory/zipball/76949fa18f8e1a7f663fd2eaa1d00e0bcea0752a",
+                "reference": "76949fa18f8e1a7f663fd2eaa1d00e0bcea0752a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\TemporaryDirectory\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily create, use and destroy temporary directories",
+            "homepage": "https://github.com/spatie/temporary-directory",
+            "keywords": [
+                "php",
+                "spatie",
+                "temporary-directory"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/temporary-directory/issues",
+                "source": "https://github.com/spatie/temporary-directory/tree/2.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-12-25T11:46:58+00:00"
+        },
+        {
             "name": "symfony/clock",
             "version": "v7.1.1",
             "source": {
@@ -5540,20 +6379,20 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "0424dff1c58f028c451efff2045f5d92410bd540"
+                "reference": "a3cc8b044a6ea513310cbd48ef7333b384945638"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/0424dff1c58f028c451efff2045f5d92410bd540",
-                "reference": "0424dff1c58f028c451efff2045f5d92410bd540",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/a3cc8b044a6ea513310cbd48ef7333b384945638",
+                "reference": "a3cc8b044a6ea513310cbd48ef7333b384945638",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-ctype": "*"
@@ -5599,7 +6438,7 @@
                 "portable"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-ctype/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -5615,24 +6454,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-intl-grapheme",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-grapheme.git",
-                "reference": "64647a7c30b2283f5d49b874d84a18fc22054b7a"
+                "reference": "b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/64647a7c30b2283f5d49b874d84a18fc22054b7a",
-                "reference": "64647a7c30b2283f5d49b874d84a18fc22054b7a",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-grapheme/zipball/b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe",
+                "reference": "b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "suggest": {
                 "ext-intl": "For best performance"
@@ -5677,7 +6516,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -5693,26 +6532,25 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-idn.git",
-                "reference": "a6e83bdeb3c84391d1dfe16f42e40727ce524a5c"
+                "reference": "c36586dcf89a12315939e00ec9b4474adcb1d773"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/a6e83bdeb3c84391d1dfe16f42e40727ce524a5c",
-                "reference": "a6e83bdeb3c84391d1dfe16f42e40727ce524a5c",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-idn/zipball/c36586dcf89a12315939e00ec9b4474adcb1d773",
+                "reference": "c36586dcf89a12315939e00ec9b4474adcb1d773",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
-                "symfony/polyfill-intl-normalizer": "^1.10",
-                "symfony/polyfill-php72": "^1.10"
+                "php": ">=7.2",
+                "symfony/polyfill-intl-normalizer": "^1.10"
             },
             "suggest": {
                 "ext-intl": "For best performance"
@@ -5761,7 +6599,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -5777,24 +6615,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-intl-normalizer",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-normalizer.git",
-                "reference": "a95281b0be0d9ab48050ebd988b967875cdb9fdb"
+                "reference": "3833d7255cc303546435cb650316bff708a1c75c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/a95281b0be0d9ab48050ebd988b967875cdb9fdb",
-                "reference": "a95281b0be0d9ab48050ebd988b967875cdb9fdb",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-normalizer/zipball/3833d7255cc303546435cb650316bff708a1c75c",
+                "reference": "3833d7255cc303546435cb650316bff708a1c75c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "suggest": {
                 "ext-intl": "For best performance"
@@ -5842,7 +6680,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -5858,24 +6696,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c"
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/fd22ab50000ef01661e2a31d850ebaa297f8e03c",
-                "reference": "fd22ab50000ef01661e2a31d850ebaa297f8e03c",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/85181ba99b2345b0ef10ce42ecac37612d9fd341",
+                "reference": "85181ba99b2345b0ef10ce42ecac37612d9fd341",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-mbstring": "*"
@@ -5922,7 +6760,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -5938,97 +6776,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-19T12:30:46+00:00"
-        },
-        {
-            "name": "symfony/polyfill-php72",
-            "version": "v1.30.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php72.git",
-                "reference": "10112722600777e02d2745716b70c5db4ca70442"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php72/zipball/10112722600777e02d2745716b70c5db4ca70442",
-                "reference": "10112722600777e02d2745716b70c5db4ca70442",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1"
-            },
-            "type": "library",
-            "extra": {
-                "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ],
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php72\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 7.2+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/polyfill-php72/tree/v1.30.0"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-06-19T12:30:46+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-php80",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php80.git",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433"
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/77fa7995ac1b21ab60769b7323d600a991a90433",
-                "reference": "77fa7995ac1b21ab60769b7323d600a991a90433",
+                "url": "https://api.github.com/repos/symfony/polyfill-php80/zipball/60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
+                "reference": "60328e362d4c2c802a54fcbf04f9d3fb892b4cf8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "type": "library",
             "extra": {
@@ -6075,7 +6840,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php80/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -6091,24 +6856,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-php83",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php83.git",
-                "reference": "dbdcdf1a4dcc2743591f1079d0c35ab1e2dcbbc9"
+                "reference": "2fb86d65e2d424369ad2905e83b236a8805ba491"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/dbdcdf1a4dcc2743591f1079d0c35ab1e2dcbbc9",
-                "reference": "dbdcdf1a4dcc2743591f1079d0c35ab1e2dcbbc9",
+                "url": "https://api.github.com/repos/symfony/polyfill-php83/zipball/2fb86d65e2d424369ad2905e83b236a8805ba491",
+                "reference": "2fb86d65e2d424369ad2905e83b236a8805ba491",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "type": "library",
             "extra": {
@@ -6151,7 +6916,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php83/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-php83/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -6167,24 +6932,24 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-06-19T12:35:24+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/polyfill-uuid",
-            "version": "v1.30.0",
+            "version": "v1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-uuid.git",
-                "reference": "2ba1f33797470debcda07fe9dce20a0003df18e9"
+                "reference": "21533be36c24be3f4b1669c4725c7d1d2bab4ae2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/2ba1f33797470debcda07fe9dce20a0003df18e9",
-                "reference": "2ba1f33797470debcda07fe9dce20a0003df18e9",
+                "url": "https://api.github.com/repos/symfony/polyfill-uuid/zipball/21533be36c24be3f4b1669c4725c7d1d2bab4ae2",
+                "reference": "21533be36c24be3f4b1669c4725c7d1d2bab4ae2",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=7.2"
             },
             "provide": {
                 "ext-uuid": "*"
@@ -6230,7 +6995,7 @@
                 "uuid"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-uuid/tree/v1.30.0"
+                "source": "https://github.com/symfony/polyfill-uuid/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -6246,7 +7011,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-31T15:07:36+00:00"
+            "time": "2024-09-09T11:45:10+00:00"
         },
         {
             "name": "symfony/process",
@@ -7608,16 +8373,16 @@
         },
         {
             "name": "laravel/breeze",
-            "version": "v2.1.4",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/breeze.git",
-                "reference": "ef237081cc9b87c858e9de8e35b523f93ac74fd3"
+                "reference": "8f4176b48eb9b7c4ddc5012d19e94003461f03da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/ef237081cc9b87c858e9de8e35b523f93ac74fd3",
-                "reference": "ef237081cc9b87c858e9de8e35b523f93ac74fd3",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/8f4176b48eb9b7c4ddc5012d19e94003461f03da",
+                "reference": "8f4176b48eb9b7c4ddc5012d19e94003461f03da",
                 "shasum": ""
             },
             "require": {
@@ -7664,20 +8429,20 @@
                 "issues": "https://github.com/laravel/breeze/issues",
                 "source": "https://github.com/laravel/breeze"
             },
-            "time": "2024-08-12T22:06:50+00:00"
+            "time": "2024-09-11T20:19:47+00:00"
         },
         {
             "name": "laravel/pint",
-            "version": "v1.17.2",
+            "version": "v1.17.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pint.git",
-                "reference": "e8a88130a25e3f9d4d5785e6a1afca98268ab110"
+                "reference": "9d77be916e145864f10788bb94531d03e1f7b482"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pint/zipball/e8a88130a25e3f9d4d5785e6a1afca98268ab110",
-                "reference": "e8a88130a25e3f9d4d5785e6a1afca98268ab110",
+                "url": "https://api.github.com/repos/laravel/pint/zipball/9d77be916e145864f10788bb94531d03e1f7b482",
+                "reference": "9d77be916e145864f10788bb94531d03e1f7b482",
                 "shasum": ""
             },
             "require": {
@@ -7688,13 +8453,13 @@
                 "php": "^8.1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.61.1",
-                "illuminate/view": "^10.48.18",
+                "friendsofphp/php-cs-fixer": "^3.64.0",
+                "illuminate/view": "^10.48.20",
                 "larastan/larastan": "^2.9.8",
                 "laravel-zero/framework": "^10.4.0",
                 "mockery/mockery": "^1.6.12",
                 "nunomaduro/termwind": "^1.15.1",
-                "pestphp/pest": "^2.35.0"
+                "pestphp/pest": "^2.35.1"
             },
             "bin": [
                 "builds/pint"
@@ -7730,20 +8495,20 @@
                 "issues": "https://github.com/laravel/pint/issues",
                 "source": "https://github.com/laravel/pint"
             },
-            "time": "2024-08-06T15:11:54+00:00"
+            "time": "2024-09-03T15:00:28+00:00"
         },
         {
             "name": "laravel/sail",
-            "version": "v1.31.1",
+            "version": "v1.32.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "3d06dd18cee8059baa7b388af00ba47f6d96bd85"
+                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/3d06dd18cee8059baa7b388af00ba47f6d96bd85",
-                "reference": "3d06dd18cee8059baa7b388af00ba47f6d96bd85",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/4a7e41d280861ca7e35710cea011a07669b4003b",
+                "reference": "4a7e41d280861ca7e35710cea011a07669b4003b",
                 "shasum": ""
             },
             "require": {
@@ -7793,7 +8558,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2024-08-02T07:45:47+00:00"
+            "time": "2024-09-11T20:14:29+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -8653,16 +9418,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.30.0",
+            "version": "1.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "5ceb0e384997db59f38774bf79c2a6134252c08f"
+                "reference": "51b95ec8670af41009e2b2b56873bad96682413e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/5ceb0e384997db59f38774bf79c2a6134252c08f",
-                "reference": "5ceb0e384997db59f38774bf79c2a6134252c08f",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/51b95ec8670af41009e2b2b56873bad96682413e",
+                "reference": "51b95ec8670af41009e2b2b56873bad96682413e",
                 "shasum": ""
             },
             "require": {
@@ -8694,9 +9459,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.30.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.30.1"
             },
-            "time": "2024-08-29T09:54:52+00:00"
+            "time": "2024-09-07T20:13:05+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

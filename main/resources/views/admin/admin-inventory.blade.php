@@ -92,7 +92,7 @@
                                 @endif
                                 {{-- end --}}
                                 <!-- Delete Confirmation Modal -->
-                                @foreach($inventory as $item)
+                            @foreach($inventory as $item)
                                 <div class="modal fade" id="modal-delete{{ $item->id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -114,7 +114,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
+                            @endforeach
                             <div class="container m-3">
                                 <div class="row align-items-center">
                                     
@@ -128,8 +128,7 @@
                                  
                                     
                                     
-                                    @livewire('inventory-update')
-                                    {{-- @livewire('inventory-archive') --}}
+                                    @livewire('inventory-display')
                                 </div>
                                 
                                     

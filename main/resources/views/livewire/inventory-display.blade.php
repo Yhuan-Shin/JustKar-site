@@ -1,8 +1,7 @@
-<div wire:poll.1000ms>
+<div wire:poll.3000ms>
     <div class="container">
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
             {{ session('success') }}
         </div>
@@ -10,15 +9,12 @@
 
         @if (session()->has('error'))
         <div class="alert alert-danger alert-dismissible fade show">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
             {{ session('error') }}
         </div>
      @endif
         @if($inventory->isEmpty() && $search)
         <div class="alert alert-warning mt-4" role="alert">
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-
             No results found for "{{ $search }}".
         </div>
          @endif
@@ -35,12 +31,11 @@
             </div>
             <div class="col-md">
                     <button wire:click="archiveSelected" class="btn btn-warning">    
-                        <i class="bi bi-archive-fill"></i>Archive</button>
+                        <i class="bi bi-archive-fill"></i> Archive</button>
             </div>
             <div class="col-md-4">
                 <form method="GET" class="col-md mb-3 float-end">
                     <select name="filter" wire:model="filter" class="form-select">
-                        <option value="">Select Stock Status</option>
                         <option value="all">All</option>
                         <option value="instock">In Stock</option>
                         <option value="lowstock">Low Stock</option>
@@ -53,15 +48,15 @@
             <div class="col">
                 <div class="table-responsive">
                     <!-- table -->
-                    <table class="table table-hover">
+                    <table class="table table-striped table-hover">
                      <thead class="table-dark">
                        <tr class="text-center">
                          <th scope="col">Product Code</th>
                          <th scope="col">Product Name</th>
                          <th scope="col">Category</th>
                          <th scope="col">Pattern</th>
-                         {{-- <th scope="col">Load/Speed</th>
-                         <th scope="col">Fitment</th> --}}
+                         <th scope="col">Load/Speed</th>
+                         {{-- <th scope="col">Fitment</th> --}}
                          <th scope="col">Quantity</th>
                          <th scope="col">Status</th>
                          <th scope="col">Brand</th>
@@ -89,6 +84,8 @@
                              <td class="text-uppercase">{{ $item->product_name }}</td>
                              <td>{{ $item->category }}</td>
                              <td class="text-uppercase">{{ $item->pattern }}</td>
+                             <td class="text-uppercase">{{ $item->load}}</td>
+                             {{-- <td class="text-uppercase">{{ $item->fitment }}</td> --}}
                              <td>{{ $item->quantity }}</td>
                              <td>
                                  @if($item->quantity == 0)
@@ -105,10 +102,10 @@
                                  <div class="container">
                                      <div class="row">
                                          <div class="col mb-2">
-                                             <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}">Edit</button>
+                                             <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}"><i class="bi bi-pencil-square"></i></button>
                                          </div>
                                          <div class="col">
-                                             <button class="btn btn-danger" type="button" data-bs-target="#modal-delete{{ $item->id}}" data-bs-toggle="modal">Delete</button>
+                                             <button class="btn btn-danger" type="button" data-bs-target="#modal-delete{{ $item->id}}" data-bs-toggle="modal"><i class="bi bi-trash3-fill"></i></button>
                                          </div>
                                      </div>
                                  </div>
@@ -121,16 +118,27 @@
                          @endforelse
                        </tbody>
                    </table>
-                   <div class="container d-flex justify-content-end">
-                        <div class="row">
+                  
+                   <div class="container">
+                        <div class="row d-flex justify-content-center">
+
                             <div class="col">
-                                <a href="{{ route('inventory.archived')}}" class="btn btn-info col-md-12">View Archived</a>
+                                <a href="{{ route('inventory.archived')}}" class="btn btn-info"><i class="bi bi-view-list"></i> View Archived</a>
                             </div>
-                            <div class="col">
+                            {{-- <div class="col">
+                                <a  href="{{ route('inventory.exportToExcel')}}" class="btn btn-outline-success">Export to Excel</a>
+                            </div> --}}
+                            <div class="col-md-4">
                                 <form action="{{ route('inventory.export')}}" method="GET">
-                                    <button class="btn btn-outline-success col-md-12">
+                                    <button class="btn btn-danger">
                                         <i class="bi bi-filetype-pdf"></i> Export to PDF</button>
                                   </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ $inventory->links() }}
+
                             </div>
                         </div>
 

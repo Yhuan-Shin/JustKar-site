@@ -3,14 +3,17 @@
 namespace App\Livewire;
 use App\Models\Inventory;
 use Livewire\Component;
+use Livewire\WithPagination;
 
-class InventoryUpdate extends Component
+class InventoryDisplay extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
     public $filter;
     public $search;
-    public $selectedItems = []; // Array to store selected items
-    public $selectAll = false;  // Boolean to track "select all" checkbox
-    public $archived = false; // Toggle between active and archived views
+    public $selectedItems = []; 
+    public $selectAll = false;  
+    public $archived = false; 
 
     public function mount($filter = null, $search = null, $archived = false)
     {
@@ -20,13 +23,11 @@ class InventoryUpdate extends Component
     }
     public function refresh()
     {
-        // Re-run the render method logic to refresh the inventory data
         $this->render();
         
     }
     public function updatedSelectAll($value)
     {
-        // If select all is checked, select all items, otherwise clear the selection
         if ($value) {
             $this->selectedItems = Inventory::where('archived', false)->pluck('id')->toArray();
         } else {
@@ -35,16 +36,13 @@ class InventoryUpdate extends Component
     }
     public function archiveSelected()
     {
-        // Check if any items are selected
         if (empty($this->selectedItems)) {
             session()->flash('error', 'No items selected. Please select items to archive.');
             return;
         }
 
-        // Archive all selected items
         Inventory::whereIn('id', $this->selectedItems)->update(['archived' => true]);
 
-        // Clear the selection and refresh the component
         $this->selectedItems = [];
         session()->flash('success', 'Selected items archived successfully.');
         $this->refresh();
@@ -52,7 +50,6 @@ class InventoryUpdate extends Component
 
     public function render()
     {
-        
         $query = Inventory::query();
         if ($this->archived) {
             $query->where('archived', true);
@@ -71,24 +68,27 @@ class InventoryUpdate extends Component
             });
             //return no results
             if ($query->count() == 0) {
-                return view('livewire.inventory-update', ['inventory' => $query->get()]);
+                return view('livewire.inventory-display', ['inventory' => $query->get()]);
                 session()->flash('warning', 'No results found. Please enter a valid search term.');
             }
         }
 
         if ($this->filter) {
-            if ($this->filter == 'instock') {
-                $query->whereColumn('quantity', '>', 'critical_level');
-            } elseif ($this->filter == 'lowstock') {
-                $query->whereColumn('quantity', '<=', 'critical_level')
-                      ->where('quantity', '>', 0);
-            } elseif ($this->filter == 'outofstock') {
-                $query->where('quantity', 0);
-            }
+           switch($this->filter){
+            case 'instock':
+                $query->where('status', 'instock');
+                break;
+            case 'lowstock':
+                 $query->where('status', 'lowstock');
+                 break;
+            case 'outofstock':
+                  $query->where('status', 'outofstock');
+                  break;
+           }
         }
 
-        $inventory = $query->get();
+        $inventory = $query->paginate(10);
 
-        return view('livewire.inventory-update', ['inventory' => $inventory]);
+        return view('livewire.inventory-display', ['inventory' => $inventory]);
     }
 }

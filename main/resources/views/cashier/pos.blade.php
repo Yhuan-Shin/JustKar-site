@@ -76,13 +76,13 @@
                                                     <form action="{{ route('order.destroy', $item->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                        <button type="submit"  class="btn btn-danger">Delete</button>
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    @endforeach
+                                @endforeach
                                 {{-- @if (session('success')) --}}
                                 @if (session('success'))
                                 <div class="alert alert-success alert-dismissible fade show mt-3">
@@ -117,10 +117,13 @@
                                                        @if($item->quantity == 0)
                                                        <span class="badge bg-danger">Out of Stock</span>
                                                        @elseif($item->quantity <= $item->critical_level)
-                                                       <span class="badge bg-warning">Low Stock</span>
+                                                       <span class="badge bg-warning">Low Stock <span class="badge bg-dark">{{$item->quantity}}</span></span>
                                                        @elseif($item->quantity > $item->critical_level)
-                                                       <span class="badge bg-success">In Stock</span>
+                                                       <span class="badge bg-success">In Stock <span class="badge bg-dark">{{$item->quantity}}</span></span>
                                                        @endif
+                                                       {{-- get the quantity --}}
+
+
                                                        <div class="container">
                                                         <div class="row mb-2">
                                                             <div class="col-md-4">
@@ -177,12 +180,9 @@
                         {{-- display orders --}}
                         <div class="col-md-4 bg-light mt-2 p-3 rounded float-end">
                             <h4 class="text-center mt-5"> <i class="bi bi-bag-fill"></i> Orders</h4>
-                            @if($orderItems->count() > 0)
+                        @if($orderItems->count() > 0)
                             @foreach($orderItems as $item)
                                 <div class="row mb-4">
-                                    {{-- <div class="col-md-3">
-                                        <img src="{{ asset('uploads/product_images/'.$item->product->product_image) }}" class="img-fluid">
-                                    </div> --}}
                                     <div class="col-md p-3 text-uppercase" >
                                         <div class="container">
                                             <div class="row">
@@ -227,8 +227,7 @@
                                                             </form>
 
                                                                 <div class="col-md-4">
-                                                                    <button class="btn btn-danger" data-bs-target="#modal-delete{{ $item->id }}" data-bs-toggle="modal">Delete</button>
-                                           
+                                                                    <button class="btn btn-danger" type="button" data-bs-target="#modal-delete{{ $item->id}}" data-bs-toggle="modal">Delete</button>
                                                                 </div>
 
                                                             </div>
@@ -245,12 +244,12 @@
                         @endif
 
                         @if($orderItems->count() > 0)
-                        <form action="{{route('order.checkout')}}" method="post">
-                            @csrf
-                            @method('POST')
-                            <button type="submit" class="btn btn-primary float-end"> <i class="bi bi-bag-check-fill"></i> Checkout</button>
-                        </form>
-                    @endif
+                            <form action="{{route('order.checkout')}}" method="post">
+                                @csrf
+                                @method('POST')
+                                <button type="submit" class="btn btn-primary float-end"> <i class="bi bi-bag-check-fill"></i> Checkout</button>
+                            </form>
+                        @endif
                         </div>
                     </div>
                 </div>

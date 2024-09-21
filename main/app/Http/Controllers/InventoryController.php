@@ -11,6 +11,7 @@ use App\Models\OrderItem;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 class InventoryController extends Controller
 {
   
@@ -24,83 +25,83 @@ class InventoryController extends Controller
     }
 
    protected $criticalLevel;
-   function store(Request $request)
-   {
+//    function store(Request $request)
+//    {
     
-    $data = $request->validate([
-        'product_code' => 'required|unique:inventory,product_code',
-        'product_name' => 'required',
-        'category' => 'required',
-        'quantity' => 'required',
-        'brand' => 'required',
-        'size' => 'required',
-        'pattern' => 'required',
-        'load' => 'required',
-        'fitment' => 'required',
-    ]);
-    $critical_level = Inventory::latest()->value('critical_level') ?? 0; 
-    try{
-        $inventory = Inventory::create([
-            'product_code' => $data['product_code'],
-            'product_name' => $data['product_name'],
-            'category' => $data['category'],
-            'quantity' => $data['quantity'],
-            'brand' => $data['brand'],
-            'size' => $data['size'],
-            'pattern' => $data['pattern'],
-            'load' => $data['load'],
-            'fitment' => $data['fitment'],
-            'critical_level' => $critical_level,
+//     $data = $request->validate([
+//         'product_code' => 'required|unique:inventory,product_code',
+//         'product_name' => 'required',
+//         'category' => 'required',
+//         'quantity' => 'required',
+//         'brand' => 'required',
+//         'size' => 'required',
+//         'pattern' => 'required',
+//         'load' => 'required',
+//         'fitment' => 'required',
+//     ]);
+//     $critical_level = Inventory::latest()->value('critical_level') ?? 0; 
+//     try{
+//         $inventory = Inventory::create([
+//             'product_code' => $data['product_code'],
+//             'product_name' => $data['product_name'],
+//             'category' => $data['category'],
+//             'quantity' => $data['quantity'],
+//             'brand' => $data['brand'],
+//             'size' => $data['size'],
+//             'pattern' => $data['pattern'],
+//             'load' => $data['load'],
+//             'fitment' => $data['fitment'],
+//             'critical_level' => $critical_level,
            
-        ]);
-    }
-    catch(QueryException $e){
-        if ($e->errorInfo[1] == 1062) { 
-            return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
-        } else {
+//         ]);
+//     }
+//     catch(QueryException $e){
+//         if ($e->errorInfo[1] == 1062) { 
+//             return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
+//         } else {
            
-            throw $e;
-        }
-    }
+//             throw $e;
+//         }
+//     }
 
 
-    Products::create([
-        'inventory_id' => $inventory->id,
-        'product_code' => $inventory->product_code,
-        'product_name' => $inventory->product_name,
-        'category' => $inventory->category,
-        'quantity' => $inventory->quantity,
-        'pattern' => $inventory->pattern,
-        'load' => $inventory->load,
-        'fitment' => $inventory->fitment,
-        'size' => $inventory->size,
-        'critical_level' => $critical_level
+//     Products::create([
+//         'inventory_id' => $inventory->id,
+//         'product_code' => $inventory->product_code,
+//         'product_name' => $inventory->product_name,
+//         'category' => $inventory->category,
+//         'quantity' => $inventory->quantity,
+//         'pattern' => $inventory->pattern,
+//         'load' => $inventory->load,
+//         'fitment' => $inventory->fitment,
+//         'size' => $inventory->size,
+//         'critical_level' => $critical_level
 
-    ]);
-    //update products critical level
+//     ]);
+//     //update products critical level
 
-    return redirect('/admin/inventory')->with('success', 'Item Inserted');
-   }
-   public function edit(string $id): View
-    {   
-        $inventory = Inventory::find($id);
-        return view('inventory.edit')->with('item', $inventory);
-    }
-    public function update(Request $request, string $id)
-{
-    try {
-        $inventory = Inventory::findOrFail($id);
-        $inventory->update($request->all());
-        return redirect('/admin/inventory')->with('success', 'Item Updated');
-    } catch (QueryException $e) {
-        if ($e->errorInfo[1] == 1062) { 
-            return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
-        } else {
+//     return redirect('/admin/inventory')->with('success', 'Item Inserted');
+//    }
+//    public function edit(string $id): View
+//     {   
+//         $inventory = Inventory::find($id);
+//         return view('inventory.edit')->with('item', $inventory);
+//     }
+//     public function update(Request $request, string $id)
+// {
+//     try {
+//         $inventory = Inventory::findOrFail($id);
+//         $inventory->update($request->all());
+//         return redirect('/admin/inventory')->with('success', 'Item Updated');
+//     } catch (QueryException $e) {
+//         if ($e->errorInfo[1] == 1062) { 
+//             return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
+//         } else {
            
-            throw $e;
-        }
-    }
-}
+//             throw $e;
+//         }
+//     }
+// }
 
     public function destroy(string $id): RedirectResponse
 {
@@ -133,5 +134,30 @@ public function setCriticalLevel(Request $request): RedirectResponse
     
 
     return redirect('/admin/inventory')->with('success', 'Critical level set!', ['critical_level' => $criticalLevel]);
+    }
+    public function exportToExcel()
+    {
+        $inventoryData = Inventory::select('id', 'product_name', 'quantity', 'category', 'brand', 'size', 'pattern', 'load', 'fitment')
+        ->get()
+        ->map(function ($item) {
+            $item->status = $item->quantity > $item->critical_level ? 'In Stock' : 'Low Stock';
+            return $item;
+        });
+    
+
+        // Convert the data to an array
+        $inventoryArray = [];
+        $inventoryArray[] = ['ID', 'Product Name', 'Quantity', 'Category', 'Brand', 'Size', 'Pattern', 'Load', 'Fitment', 'Status'];
+
+        foreach ($inventoryData as $inventory) {
+            $inventoryArray[] = $inventory->toArray();
+        }
+
+        // Generate and download the Excel file
+        Excel::create('inventory', function($excel) use ($inventoryArray) {
+            $excel->sheet('Sheet 1', function($sheet) use ($inventoryArray) {
+                $sheet->fromArray($inventoryArray, null, 'A1', false, false);
+            });
+        })->download('xlsx');
     }
 }

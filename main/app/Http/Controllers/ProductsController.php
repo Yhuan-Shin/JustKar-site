@@ -57,6 +57,8 @@ class ProductsController extends Controller
             $orderItem->product_name = $product->product_name;
             $orderItem->price = $product->price;
             $orderItem->size = $product->size;
+            $orderItem->brand = $product->brand;
+            $orderItem->category = $product->category;
             $orderItem->quantity = 1; // Default quantity
             $orderItem->save();
         }

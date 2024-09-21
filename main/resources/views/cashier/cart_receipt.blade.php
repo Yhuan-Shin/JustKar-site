@@ -1,102 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JustKar Receipt</title>
+    <title>JustKar Tire Supply Receipt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
-        /* Basic reset */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .header-address-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }   
-
-        .header, .address {
-            flex: 1;
-        }
-
-        .header {
-            text-align: left;
-        }
-
-        .address {
-            text-align: right;
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid black;
-            margin: 20px 0;
-        }
-
         table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: center;
+            border: solid 1px black;
         }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        th {
+            text-align: center;
+            vertical-align: middle;
+            font-weight: bold;
+            border: solid 1px black;
+        }
+        td{
+            text-align: center;
+            vertical-align: middle;
+            border: solid 1px black;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header-address-container">
-            {{-- header --}}
-            <div class="header">
-                <h1 style="margin: 0 0 10px 0; font-size: 24px;">Just<span style="color:red;">Kar</span> - Receipt</h1>
-                <p style="margin: 0 0 5px 0;">TIN: 274-162-585-00000</p>
-                <p style="margin: 0 0 5px 0;">BIR ATP: OCN 25BAAU20230000007</p>
-            </div>
-            {{-- address --}}
-            <div class="address">
-                <p style="margin: 0 0 5px 0;">Tandoc Street Pecson Ville<br>Subdivision,</p>
-                <p style="margin: 0 0 5px 0;">San Jose del Monte, Philippines</p>
-                <p style="margin: 0 0 5px 0;">Phone: 09123456789</p>
+
+<div class="container py-8">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <div class="text-gray-700 font-semibold text-lg ml-4">JustKar Tire Supply</div>
+                </div>
+                <div class="text-gray-700">
+                    <div class="font-bold text-xl mb-2 uppercase">Invoice</div>
+                    <div class="text-sm">Date: {{ date('d/m/Y') }}</div>
+                    <div class="text-sm">TIN: 274-162-585-00000</div>
+                    <div class="text-sm">BIR ATP: OCN 25BAAU20230000007</div>
+                </div>
             </div>
         </div>
-        <hr>
-        <table>
-            <tr>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-            </tr>
-            @foreach ($sales as $item)
+    </div>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="text-gray-700 font-bold uppercase">Product Name</th>
+            <th class="text-gray-700 font-bold uppercase">Quantity</th>
+            <th class="text-gray-700 font-bold uppercase">Price</th>
+            <th class="text-gray-700 font-bold uppercase">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach ($sales as $item)
             <tr>
                 <td>{{ $item->product_name }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->total_price }}</td>
             </tr>
-            @endforeach
-            <tr>
+        @endforeach
+        <tr>
+            <td colspan="3" style="text-align: right;"><strong>Total Price:</strong></td>
+            <td>
                 @php
                     $total = DB::table('order_items')->sum('total_price');
                 @endphp
-                <td colspan="3" style="text-align: right;"><strong>Total Price:</strong></td>
-                <td>{{ $total }}</td>
-            </tr>
-        </table>
+                {{ $total }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <p style="margin: 0 0 5px 0;">Tandoc Street Pecson Ville<br>Subdivision,</p>
+        <p style="margin: 0 0 5px 0;">San Jose del Monte, Philippines</p>
+        <p style="margin: 0 0 5px 0;">Phone: 09123456789</p>
     </div>
+</div>
+
 </body>
 </html>

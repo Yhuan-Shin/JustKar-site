@@ -3,6 +3,9 @@
         "laravel/breeze": "^2.0"
     },
     "require": {
-        "barryvdh/laravel-dompdf": "*"
+        "barryvdh/laravel-dompdf": "*",
+        "maatwebsite/excel": "^3.1"
     }
+  
+
 }

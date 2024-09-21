@@ -26,12 +26,30 @@ class Inventory extends Model
             Products::where('inventory_id', $inventory->id)->update([
                 'product_name' => $inventory->product_name,
                 'category' => $inventory->category,
-                // 'brand' => $inventory->brand,
+                'brand' => $inventory->brand,
                 'quantity' => $inventory->quantity,
                 'size' => $inventory->size,
                 'critical_level' => $inventory->critical_level,
             ]);
          
+        });
+        static::updating(function ($inventory) {
+            if ($inventory->quantity > $inventory->critical_level) {
+                $inventory->status = 'instock';
+            } elseif ($inventory->quantity <= $inventory->critical_level) {
+                $inventory->status = 'lowstock';
+            }elseif ($inventory->quantity == 0) {
+                $inventory->status = 'outofstock';
+            }
+        });
+        static::creating(function ($inventory) {
+            if ($inventory->quantity > $inventory->critical_level) {
+                $inventory->status = 'instock';
+            } elseif ($inventory->quantity <= $inventory->critical_level) {
+                $inventory->status = 'lowstock';
+            }elseif ($inventory->quantity == 0) {
+                $inventory->status = 'outofstock';
+            }
         });
     }
     public function getStockStatusAttribute()

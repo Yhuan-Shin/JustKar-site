@@ -1,14 +1,17 @@
 <div>
     <div>
         @if (session()->has('success'))
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
     
         @if (session()->has('error'))
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
             </div>
         @endif
     
@@ -31,6 +34,10 @@
                     <option value="A/T">All Terrain</option>
                     <option value="H/T">Highway Terrain</option>
                     <option value="H/L">Highway Light Truck</option>
+                    <option value="P">Passenger</option>
+                    <option value="SUV">SUV/4x4</option>
+                    <option value="T/B">Truck and Bus Radial</option>
+                    
                 </select>
                 @error('category') <span class="text-danger">{{ $message }}</span> @enderror
 

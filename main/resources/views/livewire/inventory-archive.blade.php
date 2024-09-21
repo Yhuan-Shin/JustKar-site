@@ -24,7 +24,7 @@
             
             <div class="col-md">
                 <button wire:click="unarchiveSelected" class="btn btn-success">
-                    <i class="bi bi-archive-fill"></i> Unarchive
+                    <i class="bi bi-archive-fill"></i> Restore
                 </button>
             </div>
             <div class="col-md-4">

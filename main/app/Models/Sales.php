@@ -14,6 +14,8 @@ class Sales extends Model
         'product_code',
         'product_name',
         'size',
+        'brand',
+        'category',
         'quantity',
         'price',
         'total_price',

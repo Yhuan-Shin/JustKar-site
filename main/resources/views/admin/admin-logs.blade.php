@@ -59,33 +59,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 {{-- content --}}
-                                                <table class="table table-hover table-striped">
-                                                    <thead class="table-dark">
-                                                        <tr>
-                                                            <th scope="col">Ref. Number</th>
-                                                            <th scope="col">Product</th>
-                                                            <th scope="col">Quantity</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Total</th>
-                                                            <th scope="col">Cashier Name</th>
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach ($sales as $log)
-
-                                                        <tr>
-                                                                <td>{{ $log->ref_no }}</td>
-                                                                <td>{{ $log->product_name }}</td>
-                                                                <td>{{ $log->quantity }}</td>
-                                                                <td>{{ $log->created_at ->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
-                                                                <td>{{ $log->total_price}}</td>
-                                                                <td>{{ $log->cashier_name }}</td>
-                                                        </tr>
-                                                        @endforeach
-
-                                                    </tbody>
-                                                </table>
+                                                @livewire('logs-display')
                                             </div>
                                         </div>
                                     </div>

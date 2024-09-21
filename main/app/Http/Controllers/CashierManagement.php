@@ -76,12 +76,16 @@ class CashierManagement extends Controller
     }
 
     public function login(Request $request){
+        if (Auth::check()) {
+            return redirect('/cashier')->with('error', 'You are already logged in.');
+        }
         $credentials = Validator::make($request->all(), [
             'username' => 'required|string|max:255',
             'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'            
         ]);
         if($credentials->passes()){
             if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
+                $request->session()->regenerate();
                 return redirect('/cashier/pos') ->with('success', 'Login Successful');
             }else{
                 return redirect('/cashier')->with('error', 'Invalid Credentials');   

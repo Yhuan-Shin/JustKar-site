@@ -235,9 +235,9 @@ class ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4
         ),
         'Illuminate\\Support\\' => 
         array (
-            0 => __DIR__ . '/..' . '/illuminate/macroable',
+            0 => __DIR__ . '/..' . '/illuminate/collections',
             1 => __DIR__ . '/..' . '/illuminate/conditionable',
-            2 => __DIR__ . '/..' . '/illuminate/collections',
+            2 => __DIR__ . '/..' . '/illuminate/macroable',
             3 => __DIR__ . '/..' . '/illuminate/support',
         ),
         'Illuminate\\Pipeline\\' => 
@@ -306,6 +306,23 @@ class ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'PHPExcel' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',
+            ),
+        ),
+        'M' => 
+        array (
+            'Maatwebsite\\Excel\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/maatwebsite/excel/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
@@ -318,9 +335,31 @@ class ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4
         'DateObjectError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateObjectError.php',
         'DateRangeError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateRangeError.php',
         'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
+        'Maatwebsite\\Excel\\Classes\\Cache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Classes/Cache.php',
+        'Maatwebsite\\Excel\\Classes\\FormatIdentifier' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Classes/FormatIdentifier.php',
+        'Maatwebsite\\Excel\\Classes\\LaravelExcelWorksheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Classes/LaravelExcelWorksheet.php',
+        'Maatwebsite\\Excel\\Classes\\PHPExcel' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Classes/PHPExcel.php',
+        'Maatwebsite\\Excel\\Collections\\CellCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Collections/CellCollection.php',
+        'Maatwebsite\\Excel\\Collections\\ExcelCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Collections/ExcelCollection.php',
+        'Maatwebsite\\Excel\\Collections\\RowCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Collections/RowCollection.php',
+        'Maatwebsite\\Excel\\Collections\\SheetCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Collections/SheetCollection.php',
+        'Maatwebsite\\Excel\\Excel' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Excel.php',
+        'Maatwebsite\\Excel\\ExcelServiceProvider' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/ExcelServiceProvider.php',
+        'Maatwebsite\\Excel\\Exceptions\\LaravelExcelException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Exceptions/LaravelExcelException.php',
+        'Maatwebsite\\Excel\\Facades\\Excel' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Facades/Excel.php',
+        'Maatwebsite\\Excel\\Parsers\\CssParser' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Parsers/CssParser.php',
+        'Maatwebsite\\Excel\\Parsers\\ExcelParser' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Parsers/ExcelParser.php',
+        'Maatwebsite\\Excel\\Parsers\\ViewParser' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Parsers/ViewParser.php',
+        'Maatwebsite\\Excel\\Readers\\Batch' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Readers/Batch.php',
+        'Maatwebsite\\Excel\\Readers\\ConfigReader' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Readers/ConfigReader.php',
+        'Maatwebsite\\Excel\\Readers\\Html' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Readers/HtmlReader.php',
+        'Maatwebsite\\Excel\\Readers\\LaravelExcelReader' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Readers/LaravelExcelReader.php',
+        'Maatwebsite\\Excel\\Writers\\CellWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/CellWriter.php',
+        'Maatwebsite\\Excel\\Writers\\LaravelExcelWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Maatwebsite/Excel/Writers/LaravelExcelWriter.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Override' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/Override.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
+        'TestCase' => __DIR__ . '/..' . '/maatwebsite/excel/tests/TestCase.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -328,6 +367,7 @@ class ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitb3e4a427f5c94e0f9a18aba5efe988a4::$classMap;
 
         }, null, ClassLoader::class);
