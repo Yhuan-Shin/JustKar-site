@@ -13,6 +13,7 @@ class Sales extends Model
         'ref_no',
         'product_code',
         'product_name',
+        'product_type',
         'size',
         'brand',
         'category',

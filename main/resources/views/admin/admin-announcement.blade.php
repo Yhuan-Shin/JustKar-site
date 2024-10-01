@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Announcements</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -31,9 +33,7 @@
                     @include('components/navigation')
                     <hr>
                     
-                    <a href="{{ route('admin.logout') }}">
-                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                    </a>
+                    
                   
                 </div>
             </div>
@@ -52,7 +52,6 @@
                                             <i class="bi bi-person-circle"></i>
                                             <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                            </div>
-                                        <h1>Create Announcements</h1>
                                 </div>
                                 <div class="row">
                                     <div class="container">
@@ -108,8 +107,8 @@
                                             <td>{{$announcement->content}}</td>
                                             <td><img src="{{asset('uploads/images/'.$announcement->image)}}" alt="" width="150px" height="100px"></td>
                                             <td>
-                                                <button type="button" class="btn btn-outline-primary " data-bs-target="#edit-announcement{{$announcement->id}}" data-bs-toggle="modal" value="{{ $announcement->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
-                                               <button type="button" class="btn btn-outline-danger" data-bs-target="#modal-delete{{ $announcement->id }}" data-bs-toggle="modal"><i class="bi bi-trash"></i>Delete</button>
+                                                <button type="button" class="btn btn-primary " data-bs-target="#edit-announcement{{$announcement->id}}" data-bs-toggle="modal" value="{{ $announcement->id }}"><i class="bi bi-pencil-square"></i></button>
+                                               <button type="button" class="btn btn-danger" data-bs-target="#modal-delete{{ $announcement->id }}" data-bs-toggle="modal"><i class="bi bi-trash"></i></button>
                                             </td>
                                           </tr>
                                           @endforeach

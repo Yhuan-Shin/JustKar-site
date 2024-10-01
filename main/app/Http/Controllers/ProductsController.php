@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\OrderItem;
+use App\Models\Inventory;
 use App\Models\Products;
 class ProductsController extends Controller
 {
@@ -34,6 +35,7 @@ class ProductsController extends Controller
             $inventory->product_image = $filename;
         }
         $inventory->save();
+        // refresh inventory
         return redirect('admin/products');
     }
     public function addToOrder(string $id ,Request $request){
@@ -55,6 +57,7 @@ class ProductsController extends Controller
             $orderItem->product_id = $product->id;
             $orderItem->product_code = $product->product_code;
             $orderItem->product_name = $product->product_name;
+            $orderItem->product_type = $product->product_type;
             $orderItem->price = $product->price;
             $orderItem->size = $product->size;
             $orderItem->brand = $product->brand;

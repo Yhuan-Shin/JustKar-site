@@ -2,7 +2,6 @@
 namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Sales;
-use IcehouseVentures\LaravelChartjs\Facades\Chartjs;
 use Illuminate\Support\Facades\DB;
 class SalesChart extends Component
 {

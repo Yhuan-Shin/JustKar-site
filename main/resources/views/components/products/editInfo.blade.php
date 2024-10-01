@@ -1,5 +1,5 @@
 @foreach ($products as $item)
-<div class="modal fade" id="editInfo{{ $item->id }}" tabindex="-1" aria-labelledby="editInfoLabel" aria-hidden="true">
+<div class="modal fade" id="editInfo{{ $item->id }}" wire:ignore tabindex="-1" aria-labelledby="editInfoLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

@@ -15,10 +15,9 @@ class Products extends Model
     protected $fillable = [
         'product_code',
         'product_name',
+        'product_type',
         'category',
         'brand',
-        'fitment',
-        'pattern',
         'size',
         'inventory_id',
         'quantity',
@@ -48,7 +47,8 @@ class Products extends Model
         static::updated(function ($product) {
             Inventory::where('id', $product->inventory_id)->update([
                 'product_name' => $product->product_name,
-                'size' => $product->size
+                'size' => $product->size,
+                'description' => $product->description
             ]);
         });
     }

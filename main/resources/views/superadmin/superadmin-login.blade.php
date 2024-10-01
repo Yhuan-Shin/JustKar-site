@@ -11,32 +11,92 @@
     "></script>  
     <link href="admin/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body style="height: 100vh">
     <!-- form -->
+    
     <div class="container ">
-        <div class="row justify-content-center">
+        @if(Session::has('error'))
+        <div class="alert alert-danger alert-dismissible fade show d-flex " role="alert">
+            <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
+            <p class="p-2">{{ Session::get('error') }}</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger mt-2 text-center alert-dismissible fade show" role="alert">
+            @foreach ($errors->all() as $error)
+                <p>{{ $error }}</p>
+            @endforeach
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+        @if (session('status'))
+        <div class="alert alert-success mt-2">{{ session('status') }}
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+        @endif
+        <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{route('superadmin.forgot-password')}}" method="post">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Enter Email</label>
+                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
+                                <div id="emailHelp" class="form-text">Enter your registered email to reset your password</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary float-end">Send Link</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center" style="height: 100vh">
             <div class="col-md-5">
+               
                 <div class="card mt-5">
                     <div class="card-header text-center text-white bg-dark">
                         <i class="bi bi-person-circle" style="font-size: 50px;"></i>
                         <h3 class="text-center text-uppercase">Super Admin LOGIN</h3>
                     </div>
-                    <div class="card-body text-white bg-dark">
-                        <form action="/admin" method="post">
+                    <div class="card-body bg-dark ">
+                        <form action="{{route('superadmin.login')}}" method="post">
                         @csrf
+                        @method('POST')
                             <div class="mb-3">
-                                <label for="username" class="form-label"><i class="bi bi-person fs-2 align-middle"></i>Username</label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
+                                <label for="name" class="form-label text-white">Username</label>
+                                <div class="input-group">
+                                      <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                                    <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username"  name="username" maxlength="20" aria-describedby="basic-addon1" required>
+                                  </div>
                             </div>
                             <div class="mb-3">
-                                <label for="password" class="form-label"><i class="bi bi-shield-lock fs-3 align-middle"></i> Password</label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
+                                <label for="name" class="form-label text-white">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock-fill"></i></span>
+                                    <input type="password" name="password" maxlength="16" class="form-control" placeholder="Enter Password" aria-label="password" aria-describedby="basic-addon1" required>
+                                  </div>
                             </div>
-                     
-                            <div class="mb-3 mt-5">
+                            <div class="mb-3">
                                 <div class="container">
-                                    <div class="row-md-12 ">
-                                        <input type="Submit"  name="submit" id="submit" class="btn btn-outline-primary w-25 me-3 text-uppercase text-white offset-9" value="login"></input>
+                                    <div class="row-md-12 justify-content-end">
+                                        <a class="text-white text-decoration-none float-end py-2" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Forgot Password?</a>
+                                    </div>
+
+                                   
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="container">
+                                    <div class="row-md-12">
+                                        <input type="Submit"  name="submit" id="submit" class="btn btn-primary w-25 me-3 text-uppercase text-white offset-9" value="login"></input>
                                     </div>
                                 </div>
                             </div>

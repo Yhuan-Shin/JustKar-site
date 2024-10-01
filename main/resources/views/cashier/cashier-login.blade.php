@@ -11,9 +11,9 @@
     "></script>  
     <link href="admin/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body style="height: 100vh">
     <!-- form -->
-    <div class="container mt-2">
+    <div class="container">
         @if(Session::has('error'))
         <div class="alert alert-danger alert-dismissible fade show d-flex " role="alert">
             <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
@@ -22,9 +22,9 @@
         </div>
         @endif
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center" style="height: 100vh">
             <div class="col-md-5">
-                <div class="card mt-3"  style="background-color: #06063d">
+                <div class="card mt-3 bg-dark">
                     <div class="card-header text-center text-white">
                         <i class="bi bi-person-circle" style="font-size: 50px;"></i>
                         <h3 class="text-center text-uppercase">Cashier LOGIN</h3>
@@ -33,19 +33,17 @@
                         <form action="{{route('cashier.login')}}" method="post">
                         @csrf
                         @method('POST')
-                        <div class="mb-5">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
-                                </div>
+                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
                                 <input type="text" name="username" class="form-control" placeholder="Username" maxlength="20" aria-label="Username" aria-describedby="basic-addon1">
                               </div>
                         </div>
                         <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock"></i></span>
-                                </div>
+                                  <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock-fill"></i></span>
                                 <input type="password" name="password" maxlength="16" class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon1">
                               </div>
                         </div>

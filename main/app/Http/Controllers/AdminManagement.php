@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\WhiteList;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Database\QueryException;
@@ -76,11 +77,15 @@ class AdminManagement extends Controller
             'password' => 'required|string|max:255',
         ]);
 
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/admin/dashboard')->with('success', 'Login Successful');
-        } else {
-            return redirect('/admin')->with('error', 'Invalid Credentials');
+        $clientIp = $request->ip();
+
+        if(WhiteList::where('ip_address', $clientIp)->exists()){
+            if (Auth::guard('admin')->attempt($credentials)) {
+                $request->session()->regenerate();
+                return redirect('/admin/dashboard')->with('success', 'Login Successful');
+            } else {
+                return redirect('/admin')->with('error', 'Invalid Credentials');
+            }
         }
     }
 

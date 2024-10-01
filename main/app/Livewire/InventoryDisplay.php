@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 use App\Models\Inventory;
+use App\Models\Products;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -26,6 +27,7 @@ class InventoryDisplay extends Component
         $this->render();
         
     }
+
     public function updatedSelectAll($value)
     {
         if ($value) {
@@ -42,6 +44,7 @@ class InventoryDisplay extends Component
         }
 
         Inventory::whereIn('id', $this->selectedItems)->update(['archived' => true]);
+        Products::whereIn('inventory_id', $this->selectedItems)->update(['archived' => true]);
 
         $this->selectedItems = [];
         session()->flash('success', 'Selected items archived successfully.');
@@ -65,12 +68,13 @@ class InventoryDisplay extends Component
                   ->orWhere('brand', 'like', '%' . $this->search . '%')
                   ->orWhere('category', 'like', '%' . $this->search . '%')
                   ->orWhere('quantity', 'like', '%' . $this->search . '%');
+
             });
-            //return no results
-            if ($query->count() == 0) {
-                return view('livewire.inventory-display', ['inventory' => $query->get()]);
-                session()->flash('warning', 'No results found. Please enter a valid search term.');
-            }
+                    //return no results
+         if ($query->count() == 0) {
+            return view('livewire.inventory-display', ['inventory' => $query->paginate(10)]);
+            session()->flash('warning', 'No results found. Please enter a valid search term.');
+        }
         }
 
         if ($this->filter) {

@@ -17,9 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('inventory_id');
             $table->string('product_code')->nullable();
             $table->string('product_name')->nullable();
+            $table->string('product_type')->nullable();
             $table->string('category')->nullable();
-            $table->string('fitment')->nullable();
-            $table->string('pattern')->nullable();
             $table->string('size')->nullable();
             $table->string('product_image') ->nullable();
             $table->string('price') ->nullable();

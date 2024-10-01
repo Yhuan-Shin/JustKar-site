@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Livewire;
-
 use App\Models\Sales;
-use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Livewire\Component;
+use Illuminate\Support\Carbon;
 
 class SalesChartFilter extends Component
 {
@@ -17,42 +15,39 @@ class SalesChartFilter extends Component
         $this->updateChartData();
     }
 
-    public function updatedSelectedPeriod()
+    public function updatedSelectedPeriod($value)
     {
+        $this->selectedPeriod = $value;
         $this->updateChartData();
     }
 
     public function updateChartData()
     {
+        $sales = Sales::selectRaw('product_name, SUM(total_price) as total_price')
+            ->groupBy('product_name');
+
         switch ($this->selectedPeriod) {
             case 'day':
-                $sales = Sales::whereDate('created_at', today())
-                    ->selectRaw('product_name, SUM(total_price) as total_price')
-                    ->groupBy('product_name')
-                    ->get();
+                $sales->whereDate('created_at', Carbon::today());
                 break;
 
             case 'week':
-                $sales = Sales::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
-                    ->selectRaw('product_name, SUM(total_price) as total_price')
-                    ->groupBy('product_name')
-                    ->get();
+                $sales->whereBetween('created_at', [
+                    Carbon::now()->startOfWeek(),
+                    Carbon::now()->endOfWeek()
+                ]);
                 break;
 
             case 'month':
-                $sales = Sales::whereMonth('created_at', date('m'))
-                    ->selectRaw('product_name, SUM(total_price) as total_price')
-                    ->groupBy('product_name')
-                    ->get();
+                $sales->whereMonth('created_at', Carbon::now()->month);
                 break;
 
             case 'year':
-                $sales = Sales::whereYear('created_at', date('Y'))
-                    ->selectRaw('product_name, SUM(total_price) as total_price')
-                    ->groupBy('product_name')
-                    ->get();
+                $sales->whereYear('created_at', Carbon::now()->year);
                 break;
         }
+
+        $sales = $sales->get();
 
         $this->chartData = $sales->pluck('total_price')->toArray();
         $this->chartLabels = $sales->pluck('product_name')->toArray();
@@ -60,15 +55,11 @@ class SalesChartFilter extends Component
 
     public function render()
     {
-        $chart = (new LarapexChart())->pieChart()
-            ->setTitle('Sales Data.')
-            ->setSubtitle('Selected Period: ' . ucfirst($this->selectedPeriod))
-            ->addData($this->chartData) 
-            ->setLabels($this->chartLabels);
-
         return view('livewire.sales-chart-filter', [
-            'chart' => $chart 
+            'labels' => $this->chartLabels,
+            'data' => $this->chartData
         ]);
     }
 }
+
 

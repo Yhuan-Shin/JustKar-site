@@ -82,26 +82,26 @@ class InventoryController extends Controller
 
 //     return redirect('/admin/inventory')->with('success', 'Item Inserted');
 //    }
-//    public function edit(string $id): View
-//     {   
-//         $inventory = Inventory::find($id);
-//         return view('inventory.edit')->with('item', $inventory);
-//     }
-//     public function update(Request $request, string $id)
-// {
-//     try {
-//         $inventory = Inventory::findOrFail($id);
-//         $inventory->update($request->all());
-//         return redirect('/admin/inventory')->with('success', 'Item Updated');
-//     } catch (QueryException $e) {
-//         if ($e->errorInfo[1] == 1062) { 
-//             return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
-//         } else {
+   public function edit(string $id): View
+    {   
+        $inventory = Inventory::find($id);
+        return view('inventory.edit')->with('item', $inventory);
+    }
+    public function update(Request $request, string $id)
+{
+    try {
+        $inventory = Inventory::findOrFail($id);
+        $inventory->update($request->all());
+        return redirect('/admin/inventory')->with('success', 'Item Updated');
+    } catch (QueryException $e) {
+        if ($e->errorInfo[1] == 1062) { 
+            return redirect('/admin/inventory')->with('error', 'Duplicate entry for product code. Please use a different product code.');
+        } else {
            
-//             throw $e;
-//         }
-//     }
-// }
+            throw $e;
+        }
+    }
+}
 
     public function destroy(string $id): RedirectResponse
 {

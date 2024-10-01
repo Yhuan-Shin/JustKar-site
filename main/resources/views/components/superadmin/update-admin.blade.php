@@ -24,7 +24,7 @@
 
                     <div class="mb-3">
                         <label for="password{{ $admin->id }}" class="form-label">Password</label>
-                        <input type="password" id="password{{ $admin->id }}" class="form-control admin-password" maxlength="16" name="password">
+                        <input type="password" id="password{{ $admin->id }}"  class="form-control admin-password" maxlength="16" name="password" placeholder="Update Password" required>
                         <div class="invalid-feedback password-error"></div>
                     </div>
                     

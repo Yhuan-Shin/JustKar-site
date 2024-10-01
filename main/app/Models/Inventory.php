@@ -10,7 +10,7 @@ class Inventory extends Model
 {
     protected $table = 'inventory';
     protected $primaryKey = 'id';
-    protected $fillable = ['product_code','product_name','category','quantity','brand','fitment','pattern','load','size', 'critical_level', 'status'];
+    protected $fillable = ['product_code','product_name','product_type','category','quantity','brand', 'size', 'critical_level', 'status', 'description'];
     protected $casts = [
         'archived' => 'boolean',
     ];
@@ -25,11 +25,14 @@ class Inventory extends Model
         static::updated(function ($inventory) {
             Products::where('inventory_id', $inventory->id)->update([
                 'product_name' => $inventory->product_name,
+                'product_type' => $inventory->product_type,
                 'category' => $inventory->category,
                 'brand' => $inventory->brand,
                 'quantity' => $inventory->quantity,
                 'size' => $inventory->size,
+                'description' => $inventory->description,
                 'critical_level' => $inventory->critical_level,
+                
             ]);
          
         });

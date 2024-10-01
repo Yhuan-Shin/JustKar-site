@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -32,9 +33,7 @@
                     @include('components/navigation')
                     <hr>
 
-                    <a href="{{ route('admin.logout') }}">
-                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                    </a>
+                 
                   
                 </div>
             </div>
@@ -80,12 +79,11 @@
                                             <div class="col-md">
                                                 @livewire('sales-chart')
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
+                                            <div class="col-md">
                                                 @livewire('sales-chart-filter')
                                             </div>
                                         </div>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -96,10 +94,9 @@
     </div>
     @livewireScripts
     <!-- End of sidebar -->
-    @livewireChartsScripts    
+    {{-- @livewireChartsScripts     --}}
     <script src="index.js"></script>
-    
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

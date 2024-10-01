@@ -16,14 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('product_code') ->unique();
             $table->string('product_name');
+            $table->string('product_type');
+            $table->string('size');
             $table->string('category');
             $table->string('quantity');
             $table->string('status')->nullable(); 
-            $table->string('fitment');
             $table->string('brand');
-            $table->string('pattern'); 
-            $table->string('load');
-            $table->string('size'); 
             $table->timestamps();
         });
     }

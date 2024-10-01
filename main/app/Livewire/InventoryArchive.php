@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Inventory;
+use App\Models\Products;
 
 class InventoryArchive extends Component
 {
@@ -45,6 +46,7 @@ class InventoryArchive extends Component
         }
 
         Inventory::whereIn('id', $this->selectedItems)->update(['archived' => false]);
+        Products::whereIn('inventory_id', $this->selectedItems)->update(['archived' => false]);
         $this->selectedItems = [];
     }
 

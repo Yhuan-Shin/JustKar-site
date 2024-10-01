@@ -18,25 +18,22 @@ table,th, td{
             <tr>
                 <th scope="col">Product Code</th>
                 <th scope="col">Product Name</th>
+                <th scope="col">Product Type</th>
                 <th scope="col">Category</th>
-                <th scope="col">Pattern</th>
-                <th scope="col">Load/Speed</th>
-                <th scope="col">Fitment</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Status</th>
                 <th scope="col">Brand</th>
                 <th scope="col">Size</th>
+                <th scope="col">Description</th>
             </tr>
         </thead>
         <tbody>
             @foreach($inventories as $item)
             <tr>
                 <td>{{ $item->product_code }}</td>
-                <td>{{ $item->product_name }}</td>                             
+                <td>{{ $item->product_name }}</td> 
+                <td>{{ $item->product_type }}</td>
                 <td>{{ $item->category }}</td>
-                <td>{{ $item->pattern }}</td>
-                <td>{{ $item->load }}</td>
-                <td>{{ $item->fitment }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>
                     @if($item->quantity == 0)
@@ -49,6 +46,7 @@ table,th, td{
                 </td>
                 <td>{{ $item->brand }}</td>
                 <td>{{ $item->size }}</td>
+                <td>{{ $item->description }}</td>
                 <!-- Display more attributes -->
             </tr>
             @endforeach

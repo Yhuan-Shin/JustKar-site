@@ -33,7 +33,7 @@
                     
                     <hr>
                     
-                    <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+
                     
                   
                 </div>
@@ -55,10 +55,8 @@
                                         
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1">Super Admin</span>
-                                        </div>
-                                        <h1>User Management</h1>
-                                        
+                                            <span class="d-none d-sm-inline text-dark mx-1">{{ Auth::guard('superadmin')->user()->name }}</span>
+                                        </div>                                        
                                 </div>
 
                                 <div class="row bg-light p-2 rounded">
@@ -66,7 +64,6 @@
                                         <div class="row">
                                             <div class="col">
                                                 {{-- content --}}
-                                                <button type="button" class="btn btn-outline-success float-end mb-3" data-bs-target="#add-admin" data-bs-toggle="modal"><i class=" py-2 bi bi-plus-circle"></i> Add Admin</button>
 
                                                 
                                                 @if(session()->has('success'))
@@ -104,7 +101,6 @@
                                                         <tr>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Username</th>
-                                                            <th scope="col">Password</th>
                                                              <th scope="col">Date Created</th>
                                                             <th scope="col">Date Updated</th>
                                                             <th scope="col">Action</th>
@@ -120,11 +116,10 @@
                                                        <tr>
                                                            <td>{{ $admin->name }}</td>
                                                            <td>{{ $admin->username }}</td>
-                                                           <td>{{ $admin->password }}</td>
                                                            <td>{{ $admin->created_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>{{ $admin->updated_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>
-                                                            <button type="button" class="btn btn-primary mb-2" data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i></button>
+                                                            <button type="button" class="btn btn-primary " data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i></button>
 
                                                             <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
                                                                 @csrf

@@ -1,55 +1,70 @@
 <?php
 
 namespace App\Livewire;
+
+use App\Models\Categories;
 use App\Models\Inventory;
 use App\Models\Products;
+use App\Models\ProductType;
 use Livewire\Component;
 use Illuminate\Database\QueryException;
 class InventoryAdd extends Component
 {
     public $product_code;
     public $product_name;
-    public $category;
+    public $selectedProduct = null;
+    public $selectedCategory = null;
     public $quantity;
     public $brand;
     public $size;
-    public $pattern;
-    public $load;
-    public $fitment;
+    public $description;
+    public $inventory;
+    
+    public $categories= null;
+ 
 
-    protected $rules = [
-        'product_code' => 'required|unique:inventory,product_code',
-        'product_name' => 'required',
-        'category' => 'required',
-        'quantity' => 'required',
-        'brand' => 'required',
-        'size' => 'required',
-        'pattern' => 'required',
-        'load' => 'required',
-        'fitment' => 'required',
-    ];
+
+    
+    public function closeModal()
+    {        
+        $this->resetForm();
+    }
+
+    public function updatedSelectedProduct($product_type_id){
+        $this->categories = Categories::where('product_type_id', $product_type_id)->select('id', 'category')->get();
+    }
     public function resetForm()
     {
         $this->product_code = '';
         $this->product_name = '';
-        $this->category = '';
+        $this->selectedProduct= '';
+        $this->selectedCategory = '';
         $this->quantity = '';
+        $this->description = '';
         $this->brand = '';
         $this->size = '';
-        $this->pattern = '';
-        $this->load = '';
-        $this->fitment = '';
     }
     public function submit()
     {
-        $data = $this->validate();
+        $data = [
+            'product_code' => $this->product_code,
+            'product_name' => $this->product_name,
+            'product_type' => ProductType::where('id', $this->selectedProduct)->value('product_type'),
+            'category' => Categories::where('id', $this->selectedCategory)->value('category'),
+            'quantity' => $this->quantity,
+            'brand' => $this->brand,
+            'size' => $this->size,
+            'description' => $this->description
+        ];
+        $critical_level = Inventory::latest()->value('critical_level') ?? 0;
+
         $existingInventory = Inventory::where('product_name', $data['product_name'])
                 ->where('brand', $data['brand'])
                 ->where('size', $data['size'])
-                ->where('pattern', $data['pattern'])
-                ->where('load', $data['load'])
+                ->where('product_type', $data['product_type'])
+                ->where('category', $data['category'])
+                ->where('description', $data['description'])
                 ->first();
-        $critical_level = Inventory::latest()->value('critical_level') ?? 0;
         try {
 
             if ($existingInventory) {
@@ -59,19 +74,16 @@ class InventoryAdd extends Component
                 $inventory = Inventory::create([
                     'product_code' => $data['product_code'],
                     'product_name' => $data['product_name'],
+                    'product_type' => $data['product_type'],
                     'category' => $data['category'],
                     'quantity' => $data['quantity'],
                     'brand' => $data['brand'],
                     'size' => $data['size'],
-                    'pattern' => $data['pattern'],
-                    'load' => $data['load'],
-                    'fitment' => $data['fitment'],
                     'critical_level' => $critical_level,
                     'status' => $status,
+                    'description' => $data['description']
                     
                 ]);
-                $this->resetForm();
-
                 session()->flash('success', 'Item Inserted');
                 Products::create([
                     'inventory_id' => $inventory->id,
@@ -79,13 +91,14 @@ class InventoryAdd extends Component
                     'product_name' => $inventory->product_name,
                     'category' => $inventory->category,
                     'quantity' => $inventory->quantity,
-                    'pattern' => $inventory->pattern,
                     'brand' => $inventory->brand,
-                    'load' => $inventory->load,
-                    'fitment' => $inventory->fitment,
+                    'product_type' => $inventory->product_type,
                     'size' => $inventory->size,
+                    'description' => $inventory->description,
                     'critical_level' => $critical_level,
                 ]);
+                $this->reset();
+
             }
            
         
@@ -102,6 +115,8 @@ class InventoryAdd extends Component
 
     public function render()
     {
-        return view('livewire.inventory-add');
+        return view('livewire.inventory-add',[
+            'product_type'=> ProductType::all(),
+        ]);
     }
 }

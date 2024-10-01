@@ -5,15 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js
     "></script>  
     <link href="admin/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body style="height: 100vh">
     <!-- form -->
-    <div class="container mt-2">
+    <div class="container">
         @if(Session::has('error'))
         <div class="alert alert-danger alert-dismissible fade show d-flex " role="alert">
             <i class="fs-4 bi bi-exclamation-circle-fill"> </i>
@@ -21,9 +23,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center" style="height: 100vh">
             <div class="col-md-5">
-                <div class="card mt-3" style="background-color: #06063d">
+                <div class="card mt-3 bg-dark shadow-lg rounded">
                     <div class="card-header text-center text-dark">
                         <i class="bi bi-person-circle text-light" style="font-size: 50px;"></i>
                         <h3 class="text-center text-light text-uppercase">Admin LOGIN</h3>
@@ -32,20 +34,18 @@
                         <form action="{{route('admin.login')}}" method="post">
                         @csrf
                         @method('POST')
-                            <div class="mb-5">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1"><i class="bi bi-person"></i></span>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"  name="username" maxlength="20" aria-describedby="basic-addon1">
-                                  </div>
+                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-person-circle"></i></span>
+                                    <input type="text" class="form-control" name="username" maxlength="20"  placeholder="Enter Username" aria-label="Username" aria-describedby="basic-addon1" required>
+                                </div>
                             </div>
                             <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
                                 <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock"></i></span>
-                                    </div>
-                                    <input type="password" name="password" maxlength="16" class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon1">
+                                      <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock-fill"></i></span>
+                                    <input type="password" name="password" maxlength="16" class="form-control" placeholder="Enter Password" aria-label="password" aria-describedby="basic-addon1">
                                   </div>
                             </div>
                             {{-- <div class="mb-3">

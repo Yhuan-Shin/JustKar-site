@@ -41,25 +41,27 @@
             
             <div class="row  justify-content-center">
 
-                <div class="col-lg-12 mt-5">
-                    <div class="dropdown  mb-3 float-end">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Change Car Type
-                        </button>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#" onclick="changeIframe('sedan')">Sedan</a></li>
-                          <li><a class="dropdown-item" href="#" onclick="changeIframe('suv')">SUV</a></li>
-                          <li><a class="dropdown-item" href="#" onclick="changeIframe('hatchback')">Hatchback</a></li>
-                          <li><a class="dropdown-item" href="#" onclick="changeIframe('pickup')">Pickup Truck</a></li>
-
-                        </ul>
+                <div class="col-lg-12 mt-5 ">
+                    <div class="container mb-3">
+                        <div class="row justify-content-end">
+                          <div class="col-md-6">
+                            <select id="carType" class="form-control w-50 float-end" onchange="changeIframe(this.value)">
+                              <option selected disabled>Select Car Type</option>
+                              <option value="sedan">Sedan</option>
+                              <option value="suv">SUV</option>
+                              <option value="hatchback">Hatchback</option>
+                              <option value="pickup">Pickup</option>
+                            </select>
+                          </div>
+                        </div>
                       </div>
 
                     <div class="container d-flex justify-content-center">
                         
                         {{-- car --}}
                         <div class="frame-container d-flex justify-content-center">
-                            <iframe id="vehicle-image" class="alcar_bb" src="https://bbimg.alcar-wheels.com/viewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&amp;lng=en&amp;dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&amp;fbld=F1296&amp;rbld=R020-99&amp;zoll=18&scene=none" width="100%" height="500px" scrolling="no" ></iframe>
+                          <iframe id="vehicle-image" class="alcar_bb" src="" width="100%" height="500px" scrolling="no"></iframe>
+
                         </div>
 
                     </div>
@@ -68,36 +70,85 @@
              <div class="row">
                 
                 <div class="container d-flex justify-content-center p-3 bg-light">
-                    <div id="image-list">
-                        @include('components/wheels')
-                      </div>
+                  <div id="wheels-sedan" style="display: none;">
+                    @include('components/wheels/sedan')
+                </div>
+                <div id="wheels-suv" style="display: none;">
+                    @include('components/wheels/suv')
+                </div>
+                <div id="wheels-hatchback" style="display: none;">
+                    @include('components/wheels/hatchback')
+                </div>
+                <div id="wheels-pickup" style="display: none;">
+                    @include('components/wheels/pickup')
+                </div>
                     
                 </div>
              </div>
         </div>
-        <script>
+        {{-- <script>
             function changeIframe(vehicleType) {
               const iframe = document.getElementById('vehicle-image');
+              const imageList = document.getElementById('image-list');
               let src = '';
-          
+              let wheelsComponent = '';
+
               switch(vehicleType) {
                 case 'sedan':
-                  src = 'https://bbimg.alcar-wheels.com/viewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&amp;lng=en&amp;dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&amp;fbld=F1296&amp;rbld=R020-99&amp;zoll=18&scene=none';
+                  src = 'https://bbimg.alcar-wheels.com/viewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&amp;lng=en&amp;dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&amp;fbld=F1296&amp;rbld=R020-99&amp;zoll=18';
                   break;
                 case 'suv':
                   src = 'https://bbimg.alcar-wheels.com/configurator_blackbox/bbviewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&lng=en&dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&fbld=F1910&rbld=R021-150&zoll=20&bck=';
+                  wheelsComponent = '@include('components/wheels/suv')';
                   break;
                 case 'hatchback':
                   src = 'https://bbimg.alcar-wheels.com/configurator_blackbox/bbviewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&lng=en&dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&fbld=F1776&rbld=R020-99&zoll=18&bck=';
+                  wheelsComponent = '@include('components/wheels/hatchback')';
                   break;
                 case 'pickup':
                   src = 'https://bbimg.alcar-wheels.com/configurator_blackbox/bbviewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&lng=en&dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&fbld=F2046&rbld=R021-150&zoll=20&bck=';
+                  wheelsComponent = '@include('components/wheels/pickup')';
                   break;
               }
-          
               iframe.src = src;
+              imageList.innerHTML = wheelsComponent;              
             }
-          </script>
+          </script> --}}
+          <script>
+            function changeIframe(vehicleType) {
+                const iframe = document.getElementById('vehicle-image');
+                let src = '';
+        
+                // Hide all wheel components first
+                document.getElementById('wheels-sedan').style.display = 'none';
+                document.getElementById('wheels-suv').style.display = 'none';
+                document.getElementById('wheels-hatchback').style.display = 'none';
+                document.getElementById('wheels-pickup').style.display = 'none';
+        
+                // Show wheels and update car iframe based on vehicle type
+                switch(vehicleType) {
+                    case 'sedan':
+                        src = 'https://bbimg.alcar-wheels.com/viewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&amp;lng=en&amp;dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&amp;fbld=F1296&amp;rbld=R020-99&amp;zoll=18'; // Sedan URL
+                        document.getElementById('wheels-sedan').style.display = 'block';
+                        break;
+                    case 'suv':
+                        src = 'https://bbimg.alcar-wheels.com/configurator_blackbox/bbviewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&lng=en&dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&fbld=F1910&rbld=R021-150&zoll=20&bck='; // SUV URL
+                        document.getElementById('wheels-suv').style.display = 'block';
+                        break;
+                    case 'hatchback':
+                        src = 'https://bbimg.alcar-wheels.com/configurator_blackbox/bbviewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&lng=en&dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&fbld=F1776&rbld=R020-99&zoll=18&bck='; // Hatchback URL
+                        document.getElementById('wheels-hatchback').style.display = 'block';
+                        break;
+                    case 'pickup':
+                        src = 'https://bbimg.alcar-wheels.com/configurator_blackbox/bbviewer.php?alclcs=2a92444ee73079a6a15b61fb8d7ba0a6&lng=en&dtlcs=Zu4bIeKkeZIFAq5Qk82L7QwgDbqs2oXw&fbld=F2046&rbld=R021-150&zoll=20&bck='; // Pickup URL
+                        document.getElementById('wheels-pickup').style.display = 'block';
+                        break;
+                }
+        
+                // Update the iframe src for the vehicle
+                iframe.src = src;
+            }
+        </script>
         <script src="/script.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js

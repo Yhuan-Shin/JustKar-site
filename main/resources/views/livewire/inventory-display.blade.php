@@ -1,23 +1,47 @@
 <div wire:poll.3000ms>
-    <div class="container">
-        @if (session()->has('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-
-            {{ session('success') }}
+      <!-- Delete Confirmation Modal -->
+      @foreach($inventory as $item)
+        <div class="modal fade" id="modal-delete{{ $item->id }}" wire:ignore tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this item?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="{{ route('inventory.destroy', $item->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+      @endforeach
+    <div class="container" style="padding: 0px; width: 100%;">
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show">
+
+                {{ session('success') }}
+            </div>
         @endif
 
         @if (session()->has('error'))
-        <div class="alert alert-danger alert-dismissible fade show">
+            <div class="alert alert-danger alert-dismissible fade show">
 
-            {{ session('error') }}
-        </div>
-     @endif
+                {{ session('error') }}
+            </div>
+        @endif
         @if($inventory->isEmpty() && $search)
-        <div class="alert alert-warning mt-4" role="alert">
-            No results found for "{{ $search }}".
-        </div>
-         @endif
+            <div class="alert alert-warning mt-4" role="alert">
+                No results found for "{{ $search }}".
+            </div>
+        @endif
         <div class="row">
             <div class="col-md">
                 <input type="checkbox" wire:model="selectAll"> Select All
@@ -30,7 +54,7 @@
                 <button class="btn btn-success float-end" type="submit" data-bs-target="#add-product" data-bs-toggle="modal"><i class="bi bi-plus-circle"></i> Add Product</button> 
             </div>
             <div class="col-md">
-                    <button wire:click="archiveSelected" class="btn btn-warning">    
+                    <button wire:click="archiveSelected" class="btn btn-dark">    
                         <i class="bi bi-archive-fill"></i> Archive</button>
             </div>
             <div class="col-md-4">
@@ -44,23 +68,22 @@
                 </form>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="table-responsive">
+        <div class="row" style="padding: 0px">
+            <div class="col-md-12">
+                <div class="table-responsive mt-3 border rounded p-2">
                     <!-- table -->
                     <table class="table table-striped table-hover">
-                     <thead class="table-dark">
-                       <tr class="text-center">
-                         <th scope="col">Product Code</th>
+                     <thead class="table-dark   ">
+                       <tr class="text-center" style="white-space: nowrap;">
+                         <th scope="col" >Product Code</th>
                          <th scope="col">Product Name</th>
+                         <th scope="col" >Product Type</th>
                          <th scope="col">Category</th>
-                         <th scope="col">Pattern</th>
-                         <th scope="col">Load/Speed</th>
-                         {{-- <th scope="col">Fitment</th> --}}
                          <th scope="col">Quantity</th>
                          <th scope="col">Status</th>
                          <th scope="col">Brand</th>
                          <th scope="col">Size</th>
+                         <th scope="col">Description</th>
                          <th scope="col">Actions</th>
             
                        </tr>
@@ -77,15 +100,14 @@
                          
                        
                          @forelse($inventory as $item)
-                         <tr class="text-center">
+                         <tr class="text-center" style="white-space: nowrap;">
                              <th scope="row">
                                 <input type="checkbox" wire:model="selectedItems" value="{{ $item->id }}"> {{ $item->product_code }}
                             </th>
-                             <td class="text-uppercase">{{ $item->product_name }}</td>
+                             <td class="text-uppercase" >{{ $item->product_name }}</td>
+                             <td class="text-uppercase">{{ $item->product_type }}</td>
                              <td>{{ $item->category }}</td>
-                             <td class="text-uppercase">{{ $item->pattern }}</td>
-                             <td class="text-uppercase">{{ $item->load}}</td>
-                             {{-- <td class="text-uppercase">{{ $item->fitment }}</td> --}}
+                           
                              <td>{{ $item->quantity }}</td>
                              <td>
                                  @if($item->quantity == 0)
@@ -98,6 +120,7 @@
                              </td>
                              <td class="text-uppercase">{{ $item->brand }}</td>
                              <td>{{ $item->size }}</td>
+                             <td>{{ $item->description }}</td>
                              <td>
                                  <div class="container">
                                      <div class="row">
@@ -120,20 +143,22 @@
                    </table>
                   
                    <div class="container">
-                        <div class="row d-flex justify-content-center">
+                        <div class="row ">
 
-                            <div class="col">
-                                <a href="{{ route('inventory.archived')}}" class="btn btn-info"><i class="bi bi-view-list"></i> View Archived</a>
+                            <div class="col-md d-flex  justify-content-end">
+                                <div class="btn-group " role="group" aria-label="Basic example">
+                                    <a href="{{ route('inventory.archived')}}" class="btn btn-primary me-2"><i class="bi bi-binoculars-fill"></i> View Archived</a>
+
+                                    <form action="{{ route('inventory.export')}}" method="GET">
+                                        <button class="btn btn-danger">
+                                            <i class="bi bi-file-pdf-fill"></i> Export to PDF</button>
+                                    </form>   
+                                </div>   
                             </div>
                             {{-- <div class="col">
                                 <a  href="{{ route('inventory.exportToExcel')}}" class="btn btn-outline-success">Export to Excel</a>
                             </div> --}}
-                            <div class="col-md-4">
-                                <form action="{{ route('inventory.export')}}" method="GET">
-                                    <button class="btn btn-danger">
-                                        <i class="bi bi-filetype-pdf"></i> Export to PDF</button>
-                                  </form>
-                            </div>
+                        
                         </div>
                         <div class="row">
                             <div class="col">
@@ -149,7 +174,10 @@
             
             </div>
         </div>
-   
+    {{-- modal update product --}}
+    @include('components/inventory/inventory_update')
+    {{-- end modal --}}
+ 
    
 </div>
 

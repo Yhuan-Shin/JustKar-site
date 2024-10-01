@@ -25,7 +25,7 @@
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" maxlength="16" class="form-control" id="admin-password" name="password" placeholder="Password" required>
+                <input type="password" maxlength="16" class="form-control" value="{{old('password')}}" id="admin-password" name="password" placeholder="Password" required>
                 <div class="invalid-feedback" id="admin-password-error">
               
                 </div>

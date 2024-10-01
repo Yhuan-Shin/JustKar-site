@@ -49,12 +49,13 @@
                             <tr class="text-center">
                                 <th scope="col">Product Code</th>
                                 <th scope="col">Product Name</th>
+                                <th scope="col">Product Type</th>
                                 <th scope="col">Category</th>
-                                <th scope="col">Pattern</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Brand</th>
                                 <th scope="col">Size</th>
+                                <th scope="col">Description</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -66,8 +67,8 @@
                                     {{ $item->product_code }}
                                 </th>
                                 <td class="text-uppercase">{{ $item->product_name }}</td>
-                                <td>{{ $item->category }}</td>
-                                <td class="text-uppercase">{{ $item->pattern }}</td>
+                                <td>{{ $item->product_type }}</td>
+                                <td class="text-uppercase">{{ $item->category }}</td>
                                 <td>{{ $item->quantity }}</td>
                                 <td>
                                     @if($item->quantity == 0)
@@ -80,6 +81,7 @@
                                 </td>
                                 <td class="text-uppercase">{{ $item->brand }}</td>
                                 <td>{{ $item->size }}</td>
+                                <td>{{ $item->description }}</td>
                             </tr>
                             @empty
                             <tr>

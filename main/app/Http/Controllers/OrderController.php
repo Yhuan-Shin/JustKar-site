@@ -18,10 +18,9 @@ class OrderController extends Controller
     //
     public function display(){
         $orderItem = OrderItem::all();
-        $inventory = Products::all();
         $sales = Sales::all();
         $name = User::findorfail(Auth::user()->id)->name;
-        return view('cashier/pos', ['orderItems' => $orderItem, 'inventory' => $inventory], ['name' => $name], ['sales' => $sales]);
+        return view('cashier/pos', ['orderItems' => $orderItem], ['name' => $name], ['sales' => $sales]);
     }
     public function update(string $id, Request $request) {
         $orderItem = OrderItem::findOrFail($id);
@@ -78,7 +77,7 @@ class OrderController extends Controller
                
                 Inventory::where('product_code', $item['product_code'])->update([
                     'quantity' => $inventory->quantity,
-                    'status' => $inventory->quantity == 0 ? 'outofstock' : 'instock'
+                    'status' => $inventory->quantity == 0 ? 'outofstock' : ($inventory->quantity <= $inventory->critical_level ? 'lowstock' : 'instock')
                 ]);
                 
 
@@ -90,11 +89,11 @@ class OrderController extends Controller
                     'ref_no' => uniqid('REF-'),
                     'product_code' => $item['product_code'],
                     'product_name' => $item['product_name'],
+                    'product_type' => $item['product_type'],
                     'brand' => $item['brand'],
                     'size' => $item['size'],
                     'quantity' => $item['quantity'],
                     'category' => $item['category'],
-                    'brand' => $item['brand'],
                     'price' => (float)$item['price'],   
                     'total_price' => (float)$item['price'] * (int)$item['quantity'],
                     'cashier_name' => Auth::user()->name,

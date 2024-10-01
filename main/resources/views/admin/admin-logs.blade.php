@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Logs</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
@@ -31,9 +33,7 @@
                     @include('components/navigation')
                     <hr>
                     
-                    <a href="{{ route('admin.logout') }}">
-                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                    </a>
+                    
                   
                 </div>
             </div>
@@ -52,7 +52,6 @@
                                             <i class="bi bi-person-circle"></i>
                                             <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                         </div>
-                                        <h1>Sales Logs</h1>
                                 </div>
                                 <div class="row">
                                     <div class="container">

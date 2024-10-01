@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('ref_no');
             $table->string('product_code');
             $table->string('product_name');
+            $table->string('product_type');
             $table->string('brand');
             $table->string('category');
             $table->string('size');

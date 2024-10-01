@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
+    <link rel="icon" type="image/x-icon" href="/images/logo.png">
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -32,9 +34,7 @@
                     @include('components/navigation')
                     <hr>
                     
-                    <a href="{{ route('admin.logout') }}">
-                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
-                    </a>
+            
                   
                 </div>
             </div>
@@ -53,72 +53,9 @@
                                             <i class="bi bi-person-circle"></i>
                                             <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
                                         </div>
-                                        <h1>Products</h1>
                                        
                                 </div>
-                                @include('components/products/editInfo')
-                               <div class="row" >
-                                @forelse ($products as $item)
-                                    <div class="col-md-4 d-flex justify-content-center">
-                                        {{-- card --}}
-                                        <div class="card p-3 mb-3 text-center text-uppercase" style="width: 14rem;">
-                                            <div class="card-body"> 
-                                              
-                                                @if($item->product_image == null)
-                                                 <p class="alert alert-danger">No Image</p>
-                                                @elseif($item->product_image != null)
-                                                <img src="{{asset('uploads/product_images/'.$item->product_image)}}" class="card-img-top" alt="...">
-                                                @endif
-
-                                                <h5 class="card-title">{{$item->product_name}}</h5>
-                                                    @if($item->quantity == 0)
-                                                    <span class="badge bg-danger">Out of Stock</span>
-                                                    @elseif($item->quantity <= $item->critical_level)
-                                                    <span class="badge bg-warning">Low Stock</span>
-                                                    @elseif($item->quantity > $item->critical_level)
-                                                    <span class="badge bg-success">In Stock</span>
-                                                    @endif
-                                            
-                                                <div class="container ">
-                                                    <div class="row mb-2">
-                                                        <div class="col-md-4">
-                                                            <p class="card-text">{{ $item->category }}</p>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <p class="card-text">{{ $item->size }}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-2 border rounded">
-                                                        <div class="col">
-                                                            <p class="card-text">{{ $item->description }}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="container d-flex justify-content-center">
-                                                   <div class="row">
-                                                    <div class="col">
-                                                         @if($item->price == null)
-                                                        <p class="alert alert-danger">No Price Set</p>
-                                                        @elseif($item->price != null)
-                                                        <p class="card-text text-start">₱{{ $item->price }}</p>
-                                                        @endif
-                                                    </div>
-                                                    <div class="col">
-                                                        <button class="btn btn-primary" data-bs-target="#editInfo{{ $item->id }}" data-bs-toggle="modal">Edit</button>
-                                                    </div>
-                                                   </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{-- end card --}}
-                                @empty
-                                    <div class="alert alert-danger d-flex align-items-center" role="alert">
-                                        <i class="fs-4 bi bi-exclamation-circle-fill p-3"></i> No items in inventory
-                                    </div>
-                                @endforelse
-                                </div>
+                                @livewire('products-display')
 
                                 </div>
                             </div>
