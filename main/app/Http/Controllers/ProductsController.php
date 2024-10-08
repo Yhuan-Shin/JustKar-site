@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\OrderItem;
 use App\Models\Inventory;
 use App\Models\Products;
+use Illuminate\Support\Facades\Auth;
+
 class ProductsController extends Controller
 {
     //
@@ -39,6 +41,7 @@ class ProductsController extends Controller
         return redirect('admin/products');
     }
     public function addToOrder(string $id ,Request $request){
+        $cashierId = Auth::user()->id;        
         $product = Products::find($id);
         $orderItem = OrderItem::where('product_id', $product->id)->first();
 
@@ -46,14 +49,16 @@ class ProductsController extends Controller
             return redirect('/cashier/pos')->with('error', 'Product not found!');
         }
     
-        $orderItem = OrderItem::where('product_id', $product->id)->first();
-    
+        $orderItem = OrderItem::where('product_id', $product->id)
+        ->where('cashier_id', $cashierId)
+        ->first();    
        try {
         if ($orderItem) {
             return redirect('/cashier/pos')->with('error', 'Product is already in the cart!');
         } else {
             // If the product is not in the cart, create a new order item
             $orderItem = new OrderItem();
+            $orderItem->cashier_id = $cashierId;
             $orderItem->product_id = $product->id;
             $orderItem->product_code = $product->product_code;
             $orderItem->product_name = $product->product_name;
@@ -66,7 +71,7 @@ class ProductsController extends Controller
             $orderItem->save();
         }
     } catch (\Exception $e) {
-        return redirect('/cashier/pos')->with('error', 'An error occurred while adding the product to the cart: ');
+        return redirect('/cashier/pos')->with($e->getMessage());
     }
     
 

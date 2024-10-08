@@ -54,8 +54,8 @@
                 <button class="btn btn-success float-end" type="submit" data-bs-target="#add-product" data-bs-toggle="modal"><i class="bi bi-plus-circle"></i> Add Product</button> 
             </div>
             <div class="col-md">
-                    <button wire:click="archiveSelected" class="btn btn-dark">    
-                        <i class="bi bi-archive-fill"></i> Archive</button>
+                    <button wire:click="archiveSelected" class="btn btn-warning">    
+                        <i class="bi bi-archive"></i> Archive</button>
             </div>
             <div class="col-md-4">
                 <form method="GET" class="col-md mb-3 float-end">
@@ -70,7 +70,7 @@
         </div>
         <div class="row" style="padding: 0px">
             <div class="col-md-12">
-                <div class="table-responsive mt-3 border rounded p-2">
+                <div class="table-responsive mt-3 border rounded p-2 shadow">
                     <!-- table -->
                     <table class="table table-striped table-hover">
                      <thead class="table-dark   ">
@@ -123,11 +123,11 @@
                              <td>{{ $item->description }}</td>
                              <td>
                                  <div class="container">
-                                     <div class="row">
+                                     <div class="row" style="white-space: nowrap">
                                          <div class="col mb-2">
                                              <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}"><i class="bi bi-pencil-square"></i></button>
                                          </div>
-                                         <div class="col">
+                                         <div class="col-md">
                                              <button class="btn btn-danger" type="button" data-bs-target="#modal-delete{{ $item->id}}" data-bs-toggle="modal"><i class="bi bi-trash3-fill"></i></button>
                                          </div>
                                      </div>

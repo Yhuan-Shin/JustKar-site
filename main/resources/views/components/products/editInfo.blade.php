@@ -30,7 +30,7 @@
             
                   <div class="mb-3">
                     <label for="image" class="form-label">Image</label>
-                    <input type="file" class="form-control" accept=".jpg,.jpeg,.png,.gif,.bmp,.webp,.svg"id="product_image" name="product_image" value="{{ $item->product_image }}">
+                    <input type="file" class="form-control" accept=".jpg,.jpeg,.png. "id="product_image" name="product_image" value="{{ $item->product_image }}">
                   </div>
                   <div class="mb-3">
                     <label for="description" class="form-label">Description</label>

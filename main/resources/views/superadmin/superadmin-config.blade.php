@@ -33,7 +33,6 @@
                     @include('components/superadmin/nav')
                     <hr>
                     
-                    <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
                   
                 </div>
             </div>
@@ -51,7 +50,7 @@
                             <form action="{{route('whitelist.store')}}" method="post">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="mac_address" class="form-label">MAC Address:</label>
+                                    <label for="mac_address" class="form-label">IP Address:</label>
                                     <input type="text" class="form-control" placeholder="127.0.0.1" id="ip_address" name="ip_address" required pattern="{12}">
                                 </div>
                             

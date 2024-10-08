@@ -11,6 +11,7 @@
                     @csrf
                     @method('POST')
                     <div class="mb-3">
+                        <input type="hidden" name="role" id="role" value="admin">
                         <label for="name{{ $admin->id }}" class="form-label">Name</label>
                         <input type="text" maxlength="20" id="name{{ $admin->id }}" class="form-control admin-name" name="name" value="{{ $admin->name }}" required>
                         <div class="invalid-feedback name-error"></div>

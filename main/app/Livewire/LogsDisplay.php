@@ -29,6 +29,8 @@ class LogsDisplay extends Component
     {
         $sales = Sales::where('ref_no', 'LIKE', '%'.$this->search.'%')
             ->orWhere('product_name', 'LIKE', '%'.$this->search.'%')
+            ->orWhere('product_type', 'LIKE', '%'.$this->search.'%')
+
             ->orWhere('quantity', 'LIKE', '%'.$this->search.'%')
             ->orWhereDate('created_at', '=', date('m-d-Y', strtotime(str_replace('-', '/', $this->search))))
             ->orWhere('cashier_name', 'LIKE', '%'.$this->search.'%');

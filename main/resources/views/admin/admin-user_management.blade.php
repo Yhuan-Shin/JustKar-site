@@ -58,7 +58,8 @@
                                         
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
+                                            @include('components/profile/user')
+
                                         </div>
                                         
                                 </div>
@@ -129,10 +130,10 @@
                                                         <tr>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Username</th>
-                                                             <th scope="col">Date Created</th>
+                                                            <th scope="col">Date Created</th>
                                                             <th scope="col">Date Updated</th>
+                                                            <th scope="col">Status</th>
                                                             <th scope="col">Action</th>
-
 
                                                         </tr>
                                                     </thead>
@@ -140,15 +141,46 @@
 
                                                        @foreach ($cashiers as $cashier)
 
-                                                       <tr>
+                                                       <tr >
                                                            <td>{{ $cashier->name }}</td>
                                                            <td>{{ $cashier->username }}</td>
                                                            <td>{{ $cashier->created_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>{{ $cashier->updated_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
+                                                           <td>@if($cashier->archive == 0) <span class="badge bg-success">Active</span> @else <span class="badge bg-danger">Archived</span> @endif</td>
                                                            <td>
-                                                            <button type="button" class="btn btn-outline-primary" data-bs-target="#edit-cashier{{$cashier->id}}" data-bs-toggle="modal" value="{{ $cashier->id }}"><i class="bi bi-pencil-square"></i>Edit</button>
-
-                                                         <button type="button" class="btn btn-outline-danger" data-bs-target="#modal-delete{{ $cashier->id}}" data-bs-toggle="modal"><i class="bi bi-trash"></i>Delete</button>
+                                                            <button type="button" class="btn btn-primary" data-bs-target="#edit-cashier{{$cashier->id}}" data-bs-toggle="modal" value="{{ $cashier->id }}"><i class="bi bi-pencil-square"></i></button>
+{{-- 
+                                                         <button type="button" class="btn btn-danger" data-bs-target="#modal-delete{{ $cashier->id}}" data-bs-toggle="modal"><i class="bi bi-trash"></i></button> --}}
+                                                        @if($cashier->archive == 0)
+                                                        <button type="button" class="btn btn-warning" data-bs-target="#modal-archive-confirmation{{ $cashier->id}}" data-bs-toggle="modal"><i class="bi bi-archive"></i></button>
+                                                        @endif
+                                                        @if($cashier->archive == 1)
+                                                            <form action="{{ route('cashier.restore', $cashier->id) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                <button class="btn btn-success" type="submit"><i class="bi bi-arrow-clockwise"></i></button>
+                                                            </form>
+                                                        @endif
+                                                        <!-- Archive Confirmation Modal -->
+                                                        <div class="modal fade" id="modal-archive-confirmation{{ $cashier->id }}" tabindex="-1" aria-labelledby="archiveConfirmationModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="archiveConfirmationModalLabel">Confirm Archive</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        Are you sure you want to archive this cashier?
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                        <form action="{{ route('cashier.archive', $cashier->id) }}" method="POST">
+                                                                            @csrf
+                                                                            <button type="submit" class="btn btn-primary">Archive</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                             </form>
 
                                                            </td>
@@ -157,9 +189,7 @@
 
                                                     </tbody>
                                                 </table>
-                                             
-
-
+                                    
                                             </div>
                                             
                                         </div>

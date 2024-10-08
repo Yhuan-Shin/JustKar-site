@@ -96,7 +96,7 @@
                             <div class="mb-3">
                                 <div class="container">
                                     <div class="row-md-12">
-                                        <input type="Submit"  name="submit" id="submit" class="btn btn-primary w-25 me-3 text-uppercase text-white offset-9" value="login"></input>
+                                        <input type="Submit"  name="submit" id="submit" class="btn btn-danger w-25 me-3 text-uppercase text-white offset-9" value="login"></input>
                                     </div>
                                 </div>
                             </div>

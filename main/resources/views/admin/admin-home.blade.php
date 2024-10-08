@@ -50,8 +50,8 @@
                                         </div>
                                         <div class="col text-end m-2">
                                             <i class="bi bi-person-circle"></i>
-                                            <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
-                                        </div>
+                                            @include('components/profile/user')
+                                       </div>
                                         @if (session('success'))
                                         <div class="alert alert-success alert-dismissible fade show mt-3">
                                             {{ session('success') }}
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="container">
-                                        <div class="row mb-2">
+                                        <div class="row mb-2 align-items-center justify-content-center">
                                             <div class="col">
                                                 @livewire('admin-dashboard-sales')
                                             </div>
@@ -80,7 +80,7 @@
                                                 @livewire('sales-chart')
                                             </div>
                                             <div class="col-md">
-                                                @livewire('sales-chart-filter')
+                                                @include('components/pie-chart')
                                             </div>
                                         </div>
                                     
@@ -98,6 +98,7 @@
     <script src="index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

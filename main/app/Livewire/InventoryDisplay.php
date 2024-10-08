@@ -64,11 +64,8 @@ class InventoryDisplay extends Component
             $query->where(function ($q) {
                 $q->where('product_name', 'like', '%' . $this->search . '%')
                   ->orWhere('product_code', 'like', '%' . $this->search . '%')
-                  ->orWhere('size', 'like', '%' . $this->search . '%')
                   ->orWhere('brand', 'like', '%' . $this->search . '%')
-                  ->orWhere('category', 'like', '%' . $this->search . '%')
-                  ->orWhere('quantity', 'like', '%' . $this->search . '%');
-
+                  ->orWhere('category', 'like', '%' . $this->search . '%');
             });
                     //return no results
          if ($query->count() == 0) {

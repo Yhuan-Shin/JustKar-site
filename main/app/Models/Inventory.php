@@ -34,6 +34,7 @@ class Inventory extends Model
                 'critical_level' => $inventory->critical_level,
                 
             ]);
+            
          
         });
         static::updating(function ($inventory) {

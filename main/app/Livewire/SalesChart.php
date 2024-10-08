@@ -11,17 +11,19 @@ class SalesChart extends Component
 
     public function mount()
     {
-        // Fetch sales data aggregated by brand and category
-        $salesData = Sales::select('brand', 'category', DB::raw('SUM(total_price) as total_price'))
-            ->groupBy('brand', 'category')
-            ->get();
+        
+        $salesData = Sales::select('brand', 'category', DB::raw('SUM(quantity) as total_quantity'))
+        ->groupBy('brand', 'category')
+        ->orderByDesc(DB::raw('SUM(quantity)'))  
+        ->get();
 
-        // Prepare categories and data
-        $this->categories = $salesData->pluck('category')->unique();
-        $this->brands = $salesData->pluck('brand')->unique();
+        $this->categories = $salesData->pluck('category')->unique();  
+        $this->brands = $salesData->pluck('brand')->unique();  
+
         $this->salesData = $salesData->groupBy('brand')->map(function ($items) {
-            return $items->pluck('total_price', 'category')->toArray();
+        return $items->pluck('total_quantity', 'category')->toArray();  
         });
+
     }
     public function refresh()
     {

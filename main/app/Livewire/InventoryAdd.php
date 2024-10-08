@@ -105,7 +105,7 @@ class InventoryAdd extends Component
         
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) {
-                session()->flash('error', 'Duplicate entry for product code. Please use a different product code.');
+                session()->flash('product_code', 'Duplicate entry for product code. Please use a different product code.');
                 return;
             } else {
                 throw $e;

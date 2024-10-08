@@ -10,6 +10,7 @@
             @csrf
             @method('POST')
               <div class="mb-3">
+                <input type="hidden" name="role" id="role" value="cashier">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" maxlength="20" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
                 <div class="invalid-feedback" id="name-error"></div>

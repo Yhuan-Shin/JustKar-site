@@ -94,15 +94,16 @@
                                                </div>
                                                @endif
                                                @include('components/superadmin/update-admin')
-
+                                               <button type="button" class="btn btn-outline-success float-end mb-3" data-bs-target="#add-admin" data-bs-toggle="modal"><i class=" py-2 bi bi-plus-circle"></i> Add Admin</button>
                                                 <table class="table table-hover table-responsive">
 
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">Username</th>
-                                                             <th scope="col">Date Created</th>
+                                                            <th scope="col">Date Created</th>
                                                             <th scope="col">Date Updated</th>
+                                                            <th scope="col">Status</th>
                                                             <th scope="col">Action</th>
 
 
@@ -119,15 +120,33 @@
                                                            <td>{{ $admin->created_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>{{ $admin->updated_at->timezone('Asia/Manila')->format('h:i A, d/m/Y') }}</td>
                                                            <td>
+                                                                @if($admin->archive == 0)
+                                                                    <span class="badge bg-success">Active</span>
+                                                                @else 
+                                                                    <span class="badge bg-danger">Archived</span> 
+                                                                @endif
+                                                            </td>
+                                                           <td>
                                                             <button type="button" class="btn btn-primary " data-bs-target="#edit-admin{{$admin->id}}" data-bs-toggle="modal" value="{{ $admin->id }}"><i class="bi bi-pencil-square"></i></button>
 
-                                                            <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
+                                                            {{-- <form action="{{ route('admin.destroy', $admin->id) }}" method="POST" style="display:inline;">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-danger "> <i class="bi bi-trash"></i></button>
+                                                            </form> --}}
+                                                            @if($admin->archive == 0)
+                                                            <form action="{{ route('admin.archive', $admin->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-warning "><i class="bi bi-archive"></i></button>
                                                             </form>
-
                                                            </td>
+                                                           @endif
+                                                           @if($admin->archive == 1)
+                                                           <form action="{{ route('admin.restore', $admin->id) }}" method="POST" style="display:inline;">
+                                                               @csrf
+                                                               <button type="submit" class="btn btn-success "><i class="bi bi-arrow-clockwise"></i></button>
+                                                           </form>
+                                                           @endif
                                                        </tr>
                                                        @endforeach
                                                     </tbody>

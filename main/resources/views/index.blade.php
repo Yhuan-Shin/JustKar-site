@@ -19,10 +19,7 @@
 <body>
    
             <!-- Navbar -->
-        <div class="container">
-            
-        </div>
-        <nav class="navbar fixed-top navbar-expand-lg bg-dark" id="navbar">
+        <nav class="navbar navbar-expand-lg bg-dark fixed-top" id="navbar">
             <div class="container-fluid">
                 <a href="/" class="navbar-brand px-3">
                     <img src="/images/logo.png" alt="" width="50px" height="50px">
@@ -30,8 +27,8 @@
                 <button class="navbar-toggler btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse d-flex justify-content-center  " id="navmenu">
-                    <ul class="navbar-nav text-center text-uppercase ">
+                <div class="collapse navbar-collapse justify-content-center" id="navmenu">
+                    <ul class="navbar-nav text-center ">
                         <li class="nav-item px-3">
                             <a href="#main" class="nav-link text-white " style="font-size: 14px;
                             font-weight: 500;">Home</a>
@@ -44,10 +41,10 @@
                         </li>
                       
                         <li class="nav-item px-3">
-                            <a href="#about" class="nav-link text-white" style="font-size: 16px; font-weight: 500;">About</a>
+                            <a href="#about" class="nav-link text-white" style="font-size: 14px; font-weight: 500;">About</a>
                         </li>
                         <li class="nav-item px-3">
-                            <a href="/customize" class="nav-link text-white" style="font-size: 16px; font-weight: 500;">Customize</a>
+                            <a href="/customize" class="nav-link text-white" style="font-size: 14px; font-weight: 500;">Customize</a>
                         </li>
                     </ul>
                 </div>
@@ -84,100 +81,74 @@
         
         <!-- content -->
      
-        <section id="main" style="background-image: url(/images/Background-home.png); background-size: cover; background-position: center;">
+        <section id="main" style="background-image: url(/images/background.png); background-size: cover; background-position: center; height: 100vh">
         <div class="container p-3">
        
-            <div class="row">
+            <div class="row d-flex align-items-center" style="height: 100vh">
                 <div class="col-md-6 mt-5 py-2">
-           
-                    <h1 class="text-uppercase text-dark py-2" id="title">
+                        <h1 class="text-uppercase text-light py-2" id="title">
                     
-                        We are here to fix your <span style="color: rgb(220,53,69);">tires</span></h1>
-                    <div class="col-md-12">
-                        <button type="button" class="btn btn-outline-danger fw-bold" data-bs-toggle="modal" data-bs-target="#contact"><i class="bi bi-gear-fill"></i> See Services</button>
+                            We are here to fix your <span style="color: rgb(220,53,69);">tires</span></h1>
+                        <button type="button" class="btn btn-danger fw-bold" data-bs-toggle="modal" data-bs-target="#contact"><i class="bi bi-gear-fill"></i> See Services</button>
                         <button type="button" class="btn btn-dark m-2 fw-bold" data-bs-toggle="modal" data-bs-target="#location"><i class="bi bi-geo-alt-fill"></i> Location</button>
-                        <p class="text-dark mt-3"> 
+                        <p class="text-light mt-3"> 
                             Experience the difference with JustKar Tire Supply. Whether you're looking for performance upgrades, replacements, or seasonal switches, we've got everything you need to keep your wheels turning smoothly.
                           </p>
-                    </div>
                 </div>
                
             </div>
-            <div class="container mt-5">
-                    <h4 class="text-uppercase text-dark fw-bold">Why Choose <span class="text-danger">us?</span></h4>
+            <div class="container">
+                
                   
                 <div class="row justify-content-center">        
-                    <div class="col-lg-3 col-sm-6 col-s-3 p-2 m-3 bg-light rounded">
-                        <div class="container">
-                            <div class="row" style="text-align: center;">
-                                <div class="col">
-                                    <img src="/images/badge.png" alt="" width="100px" height="100px" class="img-fluid">
-                                </div>
-                            </div>
-                        </div>        
-                                      
-                        <p class="text-dark">We're all about top-notch tires that deliver performance, durability, and safety mile after mile.</p>                    
-                    </div>
-                    <div class="col-lg-3 col-sm-6 p-2 m-3 bg-light rounded ">
-                        <div class="container">
-                            <div class="row" style="text-align: center;">
-                                <div class="col">
-                                    <img src="/images/flexibility.png" alt="" width="100px" height="100px" class="img-fluid">
-                                </div>
-                            </div>
-                        </div>              
-                            <p class="text-dark" >Off-road to eco-friendly, we've got the perfect tires for every vehicle and every need..</p>
-                    </div>          
-                    <div class="col-lg-3 col-sm-6 p-2 m-3 bg-light rounded">
-                        <div class="container">
-                            <div class="row" style="text-align: center;">
-                                <div class="col">
-                                    <img src="/images/help.png" alt="" width="100px" height="100px" class="img-fluid">
-                                </div>
-                            </div>
-                        </div> 
-                            <p class="text-dark" >Not sure which tires are right for you? Our team of tire enthusiasts is here to help you navigate through our extensive inventory and find the best fit for your ride.</p>
-                    </div>         
+                 
+                        
+                       
                 </div>
             </div>
         </div>
     </section>
     <!-- SERVICES -->
-    <section id="services">
+    <section id="services" style="height: 100vh">
         <!-- main content -->
-                   <div class="container mt-3 p-3">
-                       <h4 class="text-uppercase text-dark text-center text-dark fw-bold">OUR <span style="color: rgb(220,53,69);">SERVICES</span></h2>
-                       <div class="row text-dark justify-content-center">
-                           <div class="col-md-8 text-dark" >
-                               <p>At <span style="color: rgb(220,53,69);">JustKar Tire Supply</span>, we are dedicated to providing top-quality tires and comprehensive services to meet all your tire needs. Whether you're a vehicle owner, a fleet manager, or a tire retailer, we have the expertise and resources to serve you.</p>
-                           </div>
-                       
-                       </div>
-                   </div>
-                   <div class="container mt-2">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 hover-zoom">
-                        <img
-                            src="/images/h_1.jpg"
-                            class="w-100 shadow-1-strong rounded mb-4 border border-white"
-                            alt=""
-                        />      
-                        </div>           
-                        <div class="col-lg-4 mb-4 mb-lg-0 hover-zoom">
-                        <img
-                            src="/images/h_3.jpg"
-                            class="w-100 shadow-1-strong rounded mb-4 border border-white"
-                        />
-                        </div>            
-                        <div class="col-lg-4 mb-4 mb-lg-0 hover-zoom">
-                        <img
-                            src="/images/h_2.jpg"
-                            class="w-100 shadow-1-strong rounded mb-4 border border-white"
-                            alt=""
-                        />               
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <h4 class="text-uppercase text-dark text-center text-dark fw-bold">OUR <span style="color: rgb(220,53,69);">SERVICES</span></h2>
+                    </div>  
+                </div>  
+
+                        <div class="row mt-5 ">
+                            <div class="col-md-4 d-flex justify-content-center mb-2">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/images/1.jpg" class="card-img-top p-4" alt="..." height="250px">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Tire Sales</h5>
+                                      <p class="card-text">Purchase high-quality tires from top brands.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-center mb-2">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/images/4.jpg" class="card-img-top p-4" alt="..." height="250px">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Wheel Sales</h5>
+                                      <p class="card-text">Get the best wheels for your vehicle from our selection of top brands.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex justify-content-center mb-2">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/images/2.jpg" class="card-img-top p-4" alt="..." height="250px" >
+                                    <div class="card-body">
+                                      <h5 class="card-title">Tire Services</h5>
+                                      <p class="card-text">From tire mounting to wheel balancing, we've got you covered.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>    
+               
                </section>
            <!-- END SERVICES -->
     <!-- customize -->

@@ -4,18 +4,19 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\WhiteList;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 class AdminManagement extends Controller
 {
     //
     public function display(){
-        $admins = Admin::all();
+        $admins = User::where('role', 'admin')->get();
         return view('superadmin/superadmin-user', ['admins' => $admins]);
     }
     public function store(Request $request)
@@ -23,26 +24,42 @@ class AdminManagement extends Controller
         
         $data = $request->validate([
             'name' => 'required|string',
-            'username' => 'required|string|unique:admin,username',
+            'username' => 'required|string|unique:users,username',
+            'role'=>'required',
             'password' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/'
             ],[
                 'password.regex' => 'The password must contain at least one letter, one number, and one special character.',
             
-            ]
+            ],
+           
         );
-        if (Admin::where('username', $data['username'])->exists()) {
-            return redirect('superadmin/user_management')->with('error', 'Username already exists. Please use a different username.');
+        if(User::where('username', $data['username'])->exists() && $data['role'] == 'admin'){
+            return redirect('/superadmin/user_management')->with('error', 'Username already taken');
         }
-        Admin::create($data);
+        User::create($data);
         return redirect('/superadmin/user_management')->with('success', 'Admin Added');
         
 
 
     }
+    public function archive(string $id): RedirectResponse   
+    {
+        $admin = User::where('id', $id)->where('role', 'admin')->firstOrFail();
+        $admin->archive = 1;
+        $admin->save();
+        return redirect('/superadmin/user_management')->with('success', 'Admin Archived');
+    }
+    public function restore(string $id): RedirectResponse
+    {
+        $admin = User::where('id', $id)->where('role', 'admin')->firstOrFail();
+        $admin->archive = 0;
+        $admin->save();
+        return redirect('/superadmin/user_management')->with('success', 'Admin Restored');
+    }
     public function update(Request $request, string $id)
     {
        try{
-        $admins = Admin::find($id);
+        $admins = User::where('id', $id)->where('role', 'admin')->firstOrFail();
         $admins->update($request->validate([
             'name' => 'required|string',
             'username' => 'required|string|unique:admin,username,'.$id,
@@ -64,34 +81,9 @@ class AdminManagement extends Controller
     }
     public function destroy(string $id): RedirectResponse
     {
-        Admin::destroy('delete from admin where id = ?',[$id]);
+        User::destroy('delete from users where id = ? and role = admin',[$id] ) ;
         return redirect('/superadmin/user_management')->with('success', 'Account deleted!'); 
     }
-    public function login(Request $request)
-    {
-        if (Auth::guard('admin')->check()) {
-            return redirect('/admin')->with('error', 'You are already logged in.');
-        }
-        $credentials = $request->validate([
-            'username' => 'required|string|max:255',
-            'password' => 'required|string|max:255',
-        ]);
+   
 
-        $clientIp = $request->ip();
-
-        if(WhiteList::where('ip_address', $clientIp)->exists()){
-            if (Auth::guard('admin')->attempt($credentials)) {
-                $request->session()->regenerate();
-                return redirect('/admin/dashboard')->with('success', 'Login Successful');
-            } else {
-                return redirect('/admin')->with('error', 'Invalid Credentials');
-            }
-        }
-    }
-
-    public function logout()
-    {
-        Auth::guard('admin')->logout();
-        return redirect('/admin');
-    }
 }

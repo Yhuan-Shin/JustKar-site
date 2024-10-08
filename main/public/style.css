@@ -74,7 +74,7 @@
     /* text styles */
     #title{
       font-size: 60px;
-      text-shadow: 2px 2px #83C1C0;
+      text-shadow: 2px 2px #3d4242;
       font-weight: bold;
       @media screen and (max-width: 768px) {
         font-size: 33px;

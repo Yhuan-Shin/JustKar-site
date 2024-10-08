@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Auth;
 return [
 
     /*
@@ -35,6 +35,7 @@ return [
     'lifetime' => env('SESSION_LIFETIME', 120),
 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+    'same_site' => env('SESSION_SAME_SITE', 'lax'),
 
     /*
     |--------------------------------------------------------------------------

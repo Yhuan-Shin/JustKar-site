@@ -1,4 +1,4 @@
-<div wire:poll.2000ms>
+<div wire:poll.active>
     
     <div>
         @if (session()->has('success'))
@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label for="product_type">Product Type</label>
                 <select class="form-select" name="product_type" id="product_type" wire:model="selectedProduct" required">
-                    <option value="">Select Product Type</option>
+                    <option value=""></option>
                     @foreach($product_type as $item)
                          <option value="{{ $item->id }}">{{ $item->product_type }}</option>
                     @endforeach

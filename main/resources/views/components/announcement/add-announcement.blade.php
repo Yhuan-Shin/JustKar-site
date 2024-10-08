@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Attach Image</label>
-                    <input type="file"  class="form-control" id="image" name="image" required>
+                    <input type="file"  accept=".jpg,.jpeg,.png."  class="form-control" id="image" name="image" required>
                 </div>
                 <button type="submit" class="btn btn-primary float-end">Submit</button>
             </form>     

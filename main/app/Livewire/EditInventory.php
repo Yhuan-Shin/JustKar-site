@@ -37,20 +37,17 @@ class EditInventory extends Component
         $this->description = $inventory->description;
 
         $this->productTypes = ProductType::all();
-        $this->updatedSelectedProduct($this->selectedProduct); // Load categories based on the selected product type
+        $this->updatedSelectedProduct($this->selectedProduct); 
     }
 
     public function updatedSelectedProduct($product_type_id)
     {
-        // Load categories based on selected product type
         $this->categories = Categories::where('product_type_id', $product_type_id)->select('id', 'category')->get();
     }
 
     public function update()
     {
-        
-
-        // Prepare data for update
+        // Prepare the data to be updated
         $data = [
             'product_code' => $this->product_code,
             'product_name' => $this->product_name,
@@ -61,19 +58,29 @@ class EditInventory extends Component
             'size' => $this->size,
             'description' => $this->description
         ];
+        
         $critical_level = Inventory::latest()->value('critical_level');
-        $existingInventory = Inventory::where('product_name', $data['product_name'])->where('brand', $data['brand'])->where('size', $data['size'])->where('product_type', $data['product_type'])->where('category', $data['category'])
-        ->where('description', $data['description'])->first();
-
-        try {
-            
-        if($existingInventory){
+        
+        $existingInventory = Inventory::where('product_name', $data['product_name'])
+            ->where('brand', $data['brand'])
+            ->where('size', $data['size'])
+            ->where('product_type', $data['product_type'])
+            ->where('category', $data['category'])
+            ->where('description', $data['description'])
+            ->where('id', '!=', $this->inventory->id) 
+            ->first();
+    
+        if ($existingInventory) {
             session()->flash('error', 'Product already exists.');
+            return; // Stop further execution
         }
-        else{
+    
+        try {
             $inventory = Inventory::find($this->inventory->id);
+            
             $inventory->update($data);
-
+    
+            // Update the status based on the quantity
             if ($this->quantity <= 0) {
                 $inventory->update(['status' => 'outofstock']);
             } elseif ($this->quantity <= $critical_level) {
@@ -81,21 +88,19 @@ class EditInventory extends Component
             } else {
                 $inventory->update(['status' => 'instock']);
             }
+    
             session()->flash('message', 'Inventory updated successfully!');
-        }
-           
+    
         } catch (QueryException $e) {
+            // Handle duplicate entry error
             if ($e->errorInfo[1] == 1062) {
                 session()->flash('error', 'Duplicate entry for product code. Please use a different product code.');
             } else {
-                throw $e;
+                throw $e; // Re-throw any other exceptions
             }
         }
-
-   
     }
-
-    public function render()
+        public function render()
     {
         return view('livewire.edit-inventory', [
             'productTypes' => $this->productTypes,

@@ -33,7 +33,8 @@
         <thead class="table-dark text-center">
             <tr>
                 <th scope="col">Ref. Number</th>
-                <th scope="col">Product</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Type</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Date</th>
                 <th scope="col">Total</th>
@@ -45,12 +46,13 @@
             @foreach ($sales as $log)
 
             <tr>
-                    <td>{{ $log->ref_no }}</td>
-                    <td>{{ $log->product_name }}</td>
-                    <td>{{ $log->quantity }}</td>
-                    <td>{{ $log->created_at ->timezone('Asia/Manila')->format('m/d/Y, h:i A') }}</td>
-                    <td>{{ $log->total_price}}</td>
-                    <td>{{ $log->cashier_name }}</td>
+                <td>{{ $log->ref_no }}</td>
+                <td>{{ $log->product_name }}</td>
+                <td>{{ $log->product_type }}</td>
+                <td>{{ $log->quantity }}</td>
+                <td>{{ $log->created_at ->timezone('Asia/Manila')->format('m/d/Y, h:i A') }}</td>
+                <td>₱{{ number_format($log->total_price, 2) }}</td>
+                <td>{{ $log->cashier_name }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -58,6 +60,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col">{{ $sales->links() }}</div>
+            <div class="col">
+                <form action="{{ route('logs.export') }}" method="GET">
+                    <button class="btn btn-danger mb-3 float-end" type="submit"><i class="bi bi-file-pdf-fill"></i> Export to PDF</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            
         </div>
     </div>
 

@@ -10,6 +10,7 @@
             @csrf
             @method('POST')
             <div class="mb-3">
+                <input type="hidden" name="role" id="role" value="admin">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" maxlength="20" value="{{old('name')}}" id="admin-name" name="name" placeholder="Name" required>
                 <div class="invalid-feedback" id="admin-name-error">
@@ -27,7 +28,6 @@
                 <label for="password" class="form-label">Password</label>
                 <input type="password" maxlength="16" class="form-control" value="{{old('password')}}" id="admin-password" name="password" placeholder="Password" required>
                 <div class="invalid-feedback" id="admin-password-error">
-              
                 </div>
               </div>
               

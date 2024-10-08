@@ -53,7 +53,7 @@
     @endif
         <div class="form-group">
             <label for="quantity">Quantity</label>
-            <input type="number" min="1" value="1" class="form-control" id="quantity"  wire:model="quantity" required oninput="this.value = Math.max(this.value, 1);">
+            <input type="number" min="1" class="form-control" id="quantity"  wire:model="quantity" required ">
             @error('quantity') <span class="text-danger">{{ $message }}</span> @enderror
 
         </div>
@@ -80,5 +80,6 @@
             <button type="submit" class="btn btn-success">Update</button>
         </div>
     </form>
+
 </div>
 

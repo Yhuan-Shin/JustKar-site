@@ -33,7 +33,7 @@
                     <div class="text-gray-700 font-semibold text-lg ml-4">JustKar Tire Supply</div>
                 </div>
                 <div class="text-gray-700">
-                    <div class="font-bold text-xl mb-2 uppercase">Invoice</div>
+                    <div class="font-bold text-xl mb-2 uppercase">This receipt is not official, for sales tracking only</div>
                     <div class="text-sm">Date: {{ date('d/m/Y') }}</div>
                     <div class="text-sm">TIN: 274-162-585-00000</div>
                     <div class="text-sm">BIR ATP: OCN 25BAAU20230000007</div>
@@ -45,7 +45,10 @@
     <table class="table table-bordered">
         <thead>
         <tr>
+            <th class="text-gray-700 font-bold uppercase">Ref. No</th>
+            <th class="text-gray-700 font-bold uppercase">Product Code</th>
             <th class="text-gray-700 font-bold uppercase">Product Name</th>
+            <th class="text-gray-700 font-bold uppercase">Product Type</th>
             <th class="text-gray-700 font-bold uppercase">Quantity</th>
             <th class="text-gray-700 font-bold uppercase">Price</th>
             <th class="text-gray-700 font-bold uppercase">Total</th>
@@ -54,14 +57,17 @@
         <tbody>
         @foreach ($sales as $item)
             <tr>
+                <td>{{ $item->ref_no }}</td>
+                <td>{{ $item->product_code }}</td>
                 <td>{{ $item->product_name }}</td>
+                <td>{{ $item->product_type }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>{{ $item->price }}</td>
                 <td>{{ $item->total_price }}</td>
             </tr>
         @endforeach
         <tr>
-            <td colspan="3" style="text-align: right;"><strong>Total Price:</strong></td>
+            <td colspan="6" style="text-align: right;"><strong>Total Price:</strong></td>
             <td>
                 @php
                     $total = DB::table('order_items')->sum('total_price');

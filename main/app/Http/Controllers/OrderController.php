@@ -17,11 +17,13 @@ class OrderController extends Controller
 {
     //
     public function display(){
-        $orderItem = OrderItem::all();
+        $orderItem = OrderItem::where('cashier_id', Auth::user()->id)->get();
         $sales = Sales::all();
         $name = User::findorfail(Auth::user()->id)->name;
         return view('cashier/pos', ['orderItems' => $orderItem], ['name' => $name], ['sales' => $sales]);
     }
+
+
     public function update(string $id, Request $request) {
         $orderItem = OrderItem::findOrFail($id);
         $price = (float) $orderItem->price;
@@ -49,9 +51,10 @@ class OrderController extends Controller
         return redirect('/cashier/pos')->with('success', 'Item Deleted');
     }
 
+
     public function checkout(){ {
-        $orderItems = OrderItem::all();
-    
+        $orderItems = OrderItem::where('cashier_id', Auth::user()->id)->get();
+            
             if ($orderItems->isEmpty()) {
             return redirect('/cashier/pos')->with('error', 'No items in the order!');
             }
@@ -105,8 +108,9 @@ class OrderController extends Controller
             $sales = Sales::latest()->take($orderItems->count())->get();
             
             $pdf = PDF::loadView('cashier/cart_receipt', compact('sales'));
-            DB::table('order_items')->truncate();
             
+            OrderItem::where('cashier_id', Auth::user()->id)->delete();
+
             Mail::send([], [], function ($message) use ($pdf) {
                 $message->to('tejima911@gmail.com')
                         ->subject('Order Receipt')
@@ -115,12 +119,8 @@ class OrderController extends Controller
                         ]);
             });
 
-            return $pdf->stream('receipt.pdf');
-    
-            return redirect('/cashier/pos')->with('success', 'Order checkout successfully!');
-        
-     
-    
+            // return $pdf->download('receipt.pdf')-with('success', 'Order Created');
+            return redirect('/cashier/pos')->with('success', 'Order Created');
     }
 }
 }

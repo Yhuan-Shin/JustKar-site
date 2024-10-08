@@ -63,7 +63,7 @@
                     </a>
                     <hr>
                     
-                    <a href="{{ route('admin.logout') }}">
+                    <a href="{{ route('user.logout') }}">
                         <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
                     </a>
                   
@@ -82,7 +82,7 @@
                                     </div>
                                     <div class="col text-end m-2">
                                         <i class="bi bi-person-circle"></i>
-                                        <span class="d-none d-sm-inline text-dark mx-1"> {{ Auth::guard('admin')->user()->name }}</span>
+                                        @include('components/profile/user')
                                     </div>
                                 {{-- <h1>Inventory Management System</h1> --}}
                                 </div>

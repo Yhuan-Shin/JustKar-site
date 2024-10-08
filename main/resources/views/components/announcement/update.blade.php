@@ -20,8 +20,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Attach Image</label>
-                        <input type="file" class="form-control" id="image" name="image">
-                        <img src="{{asset('uploads/images/'.$item->image)}}" alt="" width="150px" height="100px">
+                        <input type="file" class="form-control" id="image" accept=".jpg,.jpeg,.png" name="image">
+                        <img src="{{asset('uploads/images/'.$item->image)}}"  width="150px" height="100px">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
             </div>

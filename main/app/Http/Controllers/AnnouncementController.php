@@ -19,6 +19,11 @@ class AnnouncementController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
         $announcements = new Announcement();
         $announcements->title = $request->input('title');
         $announcements->content = $request->input('content');

@@ -13,26 +13,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InventoryArchiveController;
 use App\Http\Controllers\ReceiptPDF;
+use App\Http\Controllers\SalesLogsPdf;
 use App\Http\Controllers\SuperAdminLogin;
+use App\Http\Controllers\UserLogin;
 use App\Http\Controllers\WhiteListController;
 use App\Http\Middleware\SuperAdminAuth;
 use App\Http\Middleware\WhiteListAuth;
 use App\Livewire\InventoryArchive;
 use App\Models\SuperAdmin;
+use App\Http\Controllers\PieChart;
 
 //superadmin
 Route::get('/superadmin', function () {
     return view('superadmin/superadmin-login');
 });
-//admin
-
-
-
-
-// Route::get('/cashier/pos', function () {
-//     return view('cashier/pos');
-// }); 
-
 //customers
 Route::get('/', function () {
     return view('index');
@@ -47,14 +41,18 @@ Route::get('/', [AnnouncementController::class, 'displayOnCustomers']);
 //secured routes
 
 Route::middleware([WhiteListAuth::class])->group(function() {
-    Route::get('/admin', function () {
-        return view('admin/admin-login');
+    Route::get('/login', function () {
+        return view('login');
     }); 
-    Route::middleware([AdminAuth::class])->group(function() {
+    Route::post('/login', [UserLogin::class, 'login'])->name('user.login') ;
+    Route::get('/logout', [UserLogin::class, 'logout'])->name('user.logout');
+    
+    Route::middleware(['auth:admin'])->group(function() {
         // Admin Dashboard
         Route::get('/admin/dashboard', [AdminController::class, 'index'], function () {
             return view('admin/admin-home');
         });
+        
         // Products Management
         Route::get('/admin/products', [ProductsController::class, 'display'])->name('products.display');
         Route::post('/admin/products/{id}', [ProductsController::class, 'update'])->name('products.update');
@@ -62,16 +60,20 @@ Route::middleware([WhiteListAuth::class])->group(function() {
     
         // Sales Logs
         Route::get('/admin/sales', [AdminController::class, 'displayLogs'])->name('admin.logs');
+        Route::get('/admin/sales/pdf',[SalesLogsPdf::class, 'exportToPdf'])->name('logs.export');
     
         // User Management
         Route::get('/admin/user_management', [CashierManagement::class, 'display'])->name('cashier.display');
         Route::post('/admin/user_management', [CashierManagement::class, 'store'])->name('cashier.store');
         Route::post('/admin/user_management/{id}', [CashierManagement::class, 'update'])->name('cashier.update');
         Route::delete('/admin/user_management/{id}', [CashierManagement::class, 'destroy'])->name('cashier.destroy');
+        Route::post('/admin/user_management/archived/{id}', [CashierManagement::class, 'archive'])->name('cashier.archive');
+        Route::post('/admin/user_management/restore/{id}', [CashierManagement::class, 'restore'])->name('cashier.restore');
     
         // Announcements Management
         Route::get('/admin/announcements', [AnnouncementController::class, 'display'])->name('announcement.display');
         Route::post('/admin/announcements', [AnnouncementController::class, 'store'])->name('announcement.store');
+        
         Route::put('/admin/announcements/{id}', [AnnouncementController::class, 'update'])->name('announcement.update');
         Route::delete('/admin/announcements/{id}', [AnnouncementController::class, 'destroy'])->name('announcement.destroy');
     
@@ -87,11 +89,9 @@ Route::middleware([WhiteListAuth::class])->group(function() {
     
     
     });
-    Route::post('/admin/login', [AdminManagement::class, 'login'])->name('admin.login') ;
-    Route::get('/admin/logout', [AdminManagement::class, 'logout'])->name('admin.logout');
 
     //cashier auth routes
-    Route::middleware([CashierAuth::class])->group(function() {
+    Route::middleware(['auth:cashier'])->group(function() {
     Route::get('/cashier/pos', [ProductsController::class, 'display'])->name('products.display');
     Route::post('/cashier/pos/{id}', [ProductsController::class, 'addToOrder'])->name('order.store');
     Route::get('/cashier/pos', [OrderController::class, 'display'])->name('order.display');
@@ -100,13 +100,7 @@ Route::middleware([WhiteListAuth::class])->group(function() {
     Route::post('/cashier/pos', [OrderController::class, 'checkout'])->name('order.checkout');
     Route::get('/cashier/pos/receipt{id}', [ReceiptPDF::class, 'exportToPdf'])->name('order.receipt');
 });
-//cashier login and logout
-//cashier
-Route::get('/cashier', function () {
-    return view('cashier/cashier-login');
-}); 
-Route::post('/cashier/login', [CashierManagement::class, 'login'])->name('cashier.login');
-Route::get('/cashier/logout', [CashierManagement::class, 'logout'])->name('cashier.logout');
+
 
 });
 
@@ -119,6 +113,8 @@ Route::middleware([SuperAdminAuth::class])->group(function() {
     Route::post('/superadmin/user_management', [AdminManagement::class, 'store'])->name('admin.store');
     Route::post('/superadmin/user_management/{id}', [AdminManagement::class, 'update'])->name('admin.update');
     Route::delete('/superadmin/user_management/{id}', [AdminManagement::class, 'destroy'])->name('admin.destroy');
+    ROute::post('/superadmin/user_management/archived/{id}', [AdminManagement::class, 'archive'])->name('admin.archive');
+    Route::post('/superadmin/user_management/restore/{id}', [AdminManagement::class, 'restore'])->name('admin.restore');
 
     Route::post('/superadmin/system_config', [WhiteListController::class, 'store'])->name('whitelist.store');
     Route::get('/superadmin/system_config', [WhiteListController::class, 'display'])->name('whitelist.display');

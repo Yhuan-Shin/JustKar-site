@@ -24,7 +24,10 @@
                     <i class="bi bi-person-circle"></i>
                     <span class="text-white">
                         @if (Auth::check())
-                            <span class="mx-1 ">{{ Auth::user()->name }}</span>
+                            <span class="mx-1 ">
+                            @if (Auth::guard('cashier')->check())
+                                {{ Auth::guard('cashier')->user()->username }}
+                            @endif</span>
                         @else
                             <span class="mx-1">Guest</span>
                         @endif
@@ -33,7 +36,7 @@
                 </a>
               </li>
               <li class="nav-item d-flex justify-content-center">
-                <a href="{{ route('cashier.logout') }}">
+                <a href="{{ route('user.logout') }}">
                     <button class="btn btn-outline-light col-md ">Logout</button>
                 </a>              
               </li>
@@ -91,7 +94,10 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                                 @endif
-                        
+                                
+
+
+
                                 @if (session('error'))
                                     <div class="alert alert-danger  alert-dismissible fade show mt-3" role="alert">
                                         {{ session('error') }}
@@ -111,17 +117,17 @@
                         {{-- display orders --}}
                         <div class="col-md-4 bg-light mt-2 p-3 rounded float-end">
                             <h4 class="text-center mt-5"> <i class="bi bi-bag-fill"></i> Orders</h4>
-                        @if($orderItems->count() > 0)
-                            @foreach($orderItems as $item)
+                        @if(!empty($orderItems) && $orderItems->count($orderItems) > 0)
+                            @foreach($orderItems as $item )
                                 <div class="row mb-4">
                                     <div class="col-md p-3 text-uppercase" >
                                         <div class="container">
                                             <div class="row">
                                                 <div class="col">
-                                                    <p class="card-text text-start fw-bold">{{ $item->product->product_name }}</p>
+                                                    <p class="card-text text-start fw-bold">{{ $item->product_name }}</p>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="card-text text-end badge bg-primary">₱{{ $item->product->price }}</p>
+                                                    <p class="card-text text-end badge bg-primary">₱{{ $item->price }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -174,12 +180,53 @@
                             <h6 class="text-center text-danger"> <i class="bi bi-exclamation-circle-fill"></i> Your cart is empty</h6>
                         @endif
 
-                        @if($orderItems->count() > 0)
-                            <form action="{{route('order.checkout')}}" method="post">
-                                @csrf
-                                @method('POST')
-                                <button type="submit" class="btn btn-primary float-end"> <i class="bi bi-bag-check-fill"></i> Checkout</button>
-                            </form>
+                        @if(!empty($orderItems) && $orderItems->count($orderItems) > 0)
+                            <div class="modal fade" id="confirmCheckoutModal" tabindex="-1" aria-labelledby="confirmCheckoutModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="confirmCheckoutModalLabel">Confirm Checkout</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="list-group">
+                                                @foreach($orderItems as $item)
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                           <h6> {{ $item->product_name }} - {{$item->quantity}}</h6>
+                                                            <small class="text-muted">{{ $item->size }}</small>
+                                                        </div>
+                                                        <span class="text-muted">₱{{ $item->total_price }}</span>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                            <hr>
+                                            {{-- <h6 class="text-center">Payment Method</h6>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="payment_method" id="cash" value="cash" checked>
+                                                <label class="form-check-label" for="cash">
+                                                    Cash
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="payment_method" id="qr" value="qr">
+                                                <label class="form-check-label" for="qr">
+                                                    Qr
+                                                </label>
+                                            </div> --}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <form action="{{route('order.checkout')}}" method="post">
+                                                @csrf
+                                                @method('POST')
+                                                <button type="submit" class="btn btn-primary">Checkout</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#confirmCheckoutModal"> <i class="bi bi-bag-check-fill"></i> Checkout</button>
                         @endif
                         </div>
                     </div>

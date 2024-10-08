@@ -9,12 +9,14 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 
 class CashierManagement extends Controller
 {
     //
     public function display(){
-        $cashiers = User::all();
+        $cashiers = User::where('role', 'cashier')->get();
         return view('admin/admin-user_management', ['cashiers' => $cashiers]);
     }
      public function store(Request $request)
@@ -22,6 +24,7 @@ class CashierManagement extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'username' => 'required|string|unique:users,username',
+            'role'=>'required',
             'password' => 'required|string|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/'
             ],[
                 'password.regex' => 'The password must contain at least one letter, one number, and one special character.',
@@ -74,18 +77,39 @@ class CashierManagement extends Controller
         User::destroy('delete from users where id = ?',[$id]);
         return redirect('/admin/user_management')->with('success', 'Account deleted!'); 
     }
-
+    public function archive(string $id): RedirectResponse
+    {
+        $user = User::find($id);
+        $user->archive = 1;
+        $user->save();
+        return redirect('/admin/user_management')->with('success', 'Account archived!'); 
+    }
+    public function restore(string $id): RedirectResponse
+    {
+        $user = User::find($id);
+        $user->archive = 0;
+        $user->save();
+        return redirect('/admin/user_management')->with('success', 'Account restored!');
+    }
     public function login(Request $request){
-        if (Auth::check()) {
-            return redirect('/cashier')->with('error', 'You are already logged in.');
+
+        $request->session()->regenerate();
+        $uniqueSessionId = Str::uuid()->toString();
+        $request->session()->put('unique_session_id', $uniqueSessionId);
+        
+        if (Auth::check() && Auth::user()->username == $request->username) {
+            return redirect('/cashier')->with('error', 'You are already logged in with this account.');
         }
         $credentials = Validator::make($request->all(), [
             'username' => 'required|string|max:255',
             'password' => 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'            
         ]);
+        $archive = User::where('username', $request->username)->where('archive', 1)->exists();
+        if ($archive) {
+            return redirect('/cashier')->with('error', 'Your account is archived, please contact the admin.');
+        }
         if($credentials->passes()){
             if(Auth::attempt(['username' => $request->username, 'password' => $request->password])){
-                $request->session()->regenerate();
                 return redirect('/cashier/pos') ->with('success', 'Login Successful');
             }else{
                 return redirect('/cashier')->with('error', 'Invalid Credentials');   
@@ -97,6 +121,7 @@ class CashierManagement extends Controller
     }
     public function logout(){
         Auth::logout();
+        request()->session()->flush();
         return redirect('/cashier');
     }
 }
