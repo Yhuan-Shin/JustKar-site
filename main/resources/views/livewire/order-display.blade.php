@@ -3,7 +3,7 @@
         @forelse ($product as $item)
             <div class="col-md">
                 {{-- card --}}
-                <div class="card mb-2 text-center text-uppercase" style="width: 14rem;">
+                <div class="card mb-2 text-center text-uppercase" style="width: 16rem;">
                     <div class="card-body"> 
 
                         @if($item->product_image == null)
@@ -29,7 +29,7 @@
                                 <div class="col-md-4">
                                     <p class="card-text badge bg-primary">{{ $item->category }}</p>
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-8 ">
                                     <p class="card-text">{{ $item->size }}</p>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                  @if($item->price == null)
                                 <p class="alert alert-danger">No Price Set</p>
                                 @elseif($item->price != null)
-                                <p class="card-text text-start badge bg-success">₱{{ $item->price }}</p>
+                                <p class="card-text text-start badge bg-success">₱{{ number_format($item->price,2) }}</p>
                                 @endif
                             </div>
                             <div class="col">

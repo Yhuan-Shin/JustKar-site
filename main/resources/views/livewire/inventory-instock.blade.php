@@ -12,7 +12,7 @@
            <div class="container">
             <div class="row">
                 <div class="col">
-                     <p class="badge bg-primary">{{ $category }}</p>
+                     <p class="badge bg-primary" style="white-space: nowrap">{{ $category }}</p>
                 </div>
                 <div class="col">
                     <p class="badge bg-success">{{ $quantity }}</p>

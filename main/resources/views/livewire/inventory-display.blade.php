@@ -119,20 +119,14 @@
                                  @endif
                              </td>
                              <td class="text-uppercase">{{ $item->brand }}</td>
-                             <td>{{ $item->size }}</td>
-                             <td>{{ $item->description }}</td>
-                             <td>
-                                 <div class="container">
-                                     <div class="row" style="white-space: nowrap">
-                                         <div class="col mb-2">
-                                             <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}"><i class="bi bi-pencil-square"></i></button>
-                                         </div>
-                                         <div class="col-md">
-                                             <button class="btn btn-danger" type="button" data-bs-target="#modal-delete{{ $item->id}}" data-bs-toggle="modal"><i class="bi bi-trash3-fill"></i></button>
-                                         </div>
-                                     </div>
+                             <td class="text-uppercase">{{ $item->size }}</td>
+                             <td class="text-uppercase">{{ $item->description }}</td>
+                             <td style="white-space: nowrap">
+                                 <div class="btn-group" role="group" aria-label="Basic example">
+                                     <button type="button" class="btn btn-primary" data-bs-target="#modal-update{{ $item->id}}" data-bs-toggle="modal" value="{{ $item->id }}"><i class="bi bi-pencil-square"></i></button>
+                                     <button class="btn btn-danger" type="button" data-bs-target="#modal-delete{{ $item->id}}" data-bs-toggle="modal"><i class="bi bi-trash3-fill"></i></button>
                                  </div>
-                             </td>
+                                 </td>
                          </tr>
                          @empty
                          <tr>

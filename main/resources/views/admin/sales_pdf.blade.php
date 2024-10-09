@@ -37,7 +37,7 @@
                 <td>{{ $log->product_type }}</td>
                 <td>{{ $log->quantity }}</td>
                 <td>{{ $log->created_at->format('m/d/Y, h:i A') }}</td>
-                <td>{{ $log->total_price }}</td>
+                <td>₱{{ number_format($log->total_price, 2) }}</td>
                 <td>{{ $log->cashier_name }}</td>
             </tr>
             @endforeach

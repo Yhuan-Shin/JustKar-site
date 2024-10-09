@@ -16,7 +16,7 @@
             </div>
         @endif
     
-        <form wire:submit.prevent="submit">
+        <form wire:submit="submit">
            
             <div class="form-group">
                 <label for="product_code">Code</label>
@@ -76,7 +76,7 @@
                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click="closeModal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:click="resetForm">Close</button>
                 <button type="submit" class="btn btn-success">Add</button>
             </div>
 

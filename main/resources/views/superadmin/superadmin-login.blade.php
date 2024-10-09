@@ -11,7 +11,7 @@
     "></script>  
     <link href="admin/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body style="height: 100vh">
+<body style="height: 100vh; background-image: url(images/background.png); background-repeat:no-repeat; background-size:cover">
     <!-- form -->
     
     <div class="container ">
@@ -63,8 +63,8 @@
                
                 <div class="card mt-5">
                     <div class="card-header text-center text-white bg-dark">
-                        <i class="bi bi-person-circle" style="font-size: 50px;"></i>
-                        <h3 class="text-center text-uppercase">Super Admin LOGIN</h3>
+                        <img src="{{asset('images/logo.png')}}" alt="" width="25%" height="25%">
+                        <h6 class="text-center text-uppercase">Super Admin LOGIN</h6>
                     </div>
                     <div class="card-body bg-dark ">
                         <form action="{{route('superadmin.login')}}" method="post">

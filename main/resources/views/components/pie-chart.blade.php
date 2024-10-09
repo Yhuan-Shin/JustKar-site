@@ -1,7 +1,7 @@
 <form method="GET" action="/admin/dashboard">
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-md-6 mb-2">
                 <select name="period" onchange="this.form.submit()" class="form-select">
                     <option value="today" {{ $selectedPeriod === 'today' ? 'selected' : '' }}>Today</option>
                     <option value="this_week" {{ $selectedPeriod === 'this_week' ? 'selected' : '' }}>This Week</option>
@@ -13,7 +13,7 @@
     </div>
 </form>
 
-<div id="piechart_3d" style="width: 100%; height: 500px;"></div>
+<div id="piechart_3d" style="width: 100%; height: 350px;" class="shadow"></div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">

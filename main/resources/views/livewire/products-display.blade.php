@@ -57,7 +57,7 @@
                                      @if($item->price == null)
                                     <p class="alert alert-danger">No Price Set</p>
                                     @elseif($item->price != null)
-                                    <p class="card-text text-start badge bg-success">₱{{ $item->price }}</p>
+                                    <p class="card-text text-start badge bg-success">₱{{ number_format($item->price,2) }}</p>
                                     @endif
                                 </div>
                                 <div class="col">

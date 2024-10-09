@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 @livewireStyles
 </head>
-<body>
+<body class="bg-light">
 
     <nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary">
         <div class="container-fluid">
@@ -36,14 +37,35 @@
                 </a>
               </li>
               <li class="nav-item d-flex justify-content-center">
-                <a href="{{ route('user.logout') }}">
-                    <button class="btn btn-outline-light col-md ">Logout</button>
-                </a>              
+                <button type="button" class="btn btn-danger col-md" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                    Logout
+                </button>
+
+                <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-dark" id="logoutModalLabel">Logout</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-dark">
+                                Are you sure you want to logout?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a href="{{ route('user.logout') }}">
+                                    <button type="button" class="btn btn-danger">Logout</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               </li>
             </ul>
           </div>
         </div>
-      </nav>     <div class="container-fluid">
+      </nav>     
+      <div class="container-fluid">
             <!-- content -->                  
             {{-- <div class="col text-end m-2">
                
@@ -115,7 +137,7 @@
                         </div>
 
                         {{-- display orders --}}
-                        <div class="col-md-4 bg-light mt-2 p-3 rounded float-end">
+                        <div class="col-md-4  mt-2 p-3 rounded float-end">
                             <h4 class="text-center mt-5"> <i class="bi bi-bag-fill"></i> Orders</h4>
                         @if(!empty($orderItems) && $orderItems->count($orderItems) > 0)
                             @foreach($orderItems as $item )
@@ -127,7 +149,7 @@
                                                     <p class="card-text text-start fw-bold">{{ $item->product_name }}</p>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="card-text text-end badge bg-primary">₱{{ $item->price }}</p>
+                                                    <p class="card-text text-end badge bg-primary">₱{{ number_format($item->price,2) }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -142,7 +164,7 @@
                                                     <p class="card-text text-start">TOTAL PRICE: </p>
                                                 </div>
                                                 <div class="col">
-                                                    <p class="card-text text-end badge bg-primary">{{ $item->quantity }} x ₱{{ $item->total_price }}</p>
+                                                    <p class="card-text text-end badge bg-primary">{{ $item->quantity }} x ₱{{ number_format($item->total_price,2) }}</p>
                                                 </div>
                                         </div>
                                         <div class="row mt-3">
@@ -196,30 +218,31 @@
                                                            <h6> {{ $item->product_name }} - {{$item->quantity}}</h6>
                                                             <small class="text-muted">{{ $item->size }}</small>
                                                         </div>
-                                                        <span class="text-muted">₱{{ $item->total_price }}</span>
+                                                        <span class="text-muted">₱{{ number_format($item->total_price,2) }}</span>
                                                     </li>
                                                 @endforeach
                                             </ul>
+                                            @php
+                                             $total = DB::table('order_items')->sum('total_price');
+                                            @endphp
+                                            <p class="text-end mt-2">Total: ₱{{ number_format($total,2) }}</p>
+
                                             <hr>
-                                            {{-- <h6 class="text-center">Payment Method</h6>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="payment_method" id="cash" value="cash" checked>
-                                                <label class="form-check-label" for="cash">
-                                                    Cash
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="payment_method" id="qr" value="qr">
-                                                <label class="form-check-label" for="qr">
-                                                    Qr
-                                                </label>
-                                            </div> --}}
+
+                                            <h6 class="text-center">Enter Payment Amount</h6>
+
+                                            <div class="input-group mb-3">
+                                       
+                                                <span class="input-group-text">₱</span>
+                                                <form action="{{ route('order.checkout') }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                <input type="number" name="amount" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" style="appearance: textfield" required>
+                                              </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <form action="{{route('order.checkout')}}" method="post">
-                                                @csrf
-                                                @method('POST')
+                                        
                                                 <button type="submit" class="btn btn-primary">Checkout</button>
                                             </form>
                                         </div>

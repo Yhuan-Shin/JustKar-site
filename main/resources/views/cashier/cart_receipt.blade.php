@@ -62,8 +62,8 @@
                 <td>{{ $item->product_name }}</td>
                 <td>{{ $item->product_type }}</td>
                 <td>{{ $item->quantity }}</td>
-                <td>{{ $item->price }}</td>
-                <td>{{ $item->total_price }}</td>
+                <td>₱{{ number_format($item->price, 2) }}</td>
+                <td>₱{{ number_format($item->total_price, 2) }}</td>
             </tr>
         @endforeach
         <tr>
@@ -72,7 +72,7 @@
                 @php
                     $total = DB::table('order_items')->sum('total_price');
                 @endphp
-                {{ $total }}
+                ₱{{ number_format($total, 2) }}
             </td>
         </tr>
         </tbody>

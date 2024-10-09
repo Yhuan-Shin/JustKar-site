@@ -22,28 +22,19 @@ class InventoryAdd extends Component
     
     public $categories= null;
  
-
-
     
-    public function closeModal()
-    {        
-        $this->resetForm();
+    public function resetForm()
+    {
+        
+        $this->reset();
     }
+    
+ 
 
     public function updatedSelectedProduct($product_type_id){
         $this->categories = Categories::where('product_type_id', $product_type_id)->select('id', 'category')->get();
     }
-    public function resetForm()
-    {
-        $this->product_code = '';
-        $this->product_name = '';
-        $this->selectedProduct= '';
-        $this->selectedCategory = '';
-        $this->quantity = '';
-        $this->description = '';
-        $this->brand = '';
-        $this->size = '';
-    }
+   
     public function submit()
     {
         $data = [
@@ -84,7 +75,16 @@ class InventoryAdd extends Component
                     'description' => $data['description']
                     
                 ]);
-                session()->flash('success', 'Item Inserted');
+                // session()->flash('success', 'Item Inserted');
+                $this->product_code = '';
+                $this->product_name = '';
+                $this->selectedProduct = null;
+                $this->selectedCategory = null;
+                $this->quantity = '';
+                $this->brand = '';
+                $this->size = '';
+                $this->description = '';
+
                 Products::create([
                     'inventory_id' => $inventory->id,
                     'product_code' => $inventory->product_code,
@@ -97,7 +97,6 @@ class InventoryAdd extends Component
                     'description' => $inventory->description,
                     'critical_level' => $critical_level,
                 ]);
-                $this->reset();
 
             }
            

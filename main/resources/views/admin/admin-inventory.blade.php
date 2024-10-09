@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @livewireStyles
 </head>
-<body>
+<body class="bg-light">
     <!-- sidebar -->
         {{-- modal create product --}}
         @include('components/inventory/inventory_add')
@@ -64,7 +64,7 @@
                     <hr>
                     
                     <a href="{{ route('user.logout') }}">
-                        <button type="button" class="btn btn-outline-light col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                        <button type="button" class="btn btn-danger col-md-12 mb-3"><i class="bi bi-box-arrow-right"></i> Logout</button>
                     </a>
                   
                 </div>

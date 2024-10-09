@@ -13,7 +13,7 @@
     "></script>  
     <link href="admin/style.css" rel="stylesheet" type="text/css" />
 </head>
-<body style="height: 100vh">
+<body style="height: 100vh; background-image: url('images/background.png'); background-repeat: no-repeat; background-size: cover;" >
     <!-- form -->
     <div class="container">
         @if(Session::has('error'))
@@ -27,8 +27,8 @@
             <div class="col-md-5">
                 <div class="card bg-dark shadow-lg rounded">
                     <div class="card-header text-center text-dark">
-                        <i class="bi bi-person-circle text-light" style="font-size: 50px;"></i>
-                        <h3 class="text-center text-light text-uppercase">JustKar LOGIN</h3>
+                        <img src="{{asset('images/logo.png')}}" alt="" width="25%" height=25%">
+                        <h6 class="text-center text-light text-uppercase">account LOGIN</h6>
                     </div>
                     <div class="card-body text-white">
                         <form action="{{route('user.login')}}" method="post">
@@ -45,7 +45,7 @@
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group mb-3">
                                       <span class="input-group-text" id="basic-addon1"><i class="bi bi-shield-lock-fill"></i></span>
-                                    <input type="password" name="password" maxlength="16" class="form-control" placeholder="Enter Password" aria-label="password" aria-describedby="basic-addon1">
+                                    <input type="password" name="password" maxlength="16" class="form-control" placeholder="Enter Password" aria-label="password" aria-describedby="basic-addon1" required>
                                   </div>
                             </div>
                             {{-- <div class="mb-3">

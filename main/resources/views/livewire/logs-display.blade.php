@@ -35,6 +35,7 @@
                 <th scope="col">Ref. Number</th>
                 <th scope="col">Product Name</th>
                 <th scope="col">Product Type</th>
+                <th scope="col">Brand</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Date</th>
                 <th scope="col">Total</th>
@@ -46,13 +47,14 @@
             @foreach ($sales as $log)
 
             <tr>
-                <td>{{ $log->ref_no }}</td>
-                <td>{{ $log->product_name }}</td>
-                <td>{{ $log->product_type }}</td>
-                <td>{{ $log->quantity }}</td>
+                <td>{{ strtoupper($log->ref_no) }}</td>
+                <td>{{ strtoupper($log->product_name) }}</td>
+                <td>{{ strtoupper($log->product_type) }}</td>
+                <td>{{ strtoupper($log->brand) }}</td>
+                <td>{{ strtoupper($log->quantity) }}</td>
                 <td>{{ $log->created_at ->timezone('Asia/Manila')->format('m/d/Y, h:i A') }}</td>
                 <td>₱{{ number_format($log->total_price, 2) }}</td>
-                <td>{{ $log->cashier_name }}</td>
+                <td>{{ strtoupper($log->cashier_name) }}</td>
             </tr>
             @endforeach
         </tbody>

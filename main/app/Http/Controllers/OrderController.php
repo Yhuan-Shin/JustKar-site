@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\OrderItem;
 use App\Http\Controllers\Controller;
-use App\Models\Products;
+use App\Models\Payment;
 use App\Models\User;
 use App\Models\Inventory;
 use Illuminate\Support\Facades\DB;
@@ -52,44 +52,51 @@ class OrderController extends Controller
     }
 
 
-    public function checkout(){ {
-        $orderItems = OrderItem::where('cashier_id', Auth::user()->id)->get();
-            
-            if ($orderItems->isEmpty()) {
-            return redirect('/cashier/pos')->with('error', 'No items in the order!');
-            }
+    public function checkout(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'amount' => 'required|numeric|min:0',
+        ]);
     
-            DB::beginTransaction();
-            
-        
+        $orderItems = OrderItem::where('cashier_id', Auth::user()->id)->get();
+    
+        if ($orderItems->isEmpty()) {
+            return redirect('/cashier/pos')->with('error', 'No items in the order!');
+        }
+    
+        $totalPrice = $orderItems->sum('total_price');
+    
+        if ((float)$request->input('amount') < $totalPrice) {
+            return redirect('/cashier/pos')->with('error', 'Insufficient amount!');
+        }
+    
+        DB::beginTransaction();
+    
+        try {
             foreach ($orderItems as $item) {
                 $inventory = Inventory::where('product_code', $item['product_code'])->first();
-
-                
-
-                if (!$inventory) {  
+    
+                if (!$inventory) {
+                    DB::rollBack();
                     return redirect('/cashier/pos')->with('error', 'Item not found in inventory!');
                 }
     
                 if ($inventory->quantity < $item['quantity']) {
+                    DB::rollBack();
                     return redirect('/cashier/pos')->with('error', 'Not enough stock for ' . $item['product_name'] . '!');
                 }
     
-                $inventory->quantity -= (int)$item['quantity'];
-
-               
-                Inventory::where('product_code', $item['product_code'])->update([
-                    'quantity' => $inventory->quantity,
-                    'status' => $inventory->quantity == 0 ? 'outofstock' : ($inventory->quantity <= $inventory->critical_level ? 'lowstock' : 'instock')
-                ]);
-                
-
+                $inventory->decrement('quantity', (int)$item['quantity']);
+                $inventory->status = $inventory->quantity == 0 ? 'outofstock' : ($inventory->quantity <= $inventory->critical_level ? 'lowstock' : 'instock');
                 $inventory->save();
 
+                $refNo = uniqid('REF-');
 
     
-                Sales::create([
-                    'ref_no' => uniqid('REF-'),
+                $sales =Sales::create([
+                    'inventory_id' => $inventory->id,
+                    'ref_no' => $refNo,
                     'product_code' => $item['product_code'],
                     'product_name' => $item['product_name'],
                     'product_type' => $item['product_type'],
@@ -97,20 +104,25 @@ class OrderController extends Controller
                     'size' => $item['size'],
                     'quantity' => $item['quantity'],
                     'category' => $item['category'],
-                    'price' => (float)$item['price'],   
+                    'price' => (float)$item['price'],
                     'total_price' => (float)$item['price'] * (int)$item['quantity'],
                     'cashier_name' => Auth::user()->name,
                 ]);
+                Payment::create([
+                    'ref_no' => $refNo, 
+                    'amount' => $request->input('amount'),
+                ]);
             }
-    
+         
             DB::commit();
+
+           
     
             $sales = Sales::latest()->take($orderItems->count())->get();
-            
             $pdf = PDF::loadView('cashier/cart_receipt', compact('sales'));
-            
+    
             OrderItem::where('cashier_id', Auth::user()->id)->delete();
-
+            
             Mail::send([], [], function ($message) use ($pdf) {
                 $message->to('tejima911@gmail.com')
                         ->subject('Order Receipt')
@@ -118,9 +130,12 @@ class OrderController extends Controller
                             'mime' => 'application/pdf',
                         ]);
             });
+            return redirect('/cashier/pos')->with('success', 'Transaction successful!');
 
-            // return $pdf->download('receipt.pdf')-with('success', 'Order Created');
-            return redirect('/cashier/pos')->with('success', 'Order Created');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect('/cashier/pos')->with('error', 'An error occurred!');
+        }
     }
-}
+    
 }

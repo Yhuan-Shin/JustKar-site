@@ -34,7 +34,16 @@ class Inventory extends Model
                 'critical_level' => $inventory->critical_level,
                 
             ]);
-            
+            $relatedSales = Sales::where('inventory_id', $inventory->id);
+            if ($relatedSales->exists()) {
+                $relatedSales->update([
+                    'product_name' => $inventory->product_name,
+                    'product_type' => $inventory->product_type,
+                    'category' => $inventory->category,
+                    'brand' => $inventory->brand,
+                    'size' => $inventory->size,
+                ]);
+            }
          
         });
         static::updating(function ($inventory) {

@@ -14,7 +14,7 @@ class AdminController extends Controller
 
     public function index(Request $request)
     {
-        $period = $request->input('period');
+        $period = $request->input('period') ?? 'this_month';
 
         $data = $this->fetchData($period);
         
@@ -27,7 +27,7 @@ class AdminController extends Controller
     }
     public function fetchData($period)
     {
-        $query = Sales::select(DB::raw('COUNT(*) as total_price, product_name as name'));
+        $query = Sales::select(DB::raw('SUM(total_price) as total_price, product_name as name'));
 
         switch ($period) {
             case 'today':

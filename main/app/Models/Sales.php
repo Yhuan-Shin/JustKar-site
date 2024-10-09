@@ -10,6 +10,7 @@ class Sales extends Model
     use HasFactory;
     protected $table = 'sales';
     protected $fillable = [
+        'inventory_id',
         'ref_no',
         'product_code',
         'product_name',
@@ -24,8 +25,9 @@ class Sales extends Model
     ];
     public function inventory(): BelongsTo
     {
-        return $this->belongsTo(Inventory::class, 'product_code', 'product_code');
+        return $this->belongsTo(Inventory::class);
     }
     //update inventory quantity
-
+   
+    
 }

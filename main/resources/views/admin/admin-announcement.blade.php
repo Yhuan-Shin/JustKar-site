@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-<body>
+<body class="bg-light">
 
     <!-- sidebar -->
     <div class="container-fluid">
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="row">
                                     <table class="table table-striped">
-                                        <thead>
+                                        <thead class="table-dark text-center">
                                           <tr>
                                             <th scope="col">Title</th>
                                             <th scope="col">Content</th>
@@ -103,7 +103,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($announcements as $announcement)
-                                          <tr>
+                                          <tr class="text-center">
                                             <td>{{$announcement->title}}</td>
                                             <td>{{$announcement->content}}</td>
                                             <td><img src="{{asset('uploads/images/'.$announcement->image)}}" alt="" width="150px" height="100px"></td>
