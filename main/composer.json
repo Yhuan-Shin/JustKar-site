@@ -16,7 +16,6 @@
         "laravel/tinker": "^2.9",
         "laraveldaily/laravel-charts": "^0.2.3",
         "livewire/livewire": "^3.5",
-        "maatwebsite/excel": "^1.1",
         "marineusde/larapex-charts": "^1.4",
         "pusher/pusher-php-server": "^7.2",
         "shuchkin/simplexlsx": "^1.1",
