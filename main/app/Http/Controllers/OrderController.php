@@ -24,27 +24,27 @@ class OrderController extends Controller
     }
 
 
-    public function update(string $id, Request $request) {
-        $orderItem = OrderItem::findOrFail($id);
-        $price = (float) $orderItem->price;
+    // public function update(string $id, Request $request) {
+    //     $orderItem = OrderItem::findOrFail($id);
+    //     $price = (float) $orderItem->price;
     
-        if ($request->has('increment')) {
-            $orderItem->quantity += (int) $request->input('increment');
-            $orderItem->total_price = $price * $orderItem->quantity;
-            $orderItem->save();
-            return redirect('/cashier/pos')->with('success', 'Quantity Updated');
+    //     if ($request->has('increment')) {
+    //         $orderItem->quantity += (int) $request->input('increment');
+    //         $orderItem->total_price = $price * $orderItem->quantity;
+    //         $orderItem->save();
+    //         return redirect('/cashier/pos')->with('success', 'Quantity Updated');
 
-        } elseif ($request->has('decrement')) {
-            if ($orderItem->quantity > 1) { 
-                $orderItem->quantity -= (int) $request->input('decrement');
-                $orderItem->total_price = $price * $orderItem->quantity;
-                $orderItem->save();
-                return redirect('/cashier/pos')->with('success', 'Quantity Updated');
+    //     } elseif ($request->has('decrement')) {
+    //         if ($orderItem->quantity > 1) { 
+    //             $orderItem->quantity -= (int) $request->input('decrement');
+    //             $orderItem->total_price = $price * $orderItem->quantity;
+    //             $orderItem->save();
+    //             return redirect('/cashier/pos')->with('success', 'Quantity Updated');
 
-            }
-        }   
+    //         }
+    //     }   
 
-    }
+    // }
     public function destroy(string $id) {
         $orderItem = OrderItem::findOrFail($id);
         $orderItem->delete();
@@ -54,6 +54,7 @@ class OrderController extends Controller
 
     public function checkout(Request $request)
     {
+        ini_set('max_execution_time', 3600);
         // Validate the incoming request
         $request->validate([
             'amount' => 'required|numeric|min:0',
@@ -120,9 +121,7 @@ class OrderController extends Controller
     
             $sales = Sales::latest()->take($orderItems->count())->get();
             $pdf = PDF::loadView('cashier/cart_receipt', compact('sales'));
-    
             OrderItem::where('cashier_id', Auth::user()->id)->delete();
-            
             Mail::send([], [], function ($message) use ($pdf) {
                 $message->to('tejima911@gmail.com')
                         ->subject('Order Receipt')
@@ -130,11 +129,11 @@ class OrderController extends Controller
                             'mime' => 'application/pdf',
                         ]);
             });
-            return redirect('/cashier/pos')->with('success', 'Transaction successful!');
+            return $pdf->stream('receipt.pdf');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect('/cashier/pos')->with('error', 'An error occurred!');
+            return redirect('/cashier/pos')->with('error', 'Error processing order!');
         }
     }
     
